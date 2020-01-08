@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2019/12/27 18:25:57 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/08 12:11:19 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_CUB3D_H
 # define BUFFER_SIZE 32
 # define WALL 0xffffff
-# define PURPLE 0x9b59b6
+# define PLAYER 0x9b59b6
 
 # include <mlx.h>
 # include <math.h>
@@ -44,18 +44,28 @@ typedef	struct	s_axis
 	int			y;
 }				t_axis;
 
+typedef struct	s_player
+{
+	char		vision;
+	t_axis		axis;
+}				t_player;
+
 typedef struct	s_map
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_axis		axis;
 	t_mapconf	mapconf;
+	t_player	player;
 }				t_map;
 
 int				get_next_line(int fd, char **line);
-void			drawcircle(t_map map, int r);
-void			sketchmap(t_map map);
-t_map			set_mapconf(void);
-void			check_mapconf(t_map map);
+void			sketchmap(t_map *map);
+t_map			set_mapconf(char *file);
+t_map			check_mapconf(t_map map);
+void			drawplayer(t_map map, int r);
+t_player		set_player(t_map map);
+void			ft_puterror(char *msg);
+int				quit(t_map *map);
 
 #endif

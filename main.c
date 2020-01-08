@@ -5,32 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 22:16:12 by mait-si-          #+#    #+#             */
-/*   Updated: 2019/12/27 19:25:08 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/01/08 12:25:45 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-int		expose(t_map *map)
+void	player_movment(t_map *map, char way)
 {
-	(void)map;
-	// freeing_memory(map);
-	exit(1);
+	if (way == 'w')
+		map->player.axis.y -= 10;
+	if (way == 's')
+		map->player.axis.y += 10;
+	if (way == 'a')
+		map->player.axis.x -= 10;
+	if (way == 'd')
+		map->player.axis.x += 10;
+	sketchmap(map);
 }
 
 int		key_event(int keycode, t_map *map)
 {
-	// if (keycode == 126)
-
-	// if (keycode == 125)
-
-	// if (keycode == 124)
-
-	// if (keycode == 123)
-
+	if (keycode == 13)
+		player_movment(&*map, 'w');
+	if (keycode == 1)
+		player_movment(&*map, 's');
+	if (keycode == 0)
+		player_movment(&*map, 'a');
+	if (keycode == 2)
+		player_movment(&*map, 'd');
 	if (keycode == 53)
-		expose(&*map);
+		quit(&*map);
 	return (0);
 }
 
@@ -51,19 +57,23 @@ void	ft_putstruct(t_map map)
 	map.mapconf.c[0], map.mapconf.c[1], map.mapconf.c[2]);
 }
 
-int		main(void)
+int		main(int argc, char *argv[])
 {
-	t_map	map;
+	t_map			map;
 
-	map = set_mapconf();
-	// check_mapconf(map);
-	map.mlx_ptr = mlx_init();
-	map.win_ptr =
-	mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");
-	sketchmap(map);
-	mlx_hook(map.win_ptr, 17, 0, expose, &map);
-	mlx_hook(map.win_ptr, 2, 0, key_event, &map);
-	mlx_loop(map.mlx_ptr);
+	if (argc != 2)
+		ft_puterror("you have to pass 1 argument");
+	map = set_mapconf(argv[1]);
+	map = check_mapconf(map);
+	// map.mlx_ptr = mlx_init();
+	// map.win_ptr =
+	// mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");
+	// sketchmap(&map);
+	// map.player = set_player(map);
+	// drawplayer(map, 6);
+	// mlx_hook(map.win_ptr, 17, 0, quit, &map);
+	// mlx_hook(map.win_ptr, 2, 0, key_event, &map);
+	// mlx_loop(map.mlx_ptr);
 	// ft_putstruct(map);
 	return (0);
 }
