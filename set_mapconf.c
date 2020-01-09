@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/08 13:26:39 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/09 14:13:22 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,26 @@ char	*get_mapconf(char *file, char *lookfor, int i)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_puterror("this file is not exist.");
+		ft_puterror("This file is not exist.");
 	while (get_next_line(fd, &line))
 		if (!ft_strcmp(line, ""))
 			continue ;
-		else if (!ft_memcmp(lookfor, line, 1) &&
-		(!ft_strcmp(lookfor, "C") || !ft_strcmp(lookfor, "F")))
-			return (ft_split(++line, ',')[i]);
-		else if (!ft_strcmp(ft_split(line, ' ')[0], lookfor))
-		{
-			if (ft_split(line, ' ')[2] != '\0')
-			{
-				ft_putstr(ft_split(line, ' ')[0]);
-				ft_putstr("\n");
-			}
-			return (ft_split(line, ' ')[i]);
-		}
-	ft_puterror("you have to set your file with good data.");
+		else if (!ft_strcmp(lookfor, ft_split(line, ' ')[0]))
+			if (*lookfor == 'C' || *lookfor == 'F')
+				if (ft_tablen(ft_split(line, ' ')) != 2 ||
+				ft_tablen(ft_split(++line, ',')) != 3)
+					ft_puterror("Fix F or C data");
+				else
+					return (ft_split(line, ',')[i]);
+			else if (*line == 'R' && ft_tablen(ft_split(line, ' ')) != 3)
+				ft_puterror("Fix the resolution data");
+			else if (*line != 'R' && ft_tablen(ft_split(line, ' ')) != 2)
+				ft_puterror("you have to fix your texture path");
+			else
+				return (ft_split(line, ' ')[i]);
+		else
+			continue ;
+	ft_puterror("you have missing data on your file.");
 	exit(-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 14:57:18 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/08 12:07:27 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/09 13:52:29 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 
 t_map	check_mapconf(t_map map)
 {
-	if (map.mapconf.r[0] > 1600 || map.mapconf.r[1] > 900)
+	if (map.mapconf.r[0] > WIN_WIDTH || map.mapconf.r[1] > WIN_HIGHT)
 	{
-		map.mapconf.r[0] = 1600;
-		map.mapconf.r[1] = 900;
+		map.mapconf.r[0] = WIN_WIDTH;
+		map.mapconf.r[1] = WIN_HIGHT;
 	}
 	if (map.mapconf.r[0] <= 0 || map.mapconf.r[1] <= 0)
 		ft_puterror("the resolution must have a positive value.");

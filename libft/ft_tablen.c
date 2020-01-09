@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/20 19:05:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2019/10/20 22:05:34 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/01/08 13:52:35 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/01/08 13:52:37 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int		ft_tablen(char **tab)
 {
 	int len;
 
 	len = 0;
-	while (lst)
-	{
-		lst = lst->next;
+	while (tab[len])
 		len++;
-	}
 	return (len);
 }

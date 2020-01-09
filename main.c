@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/08 12:25:45 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/09 14:09:44 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		main(int argc, char *argv[])
 	if (argc != 2)
 		ft_puterror("you have to pass 1 argument");
 	map = set_mapconf(argv[1]);
-	map = check_mapconf(map);
+	// map = check_mapconf(map);
 	// map.mlx_ptr = mlx_init();
 	// map.win_ptr =
 	// mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");
@@ -74,6 +74,6 @@ int		main(int argc, char *argv[])
 	// mlx_hook(map.win_ptr, 17, 0, quit, &map);
 	// mlx_hook(map.win_ptr, 2, 0, key_event, &map);
 	// mlx_loop(map.mlx_ptr);
-	// ft_putstruct(map);
+	ft_putstruct(map);
 	return (0);
 }

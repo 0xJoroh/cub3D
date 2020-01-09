@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/08 12:11:19 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/09 13:52:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define BUFFER_SIZE 32
 # define WALL 0xffffff
 # define PLAYER 0x9b59b6
+# define WIN_WIDTH 1600
+# define WIN_HIGHT 900
 
 # include <mlx.h>
 # include <math.h>
