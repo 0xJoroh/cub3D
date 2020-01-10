@@ -6,31 +6,11 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 14:57:18 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/09 13:52:29 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:25:09 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-
-// void	check_map(void)
-// {
-// 	char	*line;
-// 	int		i;
-// 	int		fd;
-
-// 	i = 0;
-// 	fd = open("map.cub", O_RDONLY);
-// 	if (fd < 0)
-// 		ft_puterror("file descriptor is undifined");
-// 	while (get_next_line(fd, &line))
-// 		if (ft_isdigit(*line) && *line != '1')
-// 			ft_puterror("map config not good");
-// 		else if (ft_isdigit(*line) && *line == '1')
-// 			if (i++ == 0)
-// 				while (*line)
-// 					if (*line != '1')
-// 						ft_puterror("map config not good");
-// }
 
 t_map	check_mapconf(t_map map)
 {
@@ -53,6 +33,5 @@ t_map	check_mapconf(t_map map)
 	map.mapconf.f[1] == map.mapconf.c[1] &&
 	map.mapconf.f[2] == map.mapconf.c[2])
 		ft_puterror("The celling and the floor colors must be deffirent");
-	// check_map();
 	return (map);
 }

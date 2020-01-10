@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 11:56:40 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:22:17 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,18 @@ char	*get_mapconf(char *file, char *lookfor, int i)
 	exit(-1);
 }
 
+char	*check_file(char *file)
+{
+	if (open(file, O_RDONLY) < 0)
+		ft_puterror("This map->path is not exist.");
+	return (file);
+}
+
 t_map	set_mapconf(char *file)
 {
 	t_map	map;
 
+	map.path = check_file(file);
 	map.mlx_ptr = NULL;
 	map.win_ptr = NULL;
 	map.axis.x = 0;
@@ -71,6 +79,6 @@ t_map	set_mapconf(char *file)
 	map.mapconf.c[0] = ft_atoi(get_mapconf(file, "C", 0));
 	map.mapconf.c[1] = ft_atoi(get_mapconf(file, "C", 1));
 	map.mapconf.c[2] = ft_atoi(get_mapconf(file, "C", 2));
-	map.map = get_mapshape(file);
+	set_mapshape(&map);
 	return (map);
 }
