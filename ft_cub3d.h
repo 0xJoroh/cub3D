@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:36:47 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 16:25:45 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@
 
 typedef struct	s_mapconf
 {
-	int			r[2];
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*s;
-	int			f[3];
-	int			c[3];
+	int				r[2];
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*s;
+	unsigned long	f;
+	unsigned long	c;
 }				t_mapconf;
 
 typedef	struct	s_axis
@@ -66,11 +66,11 @@ typedef struct	s_map
 int				get_next_line(int fd, char **line);
 void			sketchmap(t_map *map);
 t_map			set_mapconf(char *scene);
-t_map			check_mapconf(t_map map);
 void			drawplayer(t_map map, int r);
 t_player		set_player(t_map map);
 void			ft_puterror(char *msg);
 int				quit(t_map *map);
 void			set_mapshape(t_map *map);
+void			check_map(t_map map);
 
 #endif

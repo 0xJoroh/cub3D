@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:33:23 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 15:35:30 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void	ft_putstruct(t_map map)
 	// printf("- WE\t\t:\t%s\n", map.mapconf.we);
 	// printf("- EA\t\t:\t%s\n", map.mapconf.ea);
 	// printf("- S\t\t:\t%s\n", map.mapconf.s);
-	// printf("- F\t\t:\t(%d, %d, %d)\n",
-	// map.mapconf.f[0], map.mapconf.f[1], map.mapconf.f[2]);
-	// printf("- C\t\t:\t(%d, %d, %d)\n",
-	// map.mapconf.c[0], map.mapconf.c[1], map.mapconf.c[2]);
+	// printf("- F\t\t:\t%lu\n", map.mapconf.f);
+	// printf("- C\t\t:\t%lu\n", map.mapconf.c);
 	ft_print_words_tables(map.map);
 }
 
@@ -65,7 +63,6 @@ int		main(int argc, char *argv[])
 	if (argc != 2)
 		ft_puterror("you have to pass 1 argument");
 	map = set_mapconf(argv[1]);
-	map = check_mapconf(map);
 	// map.mlx_ptr = mlx_init();
 	// map.win_ptr =
 	// mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");

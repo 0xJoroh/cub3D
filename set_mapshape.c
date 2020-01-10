@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:17:46 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:37:50 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 16:26:16 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,33 @@ int		get_width(char *scene)
 		if (i != width)
 			ft_puterror("Fix your Map");
 	}
-	if (line_counter(line) != width)
-		ft_puterror("Fix your Map");
 	return (width);
+}
+
+void	check_map(t_map map)
+{
+	int		i;
+	int		j;
+	int		end;
+
+	i = 0;
+	end = 0;
+	while (map.map[0][end])
+		end++;
+	while (map.map[i])
+	{
+		j = 0;
+		while (map.map[i][j] && !i)
+			if (map.map[i][j++] != '1')
+				ft_puterror("The map must be closed/surrounded by walls.");
+		if (map.map[i][0] != '1' || map.map[i][end - 1] != '1')
+			ft_puterror("The map must be closed/surrounded by walls.");
+		i++;
+	}
+	j = 0;
+	while (map.map[i - 1][j])
+		if (map.map[i - 1][j++] != '1')
+			ft_puterror("The map must be closed/surrounded by walls.");
 }
 
 void	set_mapshape(t_map *map)
@@ -81,18 +105,16 @@ void	set_mapshape(t_map *map)
 	map->map = (char**)malloc((get_height(map->scene) + 1) * sizeof(char*));
 	while (get_next_line(fd, &line))
 	{
-		if (*line != '1')
+		if (*line != '1' && *line != '0')
 			continue ;
 		map->map[i] = (char*)malloc(get_width(map->scene) + 1);
 		j = 0;
 		while (*line)
-			if (*line == ' ')
-			{
+		{
+			while (*line == ' ')
 				line++;
-				continue ;
-			}
-			else
-				map->map[i][j++] = *line++;
+			map->map[i][j++] = *line++;
+		}
 		map->map[i++][j] = '\0';
 	}
 	map->map[i] = NULL;
