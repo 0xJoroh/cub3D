@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:17:46 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:26:13 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:37:50 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int		line_counter(char *line)
 	return (len);
 }
 
-int		get_height(char *file)
+int		get_height(char *scene)
 {
 	int		height;
 	char	*line;
 	int		fd;
 
 	height = 1;
-	fd = open(file, O_RDONLY);
+	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		if (*line != '1')
@@ -42,14 +42,14 @@ int		get_height(char *file)
 	return (height);
 }
 
-int		get_width(char *file)
+int		get_width(char *scene)
 {
 	int		width;
 	char	*line;
 	int		fd;
 	int		i;
 
-	fd = open(file, O_RDONLY);
+	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &line) && *line != '1')
 		continue;
 	width = line_counter(line);
@@ -77,13 +77,13 @@ void	set_mapshape(t_map *map)
 	int		j;
 
 	i = 0;
-	fd = open(map->file, O_RDONLY);
-	map->map = (char**)malloc((get_height(map->file) + 1) * sizeof(char*));
+	fd = open(map->scene, O_RDONLY);
+	map->map = (char**)malloc((get_height(map->scene) + 1) * sizeof(char*));
 	while (get_next_line(fd, &line))
 	{
 		if (*line != '1')
 			continue ;
-		map->map[i] = (char*)malloc(get_width(map->file) + 1);
+		map->map[i] = (char*)malloc(get_width(map->scene) + 1);
 		j = 0;
 		while (*line)
 			if (*line == ' ')

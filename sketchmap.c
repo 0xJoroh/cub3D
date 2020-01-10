@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:53:04 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 10:10:14 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:38:47 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_player	set_player(t_map map)
 	int			fd;
 
 	map.axis.y = 0;
-	fd = open("map.cub", O_RDONLY);
+	fd = open(map.scene, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		if (ft_memcmp(line, "1", 1))
@@ -85,7 +85,7 @@ void		sketchmap(t_map *map)
 	char	*line;
 
 	map->axis.y = 0;
-	fd = open("map.cub", O_RDONLY);
+	fd = open(map->scene, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		if (*line != '1')

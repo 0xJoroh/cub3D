@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:05:36 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:33:23 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int		key_event(int keycode, t_map *map)
 
 void	ft_putstruct(t_map map)
 {
-	printf("- X\t\t:\t%d\n", map.axis.x);
-	printf("- Y\t\t:\t%d\n", map.axis.y);
-	printf("- Resolution-X\t:\t%d\n", map.mapconf.r[0]);
-	printf("- Resolution-Y\t:\t%d\n", map.mapconf.r[1]);
-	printf("- NO\t\t:\t%s\n", map.mapconf.no);
-	printf("- SO\t\t:\t%s\n", map.mapconf.so);
-	printf("- WE\t\t:\t%s\n", map.mapconf.we);
-	printf("- EA\t\t:\t%s\n", map.mapconf.ea);
-	printf("- S\t\t:\t%s\n", map.mapconf.s);
-	printf("- F\t\t:\t(%d, %d, %d)\n",
-	map.mapconf.f[0], map.mapconf.f[1], map.mapconf.f[2]);
-	printf("- C\t\t:\t(%d, %d, %d)\n",
-	map.mapconf.c[0], map.mapconf.c[1], map.mapconf.c[2]);
+	// printf("- X\t\t:\t%d\n", map.axis.x);
+	// printf("- Y\t\t:\t%d\n", map.axis.y);
+	// printf("- Resolution-X\t:\t%d\n", map.mapconf.r[0]);
+	// printf("- Resolution-Y\t:\t%d\n", map.mapconf.r[1]);
+	// printf("- NO\t\t:\t%s\n", map.mapconf.no);
+	// printf("- SO\t\t:\t%s\n", map.mapconf.so);
+	// printf("- WE\t\t:\t%s\n", map.mapconf.we);
+	// printf("- EA\t\t:\t%s\n", map.mapconf.ea);
+	// printf("- S\t\t:\t%s\n", map.mapconf.s);
+	// printf("- F\t\t:\t(%d, %d, %d)\n",
+	// map.mapconf.f[0], map.mapconf.f[1], map.mapconf.f[2]);
+	// printf("- C\t\t:\t(%d, %d, %d)\n",
+	// map.mapconf.c[0], map.mapconf.c[1], map.mapconf.c[2]);
 	ft_print_words_tables(map.map);
 }
 

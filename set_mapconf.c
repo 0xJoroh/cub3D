@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:22:17 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:37:31 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 // 	return (0);
 // }
 
-char	*get_mapconf(char *file, char *lookfor, int i)
+char	*get_mapconf(char *scene, char *lookfor, int i)
 {
 	char	*line;
 	int		fd;
 
-	if ((fd = open(file, O_RDONLY)) < 0)
-		ft_puterror("This file is not exist.");
+	if ((fd = open(scene, O_RDONLY)) < 0)
+		ft_puterror("This scene is not exist.");
 	while (get_next_line(fd, &line))
 		if (!ft_strcmp(line, "") || *line == '\n')
 			continue ;
@@ -46,39 +46,39 @@ char	*get_mapconf(char *file, char *lookfor, int i)
 				return (ft_split(line, ' ')[i]);
 		else
 			continue ;
-	ft_puterror("you have to fix your file.");
+	ft_puterror("you have to fix your scene.");
 	exit(-1);
 }
 
-char	*check_file(char *file)
+char	*check_scene(char *scene)
 {
-	if (open(file, O_RDONLY) < 0)
+	if (open(scene, O_RDONLY) < 0)
 		ft_puterror("This map->path is not exist.");
-	return (file);
+	return (scene);
 }
 
-t_map	set_mapconf(char *file)
+t_map	set_mapconf(char *scene)
 {
 	t_map	map;
 
-	map.path = check_file(file);
+	map.scene = check_scene(scene);
 	map.mlx_ptr = NULL;
 	map.win_ptr = NULL;
 	map.axis.x = 0;
 	map.axis.y = 0;
-	map.mapconf.r[0] = ft_atoi(get_mapconf(file, "R", 1));
-	map.mapconf.r[1] = ft_atoi(get_mapconf(file, "R", 2));
-	map.mapconf.no = get_mapconf(file, "NO", 1);
-	map.mapconf.so = get_mapconf(file, "SO", 1);
-	map.mapconf.we = get_mapconf(file, "WE", 1);
-	map.mapconf.ea = get_mapconf(file, "EA", 1);
-	map.mapconf.s = get_mapconf(file, "S", 1);
-	map.mapconf.f[0] = ft_atoi(get_mapconf(file, "F", 0));
-	map.mapconf.f[1] = ft_atoi(get_mapconf(file, "F", 1));
-	map.mapconf.f[2] = ft_atoi(get_mapconf(file, "F", 2));
-	map.mapconf.c[0] = ft_atoi(get_mapconf(file, "C", 0));
-	map.mapconf.c[1] = ft_atoi(get_mapconf(file, "C", 1));
-	map.mapconf.c[2] = ft_atoi(get_mapconf(file, "C", 2));
+	map.mapconf.r[0] = ft_atoi(get_mapconf(scene, "R", 1));
+	map.mapconf.r[1] = ft_atoi(get_mapconf(scene, "R", 2));
+	map.mapconf.no = get_mapconf(scene, "NO", 1);
+	map.mapconf.so = get_mapconf(scene, "SO", 1);
+	map.mapconf.we = get_mapconf(scene, "WE", 1);
+	map.mapconf.ea = get_mapconf(scene, "EA", 1);
+	map.mapconf.s = get_mapconf(scene, "S", 1);
+	map.mapconf.f[0] = ft_atoi(get_mapconf(scene, "F", 0));
+	map.mapconf.f[1] = ft_atoi(get_mapconf(scene, "F", 1));
+	map.mapconf.f[2] = ft_atoi(get_mapconf(scene, "F", 2));
+	map.mapconf.c[0] = ft_atoi(get_mapconf(scene, "C", 0));
+	map.mapconf.c[1] = ft_atoi(get_mapconf(scene, "C", 1));
+	map.mapconf.c[2] = ft_atoi(get_mapconf(scene, "C", 2));
 	set_mapshape(&map);
 	return (map);
 }
