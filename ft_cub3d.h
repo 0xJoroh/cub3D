@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/09 13:52:11 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 09:44:15 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_map
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	char		**map;
 	t_axis		axis;
 	t_mapconf	mapconf;
 	t_player	player;

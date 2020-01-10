@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:53:04 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/08 12:30:25 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 10:10:14 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		sketchmap(t_map *map)
 	fd = open("map.cub", O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
-		if (ft_memcmp(line, "1", 1))
+		if (*line != '1')
 			continue ;
 		map->axis.x = 0;
 		while (*line)
