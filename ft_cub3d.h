@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 09:44:15 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:30:02 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void			drawplayer(t_map map, int r);
 t_player		set_player(t_map map);
 void			ft_puterror(char *msg);
 int				quit(t_map *map);
+char			**get_mapshape(char *file);
 
 #endif

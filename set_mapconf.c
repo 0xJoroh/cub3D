@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 10:16:48 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/10 10:34:43 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,6 @@
 // 		return (1);
 // 	return (0);
 // }
-
-char	**get_mapshape(char *file)
-{
-	int		fd;
-	char	*line;
-	int		height;
-	int		width;
-
-	height = 0;
-	width = 1;
-	if ((fd = open(file, O_RDONLY)) < 0)
-		ft_puterror("This file is not exist.");
-	while (get_next_line(fd, &line))
-	{
-		if (*line != '1')
-			continue ;
-		while (*line && width == 1)
-		{
-			if (*line == '1')
-				height++;
-			line++;
-			while (*line == ' ')
-				line++;
-		}
-		width++;
-	}
-	ft_putnbr(height);
-	ft_putstr(", ");
-	ft_putnbr(width);
-	exit(1);
-	return (ft_split(line, '\n'));
-}
 
 char	*get_mapconf(char *file, char *lookfor, int i)
 {
