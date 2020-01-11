@@ -6,11 +6,22 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:17:46 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 16:26:16 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/11 08:36:54 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
+
+int		valid(char *str)
+{
+	if (str[0] == 'R' || (str[0] == 'N' && str[1] == 'O') ||
+	(str[0] == 'S' && str[1] == 'O') || (str[0] == 'W' && str[1] == 'E')
+	|| (str[0] == 'E' && str[1] == 'A') || str[0] == 'S' ||
+	str[0] == 'F' || str[0] == 'C' || str[0] == '1' || str[0] == '\0' ||
+	str[0] == '0')
+		return (1);
+	return (0);
+}
 
 int		line_counter(char *line)
 {
@@ -35,6 +46,8 @@ int		get_height(char *scene)
 	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
+		if (!valid(line))
+			ft_puterror("there is extra config on your scene.");
 		if (*line != '1')
 			continue ;
 		height++;
@@ -67,32 +80,6 @@ int		get_width(char *scene)
 	return (width);
 }
 
-void	check_map(t_map map)
-{
-	int		i;
-	int		j;
-	int		end;
-
-	i = 0;
-	end = 0;
-	while (map.map[0][end])
-		end++;
-	while (map.map[i])
-	{
-		j = 0;
-		while (map.map[i][j] && !i)
-			if (map.map[i][j++] != '1')
-				ft_puterror("The map must be closed/surrounded by walls.");
-		if (map.map[i][0] != '1' || map.map[i][end - 1] != '1')
-			ft_puterror("The map must be closed/surrounded by walls.");
-		i++;
-	}
-	j = 0;
-	while (map.map[i - 1][j])
-		if (map.map[i - 1][j++] != '1')
-			ft_puterror("The map must be closed/surrounded by walls.");
-}
-
 void	set_mapshape(t_map *map)
 {
 	int		fd;
@@ -118,4 +105,6 @@ void	set_mapshape(t_map *map)
 		map->map[i++][j] = '\0';
 	}
 	map->map[i] = NULL;
+	check_walls(*map);
+	check_mapshape(*map);
 }

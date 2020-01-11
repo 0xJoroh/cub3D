@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 16:25:39 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/11 08:18:28 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@ unsigned long	get_color(int r, int g, int b)
 		ft_puterror("the Colors must have a value between 0 and 255.");
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
-
-// int		valid(char *str)
-// {
-// 	if (*str == 'R' || !ft_strcmp(str, "NO") || !ft_strcmp(str, "SO")
-// 	|| !ft_strcmp(str, "WE") || !ft_strcmp(str, "EA") || *str == 'S' ||
-// 	*str == 'F' || *str == 'C' || *str == '1')
-// 		return (1);
-// 	return (0);
-// }
 
 char			*get_mapconf(char *scene, char *lookfor, int i)
 {
@@ -57,26 +48,6 @@ char			*get_mapconf(char *scene, char *lookfor, int i)
 	exit(-1);
 }
 
-char			*check_scene(char *scene)
-{
-	if (open(scene, O_RDONLY) < 0)
-		ft_puterror("This map->path is not exist.");
-	return (scene);
-}
-
-int				check_reso(char c, int res)
-{
-	if (res <= 0)
-		ft_puterror("the resolution must have a positive value.");
-	if (c == 'W')
-		if (res > WIN_WIDTH)
-			res = WIN_WIDTH;
-	if (c == 'H')
-		if (res > WIN_HIGHT)
-			res = WIN_HIGHT;
-	return (res);
-}
-
 t_map			set_mapconf(char *scene)
 {
 	t_map	map;
@@ -102,6 +73,5 @@ t_map			set_mapconf(char *scene)
 	ft_atoi(get_mapconf(scene, "C", 1)),
 	ft_atoi(get_mapconf(scene, "C", 2)));
 	set_mapshape(&map);
-	check_map(map);
 	return (map);
 }

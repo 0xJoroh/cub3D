@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 15:35:30 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/11 10:39:22 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ int		key_event(int keycode, t_map *map)
 
 void	ft_putstruct(t_map map)
 {
-	// printf("- X\t\t:\t%d\n", map.axis.x);
-	// printf("- Y\t\t:\t%d\n", map.axis.y);
-	// printf("- Resolution-X\t:\t%d\n", map.mapconf.r[0]);
-	// printf("- Resolution-Y\t:\t%d\n", map.mapconf.r[1]);
-	// printf("- NO\t\t:\t%s\n", map.mapconf.no);
-	// printf("- SO\t\t:\t%s\n", map.mapconf.so);
-	// printf("- WE\t\t:\t%s\n", map.mapconf.we);
-	// printf("- EA\t\t:\t%s\n", map.mapconf.ea);
-	// printf("- S\t\t:\t%s\n", map.mapconf.s);
-	// printf("- F\t\t:\t%lu\n", map.mapconf.f);
-	// printf("- C\t\t:\t%lu\n", map.mapconf.c);
+	printf("- X\t\t:\t%d\n", map.axis.x);
+	printf("- Y\t\t:\t%d\n", map.axis.y);
+	printf("- Resolution-X\t:\t%d\n", map.mapconf.r[0]);
+	printf("- Resolution-Y\t:\t%d\n", map.mapconf.r[1]);
+	printf("- NO\t\t:\t%s\n", map.mapconf.no);
+	printf("- SO\t\t:\t%s\n", map.mapconf.so);
+	printf("- WE\t\t:\t%s\n", map.mapconf.we);
+	printf("- EA\t\t:\t%s\n", map.mapconf.ea);
+	printf("- S\t\t:\t%s\n", map.mapconf.s);
+	printf("- F\t\t:\t%lu\n", map.mapconf.f);
+	printf("- C\t\t:\t%lu\n", map.mapconf.c);
 	ft_print_words_tables(map.map);
 }
 
@@ -63,15 +63,21 @@ int		main(int argc, char *argv[])
 	if (argc != 2)
 		ft_puterror("you have to pass 1 argument");
 	map = set_mapconf(argv[1]);
-	// map.mlx_ptr = mlx_init();
-	// map.win_ptr =
-	// mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");
-	// sketchmap(&map);
+	map.mlx_ptr = mlx_init();
+	map.win_ptr =
+	mlx_new_window(map.mlx_ptr, map.mapconf.r[0], map.mapconf.r[1], "Cub3d");
 	// map.player = set_player(map);
 	// drawplayer(map, 6);
-	// mlx_hook(map.win_ptr, 17, 0, quit, &map);
-	// mlx_hook(map.win_ptr, 2, 0, key_event, &map);
-	// mlx_loop(map.mlx_ptr);
-	ft_putstruct(map);
+	map.win_ptr = mlx_new_window(map.mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+	"A simple example");
+	map.img.img_ptr = mlx_new_image(map.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	map.img.data = (int *)mlx_get_data_addr(map.img.img_ptr, &map.img.bpp,
+	&map.img.size_l, &map.img.endian);
+	sketchmap(&map);
+	mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, map.img.img_ptr, 0, 0);
+	mlx_hook(map.win_ptr, 17, 0, quit, &map);
+	mlx_hook(map.win_ptr, 2, 0, key_event, &map);
+	mlx_loop(map.mlx_ptr);
+	// ft_putstruct(map);
 	return (0);
 }

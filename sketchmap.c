@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:53:04 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/10 14:38:47 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/11 10:37:21 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,46 +32,23 @@ void		drawplayer(t_map map, int r)
 	}
 }
 
-void		drawsquar(t_map map, int color, int size)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j++ < size)
-			mlx_pixel_put(map.mlx_ptr, map.win_ptr,
-			map.axis.x++, map.axis.y, color);
-		map.axis.y++;
-		map.axis.x -= size;
-		i++;
-	}
-}
-
 t_player	set_player(t_map map)
 {
-	char		*line;
-	int			fd;
-
 	map.axis.y = 0;
-	fd = open(map.scene, O_RDONLY);
-	while (get_next_line(fd, &line))
+	while (*map.map)
 	{
-		if (ft_memcmp(line, "1", 1))
-			continue ;
 		map.axis.x = 0;
-		while (*line++)
+		while (**map.map)
 		{
-			if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
+			if (**map.map == 'N' || **map.map == 'S' || **map.map == 'W' ||
+			**map.map == 'E')
 			{
 				map.player.axis.x = map.axis.x;
 				map.player.axis.y = map.axis.y;
-				map.player.vision = *line;
+				map.player.vision = **map.map;
 				return (map.player);
 			}
-			if (*line == '0' || *line == '1')
+			if (**map.map == '0' || **map.map == '1')
 				map.axis.x += 55;
 		}
 		map.axis.y += 55;
@@ -79,28 +56,46 @@ t_player	set_player(t_map map)
 	return (map.player);
 }
 
+void		drawsquar(t_map map, int size)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+		{
+			map.img.data[map.axis.y * WIN_WIDTH + map.axis.x] = WALL_COLOR;
+			map.axis.x++;
+			x++;
+		}
+		map.axis.y++;
+		map.axis.x -= size;
+		y++;
+	}
+}
+
 void		sketchmap(t_map *map)
 {
-	int		fd;
-	char	*line;
+	int		x;
+	int		y;
 
-	map->axis.y = 0;
-	fd = open(map->scene, O_RDONLY);
-	while (get_next_line(fd, &line))
+	y = 0;
+	while (map->map[y])
 	{
-		if (*line != '1')
-			continue ;
-		map->axis.x = 0;
-		while (*line)
+		x = 0;
+		while (map->map[y][x])
 		{
-			if (*line == '1')
-				drawsquar(*map, WALL, 55);
+			if (map->map[y][x] == '1')
+				drawsquar(*map, 55);
 			map->axis.x += 55;
-			line++;
-			while (*line == ' ')
-				line++;
+			x++;
 		}
+		map->axis.x = 0;
 		map->axis.y += 55;
+		y++;
 	}
 	drawplayer(*map, 6);
 }
