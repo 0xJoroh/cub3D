@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/11 10:37:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/12 09:17:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define PLAYER 0x9b59b6
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
+# define SIZE 55
 
 # include <mlx.h>
 # include <math.h>
@@ -74,7 +75,7 @@ typedef struct	s_map
 }				t_map;
 
 int				get_next_line(int fd, char **line);
-void			sketchmap(t_map *map);
+void			sketchmap(t_map map);
 t_map			set_mapconf(char *scene);
 void			drawplayer(t_map map, int r);
 t_player		set_player(t_map map);

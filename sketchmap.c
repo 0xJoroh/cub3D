@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:53:04 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/11 10:37:21 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/12 09:17:21 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		drawplayer(t_map map, int r)
 		{
 			if ((pow(x - map.player.axis.x, 2) + pow(y - map.player.axis.y, 2))
 			<= pow(r, 2))
-				mlx_pixel_put(map.mlx_ptr, map.win_ptr, x, y, PLAYER);
+				map.img.data[y * WIN_WIDTH + x] = PLAYER;
 			y++;
 		}
 		x++;
@@ -34,24 +34,28 @@ void		drawplayer(t_map map, int r)
 
 t_player	set_player(t_map map)
 {
-	map.axis.y = 0;
-	while (*map.map)
+	int		x;
+	int		y;
+
+	y = 0;
+	while (map.map[y])
 	{
-		map.axis.x = 0;
-		while (**map.map)
+		x = 0;
+		while (map.map[y][x])
 		{
-			if (**map.map == 'N' || **map.map == 'S' || **map.map == 'W' ||
-			**map.map == 'E')
+			if (map.map[y][x] == 'N' || map.map[y][x] == 'S'
+			|| map.map[y][x] == 'W' || map.map[y][x] == 'E')
 			{
 				map.player.axis.x = map.axis.x;
 				map.player.axis.y = map.axis.y;
-				map.player.vision = **map.map;
-				return (map.player);
+				map.player.vision = map.map[y][x];
 			}
-			if (**map.map == '0' || **map.map == '1')
-				map.axis.x += 55;
+			map.axis.x += SIZE;
+			x++;
 		}
-		map.axis.y += 55;
+		map.axis.x = 0;
+		map.axis.y += SIZE;
+		y++;
 	}
 	return (map.player);
 }
@@ -77,25 +81,25 @@ void		drawsquar(t_map map, int size)
 	}
 }
 
-void		sketchmap(t_map *map)
+void		sketchmap(t_map map)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (map->map[y])
+	while (map.map[y])
 	{
 		x = 0;
-		while (map->map[y][x])
+		while (map.map[y][x])
 		{
-			if (map->map[y][x] == '1')
-				drawsquar(*map, 55);
-			map->axis.x += 55;
+			if (map.map[y][x] == '1')
+				drawsquar(map, SIZE);
+			map.axis.x += SIZE;
 			x++;
 		}
-		map->axis.x = 0;
-		map->axis.y += 55;
+		map.axis.x = 0;
+		map.axis.y += SIZE;
 		y++;
 	}
-	drawplayer(*map, 6);
+	// drawplayer(map, 6);
 }
