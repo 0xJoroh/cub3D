@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/13 17:28:58 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:30:05 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		key_event(int keycode, t_map *map)
 	// mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	// sketchmap(*map);
 	// drawplayer(map, 6);
+	map->img.data[20 * WIN_WIDTH + 20] = WALL_COLOR;
 	ft_putstr("(");
 	ft_putnbr(map->player.axis.x);
 	ft_putstr(", ");
@@ -71,6 +72,7 @@ int		main(int argc, char *argv[])
 	&map.img.size_l, &map.img.endian);
 	map.player = set_player(map);
 	// sketchmap(map);
+	map.img.data[10 * WIN_WIDTH + 10] = WALL_COLOR;
 	mlx_hook(map.win_ptr, 17, 0, quit, &map);
 	mlx_hook(map.win_ptr, 2, 0, key_event, &map);
 	mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, map.img.img_ptr, 0, 0);
