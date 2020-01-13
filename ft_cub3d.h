@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/12 09:17:11 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:27:42 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void			check_walls(t_map map);
 char			*check_scene(char *scene);
 int				check_reso(char c, int res);
 void			check_mapshape(t_map map);
-
+void			drawsquar(t_map map, int size);
 #endif
