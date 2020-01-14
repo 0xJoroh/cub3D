@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/14 14:46:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/14 14:54:17 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		key_event(int keycode, void *param)
 		quit(map);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	drawplayer(*map);
-	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img->img_ptr, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr,
+	map->img->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -39,11 +40,13 @@ int		func(void *param)
 
 	map = (t_map *)param;
 	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp, &map->img->size_l, &map->img->endian);
+	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr,
+	&map->img->bpp, &map->img->size_l, &map->img->endian);
 	map->axis.y = 0;
 	sketchmap(*map);
 	drawplayer(*map);
-	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img->img_ptr, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr,
+	map->img->img_ptr, 0, 0);
 	mlx_hook(map->win_ptr, 17, 0, quit, map);
 	mlx_hook(map->win_ptr, 2, 0, key_event, map);
 	return (0);
