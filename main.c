@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/14 14:54:17 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/14 14:55:18 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		main(int argc, char *argv[])
 	set_mapconf(argv[1], map);
 	set_player(map);
 	map->mlx_ptr = mlx_init();
-	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf.r[0], map->mapconf.r[1], "Game");
+	map->win_ptr = mlx_new_window(map->mlx_ptr,
+	map->mapconf.r[0], map->mapconf.r[1], "Game");
 	mlx_loop_hook(map->mlx_ptr, func, map);
 	mlx_loop(map->mlx_ptr);
 	return (0);
