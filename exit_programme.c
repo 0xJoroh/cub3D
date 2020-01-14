@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/11 08:27:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/14 11:37:49 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	ft_puterror(char *msg)
 int		quit(t_map *map)
 {
 	(void)map;
+	free(map);
 	exit(1);
 }
