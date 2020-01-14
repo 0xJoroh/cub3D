@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:53:04 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/13 17:16:24 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/14 11:35:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ void		sketchmap(t_map map)
 		map.axis.y += SIZE;
 		y++;
 	}
-	// drawplayer(map, 6);
+	drawplayer(map, 6);
 }

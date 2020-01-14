@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 12:38:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/11 08:18:28 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/14 10:57:31 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,27 @@ char			*get_mapconf(char *scene, char *lookfor, int i)
 	exit(-1);
 }
 
-t_map			set_mapconf(char *scene)
+void			set_mapconf(char *scene,t_map *map)
 {
-	t_map	map;
-
-	map.scene = check_scene(scene);
-	map.mlx_ptr = NULL;
-	map.win_ptr = NULL;
-	map.axis.x = 0;
-	map.axis.y = 0;
-	map.mapconf.r[0] = check_reso('W', ft_atoi(get_mapconf(scene, "R", 1)));
-	map.mapconf.r[1] = check_reso('H', ft_atoi(get_mapconf(scene, "R", 2)));
-	map.mapconf.no = get_mapconf(scene, "NO", 1);
-	map.mapconf.so = get_mapconf(scene, "SO", 1);
-	map.mapconf.we = get_mapconf(scene, "WE", 1);
-	map.mapconf.ea = get_mapconf(scene, "EA", 1);
-	map.mapconf.s = get_mapconf(scene, "S", 1);
-	map.mapconf.f = get_color(
+	map->scene = check_scene(scene);
+	map->mlx_ptr = NULL;
+	map->win_ptr = NULL;
+	map->axis.x = 0;
+	map->axis.y = 0;
+	map->mapconf.r[0] = check_reso('W', ft_atoi(get_mapconf(scene, "R", 1)));
+	map->mapconf.r[1] = check_reso('H', ft_atoi(get_mapconf(scene, "R", 2)));
+	map->mapconf.no = get_mapconf(scene, "NO", 1);
+	map->mapconf.so = get_mapconf(scene, "SO", 1);
+	map->mapconf.we = get_mapconf(scene, "WE", 1);
+	map->mapconf.ea = get_mapconf(scene, "EA", 1);
+	map->mapconf.s = get_mapconf(scene, "S", 1);
+	map->mapconf.f = get_color(
 	ft_atoi(get_mapconf(scene, "F", 0)),
 	ft_atoi(get_mapconf(scene, "F", 1)),
 	ft_atoi(get_mapconf(scene, "F", 2)));
-	map.mapconf.c = get_color(
+	map->mapconf.c = get_color(
 	ft_atoi(get_mapconf(scene, "C", 0)),
 	ft_atoi(get_mapconf(scene, "C", 1)),
 	ft_atoi(get_mapconf(scene, "C", 2)));
-	set_mapshape(&map);
-	return (map);
+	set_mapshape(map);
 }
