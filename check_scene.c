@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/11 09:05:31 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/01/17 18:10:26 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 char	*check_scene(char *scene)
 {
-	if (open(scene, O_RDONLY) < 0)
-		ft_puterror("This map->path is not exist.");
+	int len;
+
+	len = ft_strlen(scene);
+	if (open(scene, O_RDONLY) < 0 || scene[len - 3] != 'c'
+	|| scene[len - 2] != 'u' || scene[len - 1] != 'b')
+		ft_puterror("This path is not exist.");
 	return (scene);
 }
 
