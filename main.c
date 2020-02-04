@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/04 16:53:40 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:55:02 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int		main(int argc, char *argv[])
 	map_init(argv[1], map);
 	mlx_loop_hook(map->mlx_ptr, func, map);
 	mlx_loop(map->mlx_ptr);
-	//merge successed
+	//123
 	return (0);
 }
