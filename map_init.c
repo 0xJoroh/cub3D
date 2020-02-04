@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/17 21:31:09 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:05:46 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,35 +69,6 @@ t_mapconf		set_mapconf(char *scene)
 	ft_atoi(get_mapconf(scene, "C", 2)));
 	return (conf);
 }
-
-// t_player		get_player(t_map map)
-// {
-// 	int		x;
-// 	int		y;
-
-// 	y = 0;
-// 	while (map.map[y])
-// 	{
-// 		x = 0;
-// 		while (map.map[y][x])
-// 		{
-// 			if (map.map[y][x] == 'N' || map.map[y][x] == 'S'
-// 			|| map.map[y][x] == 'W' || map.map[y][x] == 'E')
-// 			{
-// 				map.player.axis.x = map.axis.x;
-// 				map.player.axis.y = map.axis.y;
-// 				map.player.vision = map.map[y][x];
-// 				return (map.player);
-// 			}
-// 			map.axis.x += SIZE;
-// 			x++;
-// 		}
-// 		map.axis.x = 0;
-// 		map.axis.y += SIZE;
-// 		y++;
-// 	}
-// 	return (map.player);
-// }
 
 t_player			*set_player(char **map)
 {
