@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 13:49:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:06:43 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void			check_mapshape(t_map map);
 void			sketchmap(t_map map);
 void			drawplayer(t_map *map);
 void			drawsquar(t_map map);
+void			ft_putstruct(t_map map);
 
 #endif

@@ -52,3 +52,23 @@ void		sketchmap(t_map map)
 		map.map++;
 	}
 }
+
+void		ft_putstruct(t_map map)
+{
+	printf("scene: %s\n", map.scene);
+	printf("Map X: %d\n", map.axis.x);
+	printf("Map Y: %d\n", map.axis.y);
+	printf("r[0]: %d\n", map.mapconf.r[0]);
+	printf("r[1]: %d\n", map.mapconf.r[1]);
+	printf("no: %s\n", map.mapconf.no);
+	printf("so: %s\n", map.mapconf.so);
+	printf("we: %s\n", map.mapconf.we);
+	printf("ea: %s\n", map.mapconf.ea);
+	printf("s: %s\n", map.mapconf.s);
+	printf("f: %lu\n", map.mapconf.f);
+	printf("c: %lu\n", map.mapconf.c);
+	printf("player X: %d\n", map.player.axis.x);
+	printf("player Y: %d\n", map.player.axis.y);
+	printf("vision: %c\n", map.player.vision);
+	ft_print_words_tables(map.map);
+}

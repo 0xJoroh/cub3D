@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/04 18:06:48 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:31:41 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		func(void *param)
 	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp, &map->img->size_l, &map->img->endian);
 	mlx_hook(map->win_ptr, 17, 0, quit, map);
 	mlx_hook(map->win_ptr, 2, 0, key_event, map);
-	// sketchmap(*map);
 	drawplayer(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img->img_ptr, 0, 0);
 	return (1);
@@ -55,7 +54,10 @@ int		main(int argc, char *argv[])
 	map = malloc(sizeof(t_map));
 	map->img = malloc(sizeof(t_img));
 	map_init(argv[1], map);
+	// sketchmap(*map);
+
 	mlx_loop_hook(map->mlx_ptr, func, map);
 	mlx_loop(map->mlx_ptr);
+	// ft_putstruct(*map);
 	return (0);
 }
