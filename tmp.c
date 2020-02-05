@@ -11,7 +11,6 @@ void		drawplayer(t_map *map)
 		y = map->player->axis.y - 6;
 		while (y < map->player->axis.y + 6)
 		{
-
 			if ((pow(x - map->player->axis.x, 2) + pow(y - map->player->axis.y, 2)) <= pow(6, 2))
 				map->img->data[y * WIN_WIDTH + x] = PLAYER;
 			y++;
@@ -20,37 +19,38 @@ void		drawplayer(t_map *map)
 	}
 }
 
-void		drawsquar(t_map map)
+void		drawsquar(t_map *map)
 {
 	int		y;
 	int		x;
 
-	y = -1;
-	while (++y < SIZE)
+	y = 0;
+	while (y++ <= SIZE)
 	{
-		x = -1;
-		while (++x < SIZE)
-			map.img->data[map.axis->y * WIN_WIDTH + map.axis->x++] = WALL_COLOR;
-		map.axis->y++;
-		map.axis->x -= SIZE;
+		x = 0;
+		while (x++ <= SIZE)
+			map->img->data[map->axis->y * WIN_WIDTH + map->axis->x++] = WALL_COLOR;
+		map->axis->y++;
+		map->axis->x -= SIZE;
 	}
 }
 
-void		sketchmap(t_map map)
+void		sketchmap(t_map *map)
 {
-	while (*map.map)
+	while (*map->map)
 	{
-		while (**map.map)
+		while (**map->map)
 		{
-			if (**map.map == '1')
-				drawsquar(map);
-			map.axis->x += SIZE;
-			(*map.map)++;
+			// if (**map->map == '1')
+				// drawsquar(map);
+			map->axis->x += SIZE;
+			(*map->map)++;
 		}
-		map.axis->x = 0;
-		map.axis->y += SIZE;
-		map.map++;
+		map->axis->x = 0;
+		map->axis->y += SIZE;
+		map->map++;
 	}
+	drawplayer(map);
 }
 
 void		ft_putstruct(t_map map)
