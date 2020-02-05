@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:17:46 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 14:26:31 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:33:05 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	set_mapshape(t_map *map)
 	map->map = (char**)malloc((get_height(map->scene) + 1) * sizeof(char*));
 	while (get_next_line(fd, &line))
 	{
-		if (*line != '1' && *line != '0')
+		if (*line != '1')
 			continue ;
 		map->map[i] = (char*)malloc(get_width(map->scene) + 1);
 		j = 0;
