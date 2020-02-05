@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/04 18:05:46 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:20:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,23 @@ char			*get_mapconf(char *scene, char *lookfor, int i)
 	exit(-1);
 }
 
-t_mapconf		set_mapconf(char *scene)
+void		set_mapconf(char *scene, t_mapconf *conf)
 {
-	t_mapconf	conf;
-
-	conf.r[0] = check_reso('W', ft_atoi(get_mapconf(scene, "R", 1)));
-	conf.r[1] = check_reso('H', ft_atoi(get_mapconf(scene, "R", 2)));
-	conf.no = get_mapconf(scene, "NO", 1);
-	conf.so = get_mapconf(scene, "SO", 1);
-	conf.we = get_mapconf(scene, "WE", 1);
-	conf.ea = get_mapconf(scene, "EA", 1);
-	conf.s = get_mapconf(scene, "S", 1);
-	conf.f = get_color(
+	conf->r[0] = check_reso('W', ft_atoi(get_mapconf(scene, "R", 1)));
+	conf->r[1] = check_reso('H', ft_atoi(get_mapconf(scene, "R", 2)));
+	conf->no = get_mapconf(scene, "NO", 1);
+	conf->so = get_mapconf(scene, "SO", 1);
+	conf->we = get_mapconf(scene, "WE", 1);
+	conf->ea = get_mapconf(scene, "EA", 1);
+	conf->s = get_mapconf(scene, "S", 1);
+	conf->f = get_color(
 	ft_atoi(get_mapconf(scene, "F", 0)),
 	ft_atoi(get_mapconf(scene, "F", 1)),
 	ft_atoi(get_mapconf(scene, "F", 2)));
-	conf.c = get_color(
+	conf->c = get_color(
 	ft_atoi(get_mapconf(scene, "C", 0)),
 	ft_atoi(get_mapconf(scene, "C", 1)),
 	ft_atoi(get_mapconf(scene, "C", 2)));
-	return (conf);
 }
 
 t_player			*set_player(char **map)
@@ -103,10 +100,11 @@ void			map_init(char *scene, t_map *map)
 {
 	map->mlx_ptr = mlx_init();
 	map->scene = check_scene(scene);
-	map->mapconf = set_mapconf(scene);
-	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf.r[0], map->mapconf.r[1], "Game");
+	set_mapconf(scene, map->mapconf);
+	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1], "Game");
+	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	set_mapshape(map);
-	map->player = *set_player(map->map);
-	map->axis.x = 0;
-	map->axis.y = 0;
+	map->player = set_player(map->map);
+	map->axis->x = 0;
+	map->axis->y = 0;
 }
