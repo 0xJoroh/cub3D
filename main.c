@@ -6,11 +6,22 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 20:29:51 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 22:43:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
+
+void 	sketch(t_map *map)
+{
+	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp,
+	&map->img->size_l, &map->img->endian);
+	sketchmap(map);
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr,
+	map->img->img_ptr, 0, 0);
+}
 
 int		key_event(int keycode, void *param)
 {
@@ -18,31 +29,31 @@ int		key_event(int keycode, void *param)
 
 	map = (t_map *)param;
 	if (keycode == 13)
-		map->player->axis.y -= 10;
+	{
+		map->player->axis.x =
+		cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
+		map->player->axis.y =
+		sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
+	}
 	if (keycode == 1)
-		map->player->axis.y += 10;
+	{
+		map->player->axis.x =
+		-cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
+		map->player->axis.y =
+		-sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
+	}
 	if (keycode == 0)
 		map->player->axis.x -= 10;
 	if (keycode == 2)
 		map->player->axis.x += 10;
+	if (keycode == 124)
+		map->player->angle += 10;
+	if (keycode == 123)
+		map->player->angle -= 10;
 	if (keycode == 53)
 		quit(map);
+	sketch(map);
 	return (0);
-}
-
-int		func(void *param)
-{
-	t_map	*map;
-
-	map = (t_map *)param;
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp, &map->img->size_l, &map->img->endian);
-	mlx_hook(map->win_ptr, 17, 0, quit, map);
-	mlx_hook(map->win_ptr, 2, 0, key_event, map);
-	sketchmap(map);
-	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img->img_ptr, 0, 0);
-	return (1);
 }
 
 int		main(int argc, char *argv[])
@@ -57,8 +68,9 @@ int		main(int argc, char *argv[])
 	map->mapconf = ft_calloc(1, sizeof(t_mapconf));
 	map->player = ft_calloc(1, sizeof(t_player));
 	map_init(argv[1], map);
-	mlx_loop_hook(map->mlx_ptr, func, map);
+	sketch(map);
+	mlx_hook(map->win_ptr, 17, 0, quit, map);
+	mlx_hook(map->win_ptr, 2, 0, key_event, map);
 	mlx_loop(map->mlx_ptr);
 	return (0);
 }
-

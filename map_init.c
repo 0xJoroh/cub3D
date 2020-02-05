@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 20:11:20 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 21:51:37 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,29 @@ void		set_mapconf(char *scene, t_mapconf *conf)
 	ft_atoi(get_mapconf(scene, "C", 2)));
 }
 
-t_player			*set_player(char *scene)
+int		set_player(t_map *map)
 {
-	t_player *player;
-	int		fd;
-	char	*line;
+	int i;
+	int j;
 
-	fd = open(scene, O_RDONLY);
-	player = ft_calloc(1, sizeof(t_player));
-	while (get_next_line(fd, &line))
+	i = 0;
+	while (map->map[i])
 	{
-		if (*line != '1')
-			continue ;
-		while (*line)
+		j = 0;
+		while (map->map[i][j])
 		{
-			while (*line == ' ')
-				line++;
-			if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
+			map->player->axis.x += SIZE;
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
 			{
-				player->vision = *line;
-				return (player);
+				map->player->vision = map->map[i][j];
+				return (1);
 			}
-			line++;
-			player->axis.x += SIZE;
+			j++;
 		}
-		player->axis.y += SIZE;
+		map->player->axis.y += SIZE;
+		i++;
 	}
-	return (player);
+	return (0);
 }
 
 void			map_init(char *scene, t_map *map)
@@ -103,5 +99,6 @@ void			map_init(char *scene, t_map *map)
 	set_mapconf(scene, map->mapconf);
 	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1], "Game");
 	set_mapshape(map);
-	map->player = set_player(scene);
+	set_player(map);
+	// ft_putstruct(*map);
 }

@@ -28,9 +28,24 @@ void		squar(t_map map)
 
 	while (++y < SIZE + map.axis->y)
 	{
-		x =  map.axis->x - 1;
+		x = map.axis->x - 1;
 		while (++x < SIZE + map.axis->x)
 			map.img->data[y * WIN_WIDTH + x] = WALL_COLOR;
+	}
+}
+
+void	ray(t_map *map)
+{
+	int		i;
+	float	x;
+	float	y;
+
+	i = -1;
+	while (++i < SIZE)
+	{
+		x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
+		y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
+		map->img->data[(int)y * WIN_WIDTH + (int)x] = PLAYER;
 	}
 }
 
@@ -40,7 +55,6 @@ void		sketchmap(t_map *map)
 	int j;
 
 	i = 0;
-	map->axis->x = 0;
 	map->axis->y = 0;
 	while (map->map[i])
 	{
@@ -57,6 +71,7 @@ void		sketchmap(t_map *map)
 		i++;
 	}
 	player(map);
+	ray(map);
 }
 
 void		ft_putstruct(t_map map)
@@ -78,3 +93,4 @@ void		ft_putstruct(t_map map)
 	printf("vision: %c\n", map.player->vision);
 	ft_print_words_tables(map.map);
 }
+

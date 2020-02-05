@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 20:34:12 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/05 20:35:29 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_player
 {
 	char		vision;
 	t_axis		axis;
+	float		angle;
 }				t_player;
 
 typedef struct	s_img
