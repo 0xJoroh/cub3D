@@ -1,6 +1,6 @@
 #include "ft_cub3d.h"
 
-void		drawplayer(t_map *map)
+void		player(t_map *map)
 {
 	int			x;
 	int			y;
@@ -19,38 +19,44 @@ void		drawplayer(t_map *map)
 	}
 }
 
-void		drawsquar(t_map *map)
+void		squar(t_map map)
 {
 	int		y;
 	int		x;
 
-	y = 0;
-	while (y++ <= SIZE)
+	y = map.axis->y - 1;
+
+	while (++y < SIZE + map.axis->y)
 	{
-		x = 0;
-		while (x++ <= SIZE)
-			map->img->data[map->axis->y * WIN_WIDTH + map->axis->x++] = WALL_COLOR;
-		map->axis->y++;
-		map->axis->x -= SIZE;
+		x =  map.axis->x - 1;
+		while (++x < SIZE + map.axis->x)
+			map.img->data[y * WIN_WIDTH + x] = WALL_COLOR;
 	}
 }
 
 void		sketchmap(t_map *map)
 {
-	while (*map->map)
+	int i;
+	int j;
+
+	i = 0;
+	map->axis->x = 0;
+	map->axis->y = 0;
+	while (map->map[i])
 	{
-		while (**map->map)
+		j = 0;
+		while (map->map[i][j])
 		{
-			// if (**map->map == '1')
-				// drawsquar(map);
+			if (map->map[i][j] == '1')
+				squar(*map);
 			map->axis->x += SIZE;
-			(*map->map)++;
+			j++;
 		}
 		map->axis->x = 0;
 		map->axis->y += SIZE;
-		map->map++;
+		i++;
 	}
-	drawplayer(map);
+	player(map);
 }
 
 void		ft_putstruct(t_map map)
