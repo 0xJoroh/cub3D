@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 12:15:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:45:42 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,35 @@
 
 int		key_event(t_map *map)
 {
+	float x;
+	float y;
 	if (map->player->angle == 360 || map->player->angle == -360)
 		map->player->angle = 0;
-	if (g_key.forward)
+	x = cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
+	y = sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
+	if (g_key.forward && ft_collision(x, y, map) != '1')
 	{
-		map->player->axis.x = cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
-		map->player->axis.y = sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
+		map->player->axis.x = x;
+		map->player->axis.y = y;
 	}
-	if (g_key.backward)
+	if (g_key.backward && ft_collision(x, y, map) != '1')
 	{
-		map->player->axis.x = -cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
-		map->player->axis.y = -sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
+		map->player->axis.x = -x;
+		map->player->axis.y = -y;
 	}
-	if (g_key.left)
+	x = cos((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.x;
+	y = sin((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.y;
+	if (g_key.left && ft_collision(x, y, map) != '1')
 	{
-		map->player->axis.x = cos((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.x;
-		map->player->axis.y = sin((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.y;
+		map->player->axis.x = x;
+		map->player->axis.y = y;
 	}
-	if (g_key.right)
+	x = cos((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.x;
+	y = sin((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.y;
+	if (g_key.right && ft_collision(x, y, map) != '1')
 	{
-		map->player->axis.x = cos((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.x;
-		map->player->axis.y = sin((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.y;
+		map->player->axis.x = x;
+		map->player->axis.y = y;
 	}
 	if (g_key.left_vision)
 		map->player->angle += 10;

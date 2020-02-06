@@ -97,3 +97,9 @@ void		ft_putstruct(t_map map)
 	printf("vision: %c\n", map.player->vision);
 	ft_print_words_tables(map.map);
 }
+
+char 	ft_collision(float x, float y, t_map *map)
+{
+	// printf("(%d, %d)\n", (int)x / SIZE, (int)y / SIZE);
+	return (map->map[(int)y / SIZE][(int)x / SIZE]);
+}

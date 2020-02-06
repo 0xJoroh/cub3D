@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 21:51:37 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:45:54 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,28 @@ int		set_player(t_map *map)
 {
 	int i;
 	int j;
+	int x;
+	int y;
 
+	y = 0;
 	i = 0;
 	while (map->map[i])
 	{
 		j = 0;
+		x = 0;
 		while (map->map[i][j])
 		{
-			map->player->axis.x += SIZE;
 			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
 			{
+				map->player->axis.y = y + SIZE / 2;
+				map->player->axis.x = x + SIZE / 2;
 				map->player->vision = map->map[i][j];
 				return (1);
 			}
 			j++;
+			x += SIZE;
 		}
-		map->player->axis.y += SIZE;
+		y += SIZE;
 		i++;
 	}
 	return (0);
@@ -100,5 +106,4 @@ void			map_init(char *scene, t_map *map)
 	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1], "Game");
 	set_mapshape(map);
 	set_player(map);
-	// ft_putstruct(*map);
 }
