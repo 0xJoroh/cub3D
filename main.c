@@ -6,92 +6,11 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 13:22:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:36:44 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-
-int		key_event(t_map *map)
-{
-	float x;
-	float y;
-	if (map->player->angle == 360 || map->player->angle == -360)
-		map->player->angle = 0;
-	x = cos(map->player->angle * M_PI / 180) * 7 + map->player->axis.x;
-	y = sin(map->player->angle * M_PI / 180) * 7 + map->player->axis.y;
-	if (g_key.forward && ft_collision(x, y, map) != '1')
-	{
-		map->player->axis.x = x;
-		map->player->axis.y = y;
-	}
-	if (g_key.backward && ft_collision(x, y, map) != '1')
-	{
-		map->player->axis.x = -x;
-		map->player->axis.y = -y;
-	}
-	x = cos((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.x;
-	y = sin((map->player->angle - 90) * M_PI / 180) * 7 + map->player->axis.y;
-	if (g_key.left && ft_collision(x, y, map) != '1')
-	{
-		map->player->axis.x = x;
-		map->player->axis.y = y;
-	}
-	x = cos((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.x;
-	y = sin((map->player->angle + 90) * M_PI / 180) * 7 + map->player->axis.y;
-	if (g_key.right && ft_collision(x, y, map) != '1')
-	{
-		map->player->axis.x = x;
-		map->player->axis.y = y;
-	}
-	if (g_key.left_vision)
-		map->player->angle -= 10;
-	if (g_key.right_vision)
-		map->player->angle += 10;
-	if (g_key.quit)
-		quit(map);
-	sketchmap(map);
-	return (0);
-}
-
-int key_releas(int keycode)
-{
-	if (keycode == 13)
-		g_key.forward = 0;
-	if (keycode == 1)
-		g_key.backward = 0;
-	if (keycode == 0)
-		g_key.left = 0;
-	if (keycode == 2)
-		g_key.right = 0;
-	if (keycode == 123)
-		g_key.left_vision = 0;
-	if (keycode == 124)
-		g_key.right_vision = 0;
-	if (keycode == 53)
-		g_key.quit = 0;
-	return 0;
-}
-
-int		key_press(int keycode)
-{
-	if (keycode == 13)
-		g_key.forward = 1;
-	if (keycode == 1)
-		g_key.backward = 1;
-	if (keycode == 0)
-		g_key.left = 1;
-	if (keycode == 2)
-		g_key.right = 1;
-	if (keycode == 123)
-		g_key.left_vision = 1;
-	if (keycode == 124)
-		g_key.right_vision = 1;
-	if (keycode == 53)
-		g_key.quit = 1;
-	ft_putnbr(keycode);
-	return 0;
-}
 
 int		main(int argc, char *argv[])
 {
