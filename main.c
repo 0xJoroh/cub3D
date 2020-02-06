@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 12:45:42 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:22:34 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int		key_event(t_map *map)
 		map->player->axis.y = y;
 	}
 	if (g_key.left_vision)
-		map->player->angle += 10;
-	if (g_key.right_vision)
 		map->player->angle -= 10;
+	if (g_key.right_vision)
+		map->player->angle += 10;
 	if (g_key.quit)
 		quit(map);
 	sketchmap(map);
@@ -64,9 +64,9 @@ int key_releas(int keycode)
 		g_key.left = 0;
 	if (keycode == 2)
 		g_key.right = 0;
-	if (keycode == 124)
-		g_key.left_vision = 0;
 	if (keycode == 123)
+		g_key.left_vision = 0;
+	if (keycode == 124)
 		g_key.right_vision = 0;
 	if (keycode == 53)
 		g_key.quit = 0;
@@ -83,12 +83,13 @@ int		key_press(int keycode)
 		g_key.left = 1;
 	if (keycode == 2)
 		g_key.right = 1;
-	if (keycode == 124)
-		g_key.left_vision = 1;
 	if (keycode == 123)
+		g_key.left_vision = 1;
+	if (keycode == 124)
 		g_key.right_vision = 1;
 	if (keycode == 53)
 		g_key.quit = 1;
+	ft_putnbr(keycode);
 	return 0;
 }
 
