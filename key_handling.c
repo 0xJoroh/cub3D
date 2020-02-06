@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 13:41:29 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:38:01 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ int		key_event(t_map *map)
 		map->player->angle += 5;
 	if (g_key.quit)
 		quit(map);
-	sketchmap(map);
+	if (g_key.left_vision || g_key.right_vision || g_key.right || g_key.left || g_key.forward || g_key.backward)
+	{
+		mlx_destroy_image(map->mlx_ptr, map->img->img_ptr);
+		sketchmap(map);
+	}
+
 	return (0);
 }
 

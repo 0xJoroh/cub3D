@@ -3,16 +3,26 @@
 void	vision(t_map *map)
 {
 	int		i;
+	float		j;
 	float	x;
 	float	y;
 
-	i = 0;
-	while (i++ <= SIZE)
+	j = 0;
+	map->player->angle -= 30;
+	while (j < 60)
 	{
-		x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
-		y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
-		map->img->data[(int)y * WIN_WIDTH + (int)x] = PLAYER;
+		i = 0;
+		while (i++ <= 100)
+		{
+			x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
+			y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
+			map->img->data[(int)y * map->mapconf->r[0] + (int)x] = WALL_COLOR;
+		}
+		map->player->angle += (float)60 / WIN_WIDTH;
+		j+= (float)60 / WIN_WIDTH;
 	}
+	map->player->angle -= 30;
+	printf("%f, %f\n", map->player->axis.x, map->player->axis.y);
 }
 
 void		player(t_map *map)
@@ -20,6 +30,7 @@ void		player(t_map *map)
 	int			x;
 	int			y;
 
+	vision(map);
 	x = map->player->axis.x - 6;
 	while (x < map->player->axis.x + 6)
 	{
@@ -27,12 +38,11 @@ void		player(t_map *map)
 		while (y < map->player->axis.y + 6)
 		{
 			if ((pow(x - map->player->axis.x, 2) + pow(y - map->player->axis.y, 2)) <= pow(6, 2))
-				map->img->data[y * WIN_WIDTH + x] = PLAYER;
+				map->img->data[y * map->mapconf->r[0] + x] = PLAYER;
 			y++;
 		}
 		x++;
 	}
-	vision(map);
 }
 
 void		squar(t_map map)
@@ -46,7 +56,7 @@ void		squar(t_map map)
 	{
 		x = map.axis->x - 1;
 		while (++x < SIZE + map.axis->x)
-			map.img->data[y * WIN_WIDTH + x] = WALL_COLOR;
+			map.img->data[y * map.mapconf->r[0] + x] = WALL_COLOR;
 	}
 }
 
@@ -56,8 +66,7 @@ void		sketchmap(t_map *map)
 	int j;
 
 	i = 0;
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	map->img->img_ptr = mlx_new_image(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1]);
 	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp, &map->img->size_l, &map->img->endian);
 	map->axis->y = 0;
 	while (map->map[i])

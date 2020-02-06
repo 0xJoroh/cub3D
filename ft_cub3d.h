@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 13:40:24 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:23:01 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct	s_map
 	t_img		*img;
 	t_key		*key;
 }				t_map;
-
+static int a = 0;
 t_key g_key;
 
 int				get_next_line(int fd, char **line);
@@ -107,5 +107,6 @@ void			sketchmap(t_map *map);
 void			player(t_map *map);
 void			squar(t_map map);
 void			ft_putstruct(t_map map);
+void			vision(t_map *map);
 
 #endif

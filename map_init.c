@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 12:45:54 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:16:49 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,12 @@ void			map_init(char *scene, t_map *map)
 	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1], "Game");
 	set_mapshape(map);
 	set_player(map);
+	if (map->player->vision == 'N')
+		map->player->angle = -90;
+	if (map->player->vision == 'E')
+		map->player->angle = 0;
+	if (map->player->vision == 'S')
+		map->player->angle = 90;
+	if (map->player->vision == 'W')
+		map->player->angle = 180;
 }
