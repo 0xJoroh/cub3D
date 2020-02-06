@@ -6,7 +6,7 @@
 #    By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/22 18:47:15 by mait-si-          #+#    #+#              #
-#    Updated: 2020/02/05 14:17:02 by mait-si-         ###   ########.fr        #
+#    Updated: 2020/02/06 11:53:29 by mait-si-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS		=		*.o
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c  $(SRCS)
+	gcc -Wall -Wextra -Werror -c $(SRCS)
 	gcc $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 bonus: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/05 20:35:29 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:00:35 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+typedef	struct	s_key
+{
+	int			left;
+	int			right;
+	int			forward;
+	int			backward;
+	int			quit;
+	int			left_vision;
+	int			right_vision;
+}				t_key;
+
 typedef struct	s_mapconf
 {
 	int				r[2];
@@ -43,8 +54,8 @@ typedef struct	s_mapconf
 
 typedef	struct	s_axis
 {
-	int			x;
-	int			y;
+	float			x;
+	float			y;
 }				t_axis;
 
 typedef struct	s_player
@@ -73,7 +84,10 @@ typedef struct	s_map
 	t_mapconf	*mapconf;
 	t_player	*player;
 	t_img		*img;
+	t_key		*key;
 }				t_map;
+
+t_key g_key;
 
 int				get_next_line(int fd, char **line);
 void			map_init(char *scene, t_map *map);

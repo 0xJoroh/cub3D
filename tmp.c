@@ -1,5 +1,20 @@
 #include "ft_cub3d.h"
 
+void	vision(t_map *map)
+{
+	int		i;
+	float	x;
+	float	y;
+
+	i = 0;
+	while (i++ <= SIZE)
+	{
+		x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
+		y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
+		map->img->data[(int)y * WIN_WIDTH + (int)x] = PLAYER;
+	}
+}
+
 void		player(t_map *map)
 {
 	int			x;
@@ -17,6 +32,7 @@ void		player(t_map *map)
 		}
 		x++;
 	}
+	vision(map);
 }
 
 void		squar(t_map map)
@@ -34,27 +50,15 @@ void		squar(t_map map)
 	}
 }
 
-void	ray(t_map *map)
-{
-	int		i;
-	float	x;
-	float	y;
-
-	i = -1;
-	while (++i < SIZE)
-	{
-		x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
-		y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
-		map->img->data[(int)y * WIN_WIDTH + (int)x] = PLAYER;
-	}
-}
-
 void		sketchmap(t_map *map)
 {
 	int i;
 	int j;
 
 	i = 0;
+	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	map->img->img_ptr = mlx_new_image(map->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	map->img->data = (int *)mlx_get_data_addr(map->img->img_ptr, &map->img->bpp, &map->img->size_l, &map->img->endian);
 	map->axis->y = 0;
 	while (map->map[i])
 	{
@@ -71,14 +75,14 @@ void		sketchmap(t_map *map)
 		i++;
 	}
 	player(map);
-	ray(map);
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img->img_ptr, 0, 0);
 }
 
 void		ft_putstruct(t_map map)
 {
 	printf("scene: %s\n", map.scene);
-	printf("Map X: %d\n", map.axis->x);
-	printf("Map Y: %d\n", map.axis->y);
+	printf("Map X: %f\n", map.axis->x);
+	printf("Map Y: %f\n", map.axis->y);
 	printf("r[0]: %d\n", map.mapconf->r[0]);
 	printf("r[1]: %d\n", map.mapconf->r[1]);
 	printf("no: %s\n", map.mapconf->no);
@@ -88,9 +92,8 @@ void		ft_putstruct(t_map map)
 	printf("s: %s\n", map.mapconf->s);
 	printf("f: %lu\n", map.mapconf->f);
 	printf("c: %lu\n", map.mapconf->c);
-	printf("player X: %d\n", map.player->axis.x);
-	printf("player Y: %d\n", map.player->axis.y);
+	printf("player X: %f\n", map.player->axis.x);
+	printf("player Y: %f\n", map.player->axis.y);
 	printf("vision: %c\n", map.player->vision);
 	ft_print_words_tables(map.map);
 }
-
