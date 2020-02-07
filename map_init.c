@@ -86,7 +86,7 @@ int		set_player(t_map *map)
 			{
 				map->player->axis.y = y + SIZE / 2;
 				map->player->axis.x = x + SIZE / 2;
-				map->player->vision = map->grid[i][j];
+				map->player->view = map->grid[i][j];
 				return (1);
 			}
 			j++;
@@ -106,13 +106,13 @@ void			setup(char *scene, t_map *map)
 	map->win_ptr = mlx_new_window(map->mlx_ptr, map->conf->r[0], map->conf->r[1], "The Game");
 	set_grid(map);
 	set_player(map);
-	if (map->player->vision == 'N')
+	if (map->player->view == 'N')
 		map->player->angle = -90;
-	if (map->player->vision == 'E')
+	if (map->player->view == 'E')
 		map->player->angle = 0;
-	if (map->player->vision == 'S')
+	if (map->player->view == 'S')
 		map->player->angle = 90;
-	if (map->player->vision == 'W')
+	if (map->player->view == 'W')
 		map->player->angle = 180;
 	draw(map);
 }

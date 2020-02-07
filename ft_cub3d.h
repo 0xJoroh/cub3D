@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 15:56:50 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:53:49 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 55
+# define PLAYER_SPEED 4
+# define ROTATION_SPEED 4
 
 # include <mlx.h>
 # include <math.h>
@@ -36,8 +38,8 @@ typedef	struct	s_key
 	int			forward;
 	int			backward;
 	int			quit;
-	int			left_vision;
-	int			right_vision;
+	int			left_view;
+	int			right_view;
 }				t_key;
 
 typedef struct	s_conf
@@ -60,7 +62,7 @@ typedef	struct	s_axis
 
 typedef struct	s_player
 {
-	char		vision;
+	char		view;
 	t_axis		axis;
 	float		angle;
 }				t_player;
@@ -108,6 +110,6 @@ void			draw(t_map *map);
 void			player(t_map *map);
 void			squar(t_map map);
 void			ft_putstruct(t_map map);
-void			vision(t_map *map);
+void			view(t_map *map);
 
 #endif

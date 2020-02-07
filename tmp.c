@@ -1,16 +1,16 @@
 #include "ft_cub3d.h"
 
-void	putpx(float x, float y, int color, t_map *map)
+void	rander(float x, float y, int color, t_map *map)
 {
 	if (x <= map->conf->r[0] && y <= map->conf->r[1])
 		if (x >= 0 && y >= 0)
 			map->img->data[(int)y * map->conf->r[0] + (int)x] =color;
 }
 
-void	vision(t_map *map)
+void	view(t_map *map)
 {
 	int		i;
-	float		j;
+	float	j;
 	float	x;
 	float	y;
 
@@ -23,7 +23,7 @@ void	vision(t_map *map)
 		{
 			x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
 			y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
-			putpx(x, y, WALL_COLOR, map);
+			rander(x, y, WALL_COLOR, map);
 		}
 		map->player->angle += (float)60 / WIN_WIDTH;
 		j+= (float)60 / WIN_WIDTH;
@@ -32,7 +32,7 @@ void	vision(t_map *map)
 	// printf("%f, %f\n", map->player->axis.x, map->player->axis.y);
 }
 
-// void	vision(t_map *map)
+// void	view(t_map *map)
 // {
 // 	int		i;
 // 	float	x;
@@ -52,7 +52,7 @@ void		player(t_map *map)
 	int			x;
 	int			y;
 
-	vision(map);
+	view(map);
 	x = map->player->axis.x - 6;
 	while (x < map->player->axis.x + 6)
 	{
@@ -60,7 +60,7 @@ void		player(t_map *map)
 		while (y < map->player->axis.y + 6)
 		{
 			if ((pow(x - map->player->axis.x, 2) + pow(y - map->player->axis.y, 2)) <= pow(6, 2))
-				putpx(x, y, PLAYER, map);
+				rander(x, y, PLAYER, map);
 			y++;
 		}
 		x++;
@@ -78,7 +78,7 @@ void		squar(t_map map)
 	{
 		x = map.axis->x - 1;
 		while (++x < SIZE + map.axis->x)
-			putpx(x, y, WALL_COLOR, &map);
+			rander(x, y, WALL_COLOR, &map);
 	}
 }
 
@@ -125,6 +125,6 @@ void		ft_putstruct(t_map map)
 	printf("c: %lu\n", map.conf->c);
 	printf("player X: %f\n", map.player->axis.x);
 	printf("player Y: %f\n", map.player->axis.y);
-	printf("vision: %c\n", map.player->vision);
+	printf("view: %c\n", map.player->view);
 	ft_print_words_tables(map.grid);
 }
