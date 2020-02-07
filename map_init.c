@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   setup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 18:16:49 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 15:53:43 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned long	get_color(int r, int g, int b)
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
-char			*get_mapconf(char *scene, char *lookfor, int i)
+char			*get_conf(char *scene, char *lookfor, int i)
 {
 	char	*line;
 	int		fd;
@@ -48,23 +48,23 @@ char			*get_mapconf(char *scene, char *lookfor, int i)
 	exit(-1);
 }
 
-void		set_mapconf(char *scene, t_mapconf *conf)
+void		set_conf(char *scene, t_conf *conf)
 {
-	conf->r[0] = check_reso('W', ft_atoi(get_mapconf(scene, "R", 1)));
-	conf->r[1] = check_reso('H', ft_atoi(get_mapconf(scene, "R", 2)));
-	conf->no = get_mapconf(scene, "NO", 1);
-	conf->so = get_mapconf(scene, "SO", 1);
-	conf->we = get_mapconf(scene, "WE", 1);
-	conf->ea = get_mapconf(scene, "EA", 1);
-	conf->s = get_mapconf(scene, "S", 1);
+	conf->r[0] = check_reso('W', ft_atoi(get_conf(scene, "R", 1)));
+	conf->r[1] = check_reso('H', ft_atoi(get_conf(scene, "R", 2)));
+	conf->no = get_conf(scene, "NO", 1);
+	conf->so = get_conf(scene, "SO", 1);
+	conf->we = get_conf(scene, "WE", 1);
+	conf->ea = get_conf(scene, "EA", 1);
+	conf->s = get_conf(scene, "S", 1);
 	conf->f = get_color(
-	ft_atoi(get_mapconf(scene, "F", 0)),
-	ft_atoi(get_mapconf(scene, "F", 1)),
-	ft_atoi(get_mapconf(scene, "F", 2)));
+	ft_atoi(get_conf(scene, "F", 0)),
+	ft_atoi(get_conf(scene, "F", 1)),
+	ft_atoi(get_conf(scene, "F", 2)));
 	conf->c = get_color(
-	ft_atoi(get_mapconf(scene, "C", 0)),
-	ft_atoi(get_mapconf(scene, "C", 1)),
-	ft_atoi(get_mapconf(scene, "C", 2)));
+	ft_atoi(get_conf(scene, "C", 0)),
+	ft_atoi(get_conf(scene, "C", 1)),
+	ft_atoi(get_conf(scene, "C", 2)));
 }
 
 int		set_player(t_map *map)
@@ -76,17 +76,17 @@ int		set_player(t_map *map)
 
 	y = 0;
 	i = 0;
-	while (map->map[i])
+	while (map->grid[i])
 	{
 		j = 0;
 		x = 0;
-		while (map->map[i][j])
+		while (map->grid[i][j])
 		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			if (map->grid[i][j] == 'N' || map->grid[i][j] == 'S' || map->grid[i][j] == 'W' || map->grid[i][j] == 'E')
 			{
 				map->player->axis.y = y + SIZE / 2;
 				map->player->axis.x = x + SIZE / 2;
-				map->player->vision = map->map[i][j];
+				map->player->vision = map->grid[i][j];
 				return (1);
 			}
 			j++;
@@ -98,13 +98,13 @@ int		set_player(t_map *map)
 	return (0);
 }
 
-void			map_init(char *scene, t_map *map)
+void			setup(char *scene, t_map *map)
 {
 	map->mlx_ptr = mlx_init();
 	map->scene = check_scene(scene);
-	set_mapconf(scene, map->mapconf);
-	map->win_ptr = mlx_new_window(map->mlx_ptr, map->mapconf->r[0], map->mapconf->r[1], "Game");
-	set_mapshape(map);
+	set_conf(scene, map->conf);
+	map->win_ptr = mlx_new_window(map->mlx_ptr, map->conf->r[0], map->conf->r[1], "The Game");
+	set_grid(map);
 	set_player(map);
 	if (map->player->vision == 'N')
 		map->player->angle = -90;
@@ -114,4 +114,5 @@ void			map_init(char *scene, t_map *map)
 		map->player->angle = 90;
 	if (map->player->vision == 'W')
 		map->player->angle = 180;
+	draw(map);
 }

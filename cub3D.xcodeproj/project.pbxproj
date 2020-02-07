@@ -1,0 +1,204 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXFileReference section */
+		8AA5874623ED93F2002A92FD /* .git */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .git; sourceTree = "<group>"; };
+		8AA5874723ED93F2002A92FD /* .vscode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .vscode; sourceTree = "<group>"; };
+		8AA5874823ED93F2002A92FD /* check_scene.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = check_scene.c; sourceTree = "<group>"; };
+		8AA5874923ED93F2002A92FD /* Cub3D */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Cub3D; sourceTree = "<group>"; };
+		8AA5874A23ED93F2002A92FD /* exit_programme.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = exit_programme.c; sourceTree = "<group>"; };
+		8AA5874B23ED93F2002A92FD /* ft_cub3d.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = ft_cub3d.h; sourceTree = "<group>"; };
+		8AA5874C23ED93F2002A92FD /* get_next_line.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = get_next_line.c; sourceTree = "<group>"; };
+		8AA5874D23ED93F2002A92FD /* key_handling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = key_handling.c; sourceTree = "<group>"; };
+		8AA5874E23ED93F2002A92FD /* libft */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libft; sourceTree = "<group>"; };
+		8AA5874F23ED93F2002A92FD /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		8AA5875023ED93F2002A92FD /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		8AA5875123ED93F2002A92FD /* map.cub */ = {isa = PBXFileReference; lastKnownFileType = text; path = map.cub; sourceTree = "<group>"; };
+		8AA5875223ED93F2002A92FD /* setup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = setup.c; sourceTree = "<group>"; };
+		8AA5875323ED93F2002A92FD /* set_grid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = set_grid.c; sourceTree = "<group>"; };
+		8AA5875423ED93F2002A92FD /* tmp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tmp.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		8AA5874023ED93F2002A92FD = {
+			isa = PBXGroup;
+			children = (
+				8AA5874623ED93F2002A92FD /* .git */,
+				8AA5874723ED93F2002A92FD /* .vscode */,
+				8AA5874823ED93F2002A92FD /* check_scene.c */,
+				8AA5874923ED93F2002A92FD /* Cub3D */,
+				8AA5874A23ED93F2002A92FD /* exit_programme.c */,
+				8AA5874B23ED93F2002A92FD /* ft_cub3d.h */,
+				8AA5874C23ED93F2002A92FD /* get_next_line.c */,
+				8AA5874D23ED93F2002A92FD /* key_handling.c */,
+				8AA5874E23ED93F2002A92FD /* libft */,
+				8AA5874F23ED93F2002A92FD /* main.c */,
+				8AA5875023ED93F2002A92FD /* Makefile */,
+				8AA5875123ED93F2002A92FD /* map.cub */,
+				8AA5875223ED93F2002A92FD /* setup.c */,
+				8AA5875323ED93F2002A92FD /* set_grid.c */,
+				8AA5875423ED93F2002A92FD /* tmp.c */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		8AA5874523ED93F2002A92FD /* cub3D */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 8AA5875523ED93F2002A92FD /* Build configuration list for PBXLegacyTarget "cub3D" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/mait-si-/Desktop/cub3D";
+			dependencies = (
+			);
+			name = cub3D;
+			passBuildSettingsInEnvironment = 1;
+			productName = cub3D;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		8AA5874123ED93F2002A92FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+			};
+			buildConfigurationList = 8AA5874423ED93F2002A92FD /* Build configuration list for PBXProject "cub3D" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8AA5874023ED93F2002A92FD;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8AA5874523ED93F2002A92FD /* cub3D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		8AA5874223ED93F2002A92FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8AA5874323ED93F2002A92FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8AA5875623ED93F2002A92FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = cub3D;
+			};
+			name = Debug;
+		};
+		8AA5875723ED93F2002A92FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = cub3D;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8AA5874423ED93F2002A92FD /* Build configuration list for PBXProject "cub3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AA5874223ED93F2002A92FD /* Debug */,
+				8AA5874323ED93F2002A92FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AA5875523ED93F2002A92FD /* Build configuration list for PBXLegacyTarget "cub3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AA5875623ED93F2002A92FD /* Debug */,
+				8AA5875723ED93F2002A92FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8AA5874123ED93F2002A92FD /* Project object */;
+}

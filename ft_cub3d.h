@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 18:23:01 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 15:56:50 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef	struct	s_key
 	int			right_vision;
 }				t_key;
 
-typedef struct	s_mapconf
+typedef struct	s_conf
 {
 	int				r[2];
 	char			*no;
@@ -50,7 +50,7 @@ typedef struct	s_mapconf
 	char			*s;
 	unsigned long	f;
 	unsigned long	c;
-}				t_mapconf;
+}				t_conf;
 
 typedef	struct	s_axis
 {
@@ -79,21 +79,21 @@ typedef struct	s_map
 	char		*scene;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	char		**map;
+	char		**grid;
 	t_axis		*axis;
-	t_mapconf	*mapconf;
+	t_conf		*conf;
 	t_player	*player;
 	t_img		*img;
 	t_key		*key;
 }				t_map;
-static int a = 0;
+
 t_key g_key;
 
 int				get_next_line(int fd, char **line);
-void			map_init(char *scene, t_map *map);
+void			setup(char *scene, t_map *map);
 void			ft_puterror(char *msg);
 int				quit(t_map *map);
-void			set_mapshape(t_map *map);
+void			set_grid(t_map *map);
 void			check_walls(t_map map);
 char			*check_scene(char *scene);
 int				check_reso(char c, int res);
@@ -101,9 +101,10 @@ void			check_mapshape(t_map map);
 int				key_event(t_map *map);
 int 			key_releas(int keycode);
 int				key_press(int keycode);
+int				raycast(t_map *map);
 
 /***********************		Tmp		****************************/
-void			sketchmap(t_map *map);
+void			draw(t_map *map);
 void			player(t_map *map);
 void			squar(t_map map);
 void			ft_putstruct(t_map map);

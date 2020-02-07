@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/01/17 18:10:26 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 15:49:18 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ void	check_walls(t_map map)
 
 	i = 0;
 	end = 0;
-	while (map.map[0][end])
+	while (map.grid[0][end])
 		end++;
-	while (map.map[i])
+	while (map.grid[i])
 	{
 		j = 0;
-		while (map.map[i][j] && !i)
-			if (map.map[i][j++] != '1')
+		while (map.grid[i][j] && !i)
+			if (map.grid[i][j++] != '1')
 				ft_puterror("The map must be closed/surrounded by walls.");
-		if (map.map[i][0] != '1' || map.map[i][end - 1] != '1')
+		if (map.grid[i][0] != '1' || map.grid[i][end - 1] != '1')
 			ft_puterror("The map must be closed/surrounded by walls.");
 		i++;
 	}
 	j = 0;
-	while (map.map[i - 1][j])
-		if (map.map[i - 1][j++] != '1')
+	while (map.grid[i - 1][j])
+		if (map.grid[i - 1][j++] != '1')
 			ft_puterror("The map must be closed/surrounded by walls.");
 }
 
@@ -70,16 +70,16 @@ void	check_mapshape(t_map map)
 
 	i = -1;
 	player = 0;
-	while (map.map[++i])
+	while (map.grid[++i])
 	{
 		j = -1;
-		while (map.map[i][++j])
-			if (map.map[i][j] != '1' && map.map[i][j] != '0' &&
-			map.map[i][j] != '2' && map.map[i][j] != 'S' && map.map[i][j] != 'N'
-			&& map.map[i][j] != 'W' && map.map[i][j] != 'E')
+		while (map.grid[i][++j])
+			if (map.grid[i][j] != '1' && map.grid[i][j] != '0' &&
+			map.grid[i][j] != '2' && map.grid[i][j] != 'S' && map.grid[i][j] != 'N'
+			&& map.grid[i][j] != 'W' && map.grid[i][j] != 'E')
 				ft_puterror("There is extra character in yout map");
-			else if (map.map[i][j] == 'S' || map.map[i][j] == 'N'
-			|| map.map[i][j] == 'W' || map.map[i][j] == 'E')
+			else if (map.grid[i][j] == 'S' || map.grid[i][j] == 'N'
+			|| map.grid[i][j] == 'W' || map.grid[i][j] == 'E')
 				player++;
 	}
 	if (!player)

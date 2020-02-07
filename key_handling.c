@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/06 18:38:01 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 15:54:21 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ int		key_event(t_map *map)
 		map->player->angle = 0;
 	x = cos(map->player->angle * M_PI / 180) * 3 + map->player->axis.x;
 	y = sin(map->player->angle * M_PI / 180) * 3 + map->player->axis.y;
-	if (g_key.forward && map->map[(int)y / SIZE][(int)x / SIZE] != '1')
+	if (g_key.forward && map->grid[(int)y / SIZE][(int)x / SIZE] != '1')
 	{
 		map->player->axis.x = x;
 		map->player->axis.y = y;
 	}
 	x = -cos(map->player->angle * M_PI / 180) * 3 + map->player->axis.x;
 	y = -sin(map->player->angle * M_PI / 180) * 3 + map->player->axis.y;
-	if (g_key.backward && map->map[(int)y / SIZE][(int)x / SIZE] != '1')
+	if (g_key.backward && map->grid[(int)y / SIZE][(int)x / SIZE] != '1')
 	{
 		map->player->axis.x = x;
 		map->player->axis.y = y;
 	}
 	x = cos((map->player->angle - 90) * M_PI / 180) * 3 + map->player->axis.x;
 	y = sin((map->player->angle - 90) * M_PI / 180) * 3 + map->player->axis.y;
-	if (g_key.left && map->map[(int)y / SIZE][(int)x / SIZE] != '1')
+	if (g_key.left && map->grid[(int)y / SIZE][(int)x / SIZE] != '1')
 	{
 		map->player->axis.x = x;
 		map->player->axis.y = y;
 	}
 	x = cos((map->player->angle + 90) * M_PI / 180) * 3 + map->player->axis.x;
 	y = sin((map->player->angle + 90) * M_PI / 180) * 3 + map->player->axis.y;
-	if (g_key.right && map->map[(int)y / SIZE][(int)x / SIZE] != '1')
+	if (g_key.right && map->grid[(int)y / SIZE][(int)x / SIZE] != '1')
 	{
 		map->player->axis.x = x;
 		map->player->axis.y = y;
@@ -56,7 +56,7 @@ int		key_event(t_map *map)
 	if (g_key.left_vision || g_key.right_vision || g_key.right || g_key.left || g_key.forward || g_key.backward)
 	{
 		mlx_destroy_image(map->mlx_ptr, map->img->img_ptr);
-		sketchmap(map);
+		draw(map);
 	}
 
 	return (0);

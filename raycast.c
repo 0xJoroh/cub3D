@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/25 02:40:13 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 16:07:51 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/07 15:51:44 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_cub3d.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int		raycast(t_map *map)
 {
-	unsigned char	*c;
-
-	if (!(c = malloc(count * size)))
-		return (0);
-	ft_bzero(c, count * size);
-	return (c);
+	int i = 0;
+	float x = map->player->axis.x;
+	float y = map->player->axis.y;
+	while (1)
+	{
+		x = cos(map->player->angle * M_PI / 180) * i + map->player->axis.x;
+		y = sin(map->player->angle * M_PI / 180) * i + map->player->axis.y;
+		if (map->grid[(int)y / SIZE][(int)x / SIZE] == '1')
+			break ;
+		i++;
+	}
+	return i;
 }
