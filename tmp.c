@@ -2,57 +2,66 @@
 
 void	rander(float x, float y, int color)
 {
-	if (x <= t_map.conf.r[0] && y <= t_map.conf.r[1])
-		if (x >= 0 && y >= 0)
+	if (x < t_map.conf.r[0] && y < t_map.conf.r[1])
+		if (x > 0 && y > 0)
 			t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] =color;
 }
 
-void	view()
+float	degtorad(float deg)
 {
-	int		i;
-	float	j;
-	float	x;
-	float	y;
+	return (deg * M_PI / 180);
+}
 
-	j = 0;
-	t_map.player.angle -= 30;
-	while (j < 60)
-	{
-		i = 0;
-		while (i++ <= 50)
-		{
-			x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
-			y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
-			rander(x, y, WALL_COLOR);
-		}
-		t_map.player.angle += (float)60 / WIN_WIDTH;
-		j+= (float)60 / WIN_WIDTH;
-	}
-	t_map.player.angle -= 30;
-	// printf("%f, %f\n", t_map.player.x, t_map.player.y);
+int		wall_collision(float x, float y)
+{
+	return (t_map.grid[(int)y / SIZE][(int)x / SIZE] != '1');
 }
 
 // void	view()
 // {
 // 	int		i;
+// 	float	j;
 // 	float	x;
 // 	float	y;
 
-// 	i = 0;
-// 	while (i++ <= raycast(map))
+// 	j = 0;
+// 	t_map.player.angle -= 30;
+// 	while (j < 60)
 // 	{
-// 		x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
-// 		y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
-// 		t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = PLAYER;
+// 		i = 0;
+// 		while (i++ <= 50)
+// 		{
+// 			x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
+// 			y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
+// 			rander(x, y, WALL_COLOR);
+// 		}
+// 		t_map.player.angle += (float)60 / WIN_WIDTH;
+// 		j+= (float)60 / WIN_WIDTH;
 // 	}
+// 	t_map.player.angle -= 30;
+	// printf("%f, %f\n", t_map.player.x, t_map.player.y);
 // }
+
+void	view()
+{
+	float	x;
+	float	y;
+// printf("%f\n", raycast());
+// exit(1);
+	for (int i = 0; i < raycast(); i++)
+	{
+		x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
+		y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
+		rander(x, y, PLAYER);
+	}
+}
 
 void		player()
 {
 	int			x;
 	int			y;
 
-	view();
+	// view();
 	x = t_map.player.x - 6;
 	while (x < t_map.player.x + 6)
 	{
@@ -84,26 +93,19 @@ void		squar()
 
 void		draw()
 {
-	int i;
-	int j;
-
-	i = 0;
 	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
 	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
 	t_map.y = 0;
-	while (t_map.grid[i])
+	for (int i = 0 ; t_map.grid[i] ; i++)
 	{
-		j = 0;
-		while (t_map.grid[i][j])
+		for (int j = 0; t_map.grid[i][j]; j++)
 		{
 			if (t_map.grid[i][j] == '1')
 				squar();
 			t_map.x += SIZE;
-			j++;
 		}
 		t_map.x = 0;
 		t_map.y += SIZE;
-		i++;
 	}
 	player();
 	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);

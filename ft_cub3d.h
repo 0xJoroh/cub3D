@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 20:54:41 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 23:55:09 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 55
-# define PLAYER_SPEED 5
-# define ROTATION_SPEED 5
+# define PLAYER_SPEED 3
+# define ROTATION_SPEED 3
 
 # include <mlx.h>
 # include <math.h>
@@ -98,7 +98,10 @@ void			check_grid();
 int				key_event();
 int				key_releas(int keycode);
 int				key_press(int keycode);
-int				raycast();
+float			raycast();
+void			rander(float x, float y, int color);
+float			degtorad(float deg);
+int				wall_collision(float x, float y);
 
 /***********************		Tmp		****************************/
 
