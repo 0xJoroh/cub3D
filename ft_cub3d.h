@@ -6,20 +6,20 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 16:57:52 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 20:54:41 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
-# define BUFFER_SIZE 32
+# define BUFFER_SIZE 128
 # define WALL_COLOR 0xffffff
 # define PLAYER 0x9b59b6
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 55
-# define PLAYER_SPEED 4
-# define ROTATION_SPEED 4
+# define PLAYER_SPEED 5
+# define ROTATION_SPEED 5
 
 # include <mlx.h>
 # include <math.h>
@@ -54,17 +54,12 @@ typedef struct	s_conf
 	unsigned long	c;
 }				t_conf;
 
-typedef	struct	s_axis
-{
-	float			x;
-	float			y;
-}				t_axis;
-
 typedef struct	s_player
 {
 	char		view;
-	t_axis		axis;
 	float		angle;
+	float		x;
+	float		y;
 }				t_player;
 
 typedef struct	s_img
@@ -76,40 +71,41 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
-typedef struct	s_map
+struct			s_map
 {
+	float		x;
+	float		y;
 	char		*scene;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	char		**grid;
-	t_axis		*axis;
-	t_conf		*conf;
-	t_player	*player;
-	t_img		*img;
-	t_key		*key;
+	int			grid_height;
+	t_conf		conf;
+	t_player	player;
+	t_img		img;
+	t_key		key;
 }				t_map;
 
-t_key g_key;
-
 int				get_next_line(int fd, char **line);
-void			setup(char *scene, t_map *map);
+void			setup(char *scene);
 void			ft_puterror(char *msg);
-int				quit(t_map *map);
-void			set_grid(t_map *map);
-void			check_walls(t_map map);
+int				quit();
+void			set_grid();
+void			check_walls();
 char			*check_scene(char *scene);
 int				check_reso(char c, int res);
-void			check_grid(t_map map);
-int				key_event(t_map *map);
-int 			key_releas(int keycode);
+void			check_grid();
+int				key_event();
+int				key_releas(int keycode);
 int				key_press(int keycode);
-int				raycast(t_map *map);
+int				raycast();
 
 /***********************		Tmp		****************************/
-void			draw(t_map *map);
-void			player(t_map *map);
-void			squar(t_map map);
-void			ft_putstruct(t_map map);
-void			view(t_map *map);
+
+void			draw();
+void			player();
+void			squar();
+void			ft_putstruct();
+void			view();
 
 #endif

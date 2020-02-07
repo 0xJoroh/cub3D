@@ -64,8 +64,12 @@ int		get_width(char *scene)
 
 	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &line) && *line != '1')
+	{
+		free(line);
 		continue;
+	}
 	width = line_counter(line);
+	free(line);
 	while (get_next_line(fd, &line))
 	{
 		i = 0;
@@ -80,7 +84,7 @@ int		get_width(char *scene)
 	return (width);
 }
 
-void	set_grid(t_map *map)
+void	set_grid()
 {
 	int		fd;
 	char	*line;
@@ -88,23 +92,23 @@ void	set_grid(t_map *map)
 	int		j;
 
 	i = 0;
-	fd = open(map->scene, O_RDONLY);
-	map->grid = (char**)malloc((get_height(map->scene) + 1) * sizeof(char*));
+	fd = open(t_map.scene, O_RDONLY);
+	t_map.grid = (char**)malloc((t_map.grid_height = get_height(t_map.scene) + 1) * sizeof(char*));
 	while (get_next_line(fd, &line))
 	{
 		if (*line != '1')
 			continue ;
-		map->grid[i] = (char*)malloc(get_width(map->scene) + 1);
+		t_map.grid[i] = (char*)malloc(get_width(t_map.scene) + 1);
 		j = 0;
 		while (*line)
 		{
 			while (*line == ' ')
 				line++;
-			map->grid[i][j++] = *line++;
+			t_map.grid[i][j++] = *line++;
 		}
-		map->grid[i++][j] = '\0';
+		t_map.grid[i++][j] = '\0';
 	}
-	map->grid[i] = NULL;
-	check_walls(*map);
-	check_grid(*map);
+	t_map.grid[i] = NULL;
+	check_walls();
+	check_grid();
 }

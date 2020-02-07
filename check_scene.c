@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 17:04:12 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 17:44:16 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ char	*check_scene(char *scene)
 	int len;
 
 	len = ft_strlen(scene);
-	if (open(scene, O_RDONLY) < 0 || scene[len - 3] != 'c'
-	|| scene[len - 2] != 'u' || scene[len - 1] != 'b')
+	if (open(scene, O_RDONLY) < 0 || scene[len - 3] != 'c' || scene[len - 2] != 'u' || scene[len - 1] != 'b')
 		ft_puterror("This path is not exist.");
 	return (scene);
 }
@@ -36,7 +35,7 @@ int		check_reso(char c, int res)
 	return (res);
 }
 
-void	check_walls(t_map map)
+void	check_walls()
 {
 	int		i;
 	int		j;
@@ -44,25 +43,25 @@ void	check_walls(t_map map)
 
 	i = 0;
 	end = 0;
-	while (map.grid[0][end])
+	while (t_map.grid[0][end])
 		end++;
-	while (map.grid[i])
+	while (t_map.grid[i])
 	{
 		j = 0;
-		while (map.grid[i][j] && !i)
-			if (map.grid[i][j++] != '1')
+		while (t_map.grid[i][j] && !i)
+			if (t_map.grid[i][j++] != '1')
 				ft_puterror("The map must be closed/surrounded by walls.");
-		if (map.grid[i][0] != '1' || map.grid[i][end - 1] != '1')
+		if (t_map.grid[i][0] != '1' || t_map.grid[i][end - 1] != '1')
 			ft_puterror("The map must be closed/surrounded by walls.");
 		i++;
 	}
 	j = 0;
-	while (map.grid[i - 1][j])
-		if (map.grid[i - 1][j++] != '1')
+	while (t_map.grid[i - 1][j])
+		if (t_map.grid[i - 1][j++] != '1')
 			ft_puterror("The map must be closed/surrounded by walls.");
 }
 
-void	check_grid(t_map map)
+void	check_grid()
 {
 	int		i;
 	int		j;
@@ -70,16 +69,16 @@ void	check_grid(t_map map)
 
 	i = -1;
 	player = 0;
-	while (map.grid[++i])
+	while (t_map.grid[++i])
 	{
 		j = -1;
-		while (map.grid[i][++j])
-			if (map.grid[i][j] != '1' && map.grid[i][j] != '0' &&
-			map.grid[i][j] != '2' && map.grid[i][j] != 'S' && map.grid[i][j] != 'N'
-			&& map.grid[i][j] != 'W' && map.grid[i][j] != 'E')
+		while (t_map.grid[i][++j])
+			if (t_map.grid[i][j] != '1' && t_map.grid[i][j] != '0' &&
+			t_map.grid[i][j] != '2' && t_map.grid[i][j] != 'S' && t_map.grid[i][j] != 'N'
+			&& t_map.grid[i][j] != 'W' && t_map.grid[i][j] != 'E')
 				ft_puterror("There is extra character in your map");
-			else if (map.grid[i][j] == 'S' || map.grid[i][j] == 'N'
-			|| map.grid[i][j] == 'W' || map.grid[i][j] == 'E')
+			else if (t_map.grid[i][j] == 'S' || t_map.grid[i][j] == 'N'
+			|| t_map.grid[i][j] == 'W' || t_map.grid[i][j] == 'E')
 				player++;
 	}
 	if (player != 1)

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 15:52:57 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 20:35:28 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	ft_puterror(char *msg)
 {
 	write(2, "Error\n", 7);
 	ft_putstr(msg);
-	exit(-1);
+	quit();
 }
 
-int		quit(t_map *map)
+int		quit()
 {
-	free(map);
+	// while (t_map.grid_height--)
+	// 	free(t_map.grid[t_map.grid_height]);
+	// free(t_map.grid);
 	exit(1);
+	return (0);
 }
