@@ -46,12 +46,11 @@ void	view()
 {
 	float	x;
 	float	y;
-// printf("%f\n", raycast());
-// exit(1);
+
 	for (int i = 0; i < raycast(); i++)
 	{
-		x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
-		y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
+		x = cos(degtorad(t_map.player.angle)) * i + t_map.player.x;
+		y = sin(degtorad(t_map.player.angle)) * i + t_map.player.y;
 		rander(x, y, PLAYER);
 	}
 }
@@ -61,7 +60,7 @@ void		player()
 	int			x;
 	int			y;
 
-	// view();
+	view();
 	x = t_map.player.x - 6;
 	while (x < t_map.player.x + 6)
 	{
@@ -91,6 +90,13 @@ void		squar()
 	}
 }
 
+void		matrix()
+{
+	for (int y = 0; y < WIN_HEIGHT; y += SIZE)
+		for (int x = 0; x < WIN_WIDTH; x++)
+			rander(x, y, PLAYER);
+}
+
 void		draw()
 {
 	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
@@ -108,6 +114,7 @@ void		draw()
 		t_map.y += SIZE;
 	}
 	player();
+	matrix();
 	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }
 
