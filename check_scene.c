@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 15:49:18 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/07 17:04:12 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_walls(t_map map)
 			ft_puterror("The map must be closed/surrounded by walls.");
 }
 
-void	check_mapshape(t_map map)
+void	check_grid(t_map map)
 {
 	int		i;
 	int		j;
@@ -77,13 +77,11 @@ void	check_mapshape(t_map map)
 			if (map.grid[i][j] != '1' && map.grid[i][j] != '0' &&
 			map.grid[i][j] != '2' && map.grid[i][j] != 'S' && map.grid[i][j] != 'N'
 			&& map.grid[i][j] != 'W' && map.grid[i][j] != 'E')
-				ft_puterror("There is extra character in yout map");
+				ft_puterror("There is extra character in your map");
 			else if (map.grid[i][j] == 'S' || map.grid[i][j] == 'N'
 			|| map.grid[i][j] == 'W' || map.grid[i][j] == 'E')
 				player++;
 	}
-	if (!player)
-		ft_puterror("There is no player on your map");
-	if (player > 1)
-		ft_puterror("you have multiple player on your map");
+	if (player != 1)
+		ft_puterror("you have to have just 1 player");
 }

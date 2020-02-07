@@ -106,5 +106,5 @@ void	set_grid(t_map *map)
 	}
 	map->grid[i] = NULL;
 	check_walls(*map);
-	check_mapshape(*map);
+	check_grid(*map);
 }
