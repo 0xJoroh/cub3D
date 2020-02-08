@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/08 00:24:26 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/08 22:52:51 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 55
-# define PLAYER_SPEED 3
+# define PLAYER_SPEED 5
 # define ROTATION_SPEED 1
 
 # include <mlx.h>
@@ -30,6 +30,16 @@
 # include <stdio.h>
 # include <limits.h>
 # include "libft/libft.h"
+
+typedef	struct	s_ray
+{
+	int			is_down;
+	int			is_up;
+	int			is_right;
+	int			is_left;
+	int			distance;
+	float		angle;
+}				t_ray;
 
 typedef	struct	s_key
 {
@@ -57,7 +67,6 @@ typedef struct	s_conf
 typedef struct	s_player
 {
 	char		view;
-	float		angle;
 	float		x;
 	float		y;
 }				t_player;
@@ -84,6 +93,7 @@ struct			s_map
 	t_player	player;
 	t_img		img;
 	t_key		key;
+	t_ray		ray;
 }				t_map;
 
 int				get_next_line(int fd, char **line);
@@ -102,6 +112,8 @@ int				raycast();
 void			rander(float x, float y, int color);
 float			degtorad(float deg);
 int				wall_collision(float x, float y);
+float			normalize_angle(float angle);
+void			ray_init();
 
 /***********************		Tmp		****************************/
 

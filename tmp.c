@@ -2,9 +2,8 @@
 
 void	rander(float x, float y, int color)
 {
-	if (x < t_map.conf.r[0] && y < t_map.conf.r[1])
-		if (x > 0 && y > 0)
-			t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] =color;
+	if (x < t_map.conf.r[0] && y < t_map.conf.r[1] && x > 0 && y > 0)
+		t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = color;
 }
 
 float	degtorad(float deg)
@@ -14,46 +13,51 @@ float	degtorad(float deg)
 
 int		wall_collision(float x, float y)
 {
-	return (t_map.grid[(int)y / SIZE][(int)x / SIZE] != '1');
+	return (t_map.grid[(int)y / SIZE][(int)x / SIZE] == '1');
 }
 
-// void	view()
-// {
-// 	int		i;
-// 	float	j;
-// 	float	x;
-// 	float	y;
-
-// 	j = 0;
-// 	t_map.player.angle -= 30;
-// 	while (j < 60)
-// 	{
-// 		i = 0;
-// 		while (i++ <= 50)
-// 		{
-// 			x = cos(t_map.player.angle * M_PI / 180) * i + t_map.player.x;
-// 			y = sin(t_map.player.angle * M_PI / 180) * i + t_map.player.y;
-// 			rander(x, y, WALL_COLOR);
-// 		}
-// 		t_map.player.angle += (float)60 / WIN_WIDTH;
-// 		j+= (float)60 / WIN_WIDTH;
-// 	}
-// 	t_map.player.angle -= 30;
-	// printf("%f, %f\n", t_map.player.x, t_map.player.y);
-// }
+float	normalize_angle(float angle)
+{
+	if (angle > (2 * M_PI) || angle < -(2 * M_PI))
+		return (0);
+	return (angle);
+}
 
 void	view()
 {
 	float	x;
 	float	y;
-
-	for (int i = 0; i < raycast(); i++)
+	t_map.ray.angle -= degtorad(30);
+	for (float j = 0 ; j < 60 ; j += (float)60 / WIN_WIDTH)
 	{
-		x = cos(degtorad(t_map.player.angle)) * i + t_map.player.x;
-		y = sin(degtorad(t_map.player.angle)) * i + t_map.player.y;
-		rander(x, y, PLAYER);
+		t_map.ray.distance = raycast();
+		// printf("%d\n",t_map.ray.distance);
+		// exit(1);
+		for (int i = 0 ; i < t_map.ray.distance; i++)
+		{
+			x = cos(t_map.ray.angle) * i + t_map.player.x;
+			y = sin(t_map.ray.angle) * i + t_map.player.y;
+			rander(x, y, PLAYER);
+		}
+		t_map.ray.angle += degtorad((float)60 / WIN_WIDTH);
 	}
+	t_map.ray.angle -= degtorad(30);
 }
+
+// void	view()
+// {
+// 	float	x;
+// 	float	y;
+// 	// t_map.ray.distance = 100;
+// 	t_map.ray.distance = raycast();
+
+// 	for (int i = 0; i < t_map.ray.distance; i++)
+// 	{
+// 		x = cos(t_map.ray.angle) * i + t_map.player.x;
+// 		y = sin(t_map.ray.angle) * i + t_map.player.y;
+// 		rander(x, y, PLAYER);
+// 	}
+// }
 
 void		player()
 {
@@ -99,6 +103,7 @@ void		matrix()
 
 void		draw()
 {
+	ray_init();
 	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
 	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
 	t_map.y = 0;
