@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 03:02:06 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 03:04:47 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ int		verticale(float playerX, float playerY, float angle)
 
 int		raycast()
 {
-	int		h;
+	// int		h;
 	int		v;
 
-	h = horizontal(t_map.player.x, t_map.player.y, t_map.ray.angle);
+	// h = horizontal(t_map.player.x, t_map.player.y, t_map.ray.angle);
 	v = verticale(t_map.player.x, t_map.player.y, t_map.ray.angle);
-	printf("%d, %d\n", h, v);
-	return ((h < v) ? h : v);
+	printf("%d\n"v);
+	// return ((h < v) ? h : v);
+	return v;
 }
