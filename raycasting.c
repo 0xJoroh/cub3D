@@ -6,11 +6,28 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 16:38:51 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 17:04:37 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
+
+int		wall_collision(float x, float y)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (t_map.grid[0][i])
+		i++;
+	while (t_map.grid[j])
+		j++;
+	if (x > 0 && y > 0)
+		if ((int)y / SIZE < j && (int)x / SIZE < i)
+			return (t_map.grid[(int)y / SIZE][(int)x / SIZE] == '1');
+	return (1);
+}
 
 void	ray_init(float angle)
 {

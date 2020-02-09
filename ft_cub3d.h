@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 16:27:38 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 17:48:30 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define PLAYER 0x9b59b6
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define SIZE 55
-# define PLAYER_SPEED 5
-# define ROTATION_ANGLE 5
+# define SIZE 8
+# define PLAYER_SPEED 2
+# define ROTATION_ANGLE 3
 
 # include <mlx.h>
 # include <math.h>

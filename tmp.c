@@ -16,22 +16,7 @@ float	radtodeg(float rad)
 	return (rad * (180 / M_PI));
 }
 
-int		wall_collision(float x, float y)
-{
-	int i;
-	int j;
 
-	i = 0;
-	j = 0;
-	while (t_map.grid[0][i])
-		i++;
-	while (t_map.grid[j])
-		j++;
-	if (x > 0 && y > 0)
-		if ((int)y / SIZE < j && (int)x / SIZE < i)
-			return (t_map.grid[(int)y / SIZE][(int)x / SIZE] == '1');
-	return (1);
-}
 
 float	normalize_angle(float angle)
 {
@@ -53,7 +38,7 @@ void		draw()
 	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
 	map();
 	view();
-	player();
+	// player();
 	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }
 
@@ -79,18 +64,19 @@ void		draw()
 
 void	view()
 {
-	float ppp, wall, start, end;
+	// float dist_proj_plan, wall_hight, start, end;
 	float angle = t_map.ray.angle - FOV_ANGLE / 2;
 	angle = normalize_angle(angle);
 	for (int j = 0 ; j < t_map.conf.r[0] ; j++)
 	{
 		ray_init(angle);
-
 		t_map.ray.distance = raycast(angle);
-		ppp = (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
-		wall = (SIZE / t_map.ray.distance) * ppp;
-		start = (t_map.conf.r[1] / 2) - (wall / 2);
-		end = (t_map.conf.r[1] / 2) + (wall / 2);
+
+		// dist_proj_plan = (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
+		// wall_hight = (SIZE / t_map.ray.distance) * dist_proj_plan;
+		// start = (t_map.conf.r[1] / 2) - (wall / 2);
+		// end = (t_map.conf.r[1] / 2) + (wall / 2);
+
 		for (int i = 0 ; i < t_map.ray.distance; i++)
 		{
 			float x = cos(angle) * i + t_map.player.x;
