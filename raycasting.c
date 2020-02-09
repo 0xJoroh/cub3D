@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 02:59:55 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 03:02:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int		raycast()
 
 	h = horizontal(t_map.player.x, t_map.player.y, t_map.ray.angle);
 	v = verticale(t_map.player.x, t_map.player.y, t_map.ray.angle);
-	// return v;
+	printf("%d, %d\n", h, v);
 	return ((h < v) ? h : v);
 }
