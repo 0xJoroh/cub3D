@@ -31,8 +31,6 @@ void	view()
 	for (float j = 0 ; j < 60 ; j += (float)60 / WIN_WIDTH)
 	{
 		t_map.ray.distance = raycast();
-		// printf("%d\n",t_map.ray.distance);
-		// exit(1);
 		for (int i = 0 ; i < t_map.ray.distance; i++)
 		{
 			x = cos(t_map.ray.angle) * i + t_map.player.x;
@@ -48,7 +46,6 @@ void	view()
 // {
 // 	float	x;
 // 	float	y;
-// 	// t_map.ray.distance = 100;
 // 	t_map.ray.distance = raycast();
 
 // 	for (int i = 0; i < t_map.ray.distance; i++)
@@ -96,9 +93,9 @@ void		squar()
 
 void		matrix()
 {
-	for (int y = 0; y < WIN_HEIGHT; y += SIZE)
-		for (int x = 0; x < WIN_WIDTH; x++)
-			rander(x, y, PLAYER);
+	for (int y = 0; y < WIN_WIDTH; y += SIZE)
+		for (int x = 0; x < WIN_HEIGHT; x++)
+			rander(y, x, PLAYER);
 }
 
 void		draw()
@@ -119,7 +116,7 @@ void		draw()
 		t_map.y += SIZE;
 	}
 	player();
-	matrix();
+	// matrix();
 	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/08 23:11:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 00:32:15 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int		key_event()
 	float x;
 	float y;
 
-	// if (t_map.key.left_view || t_map.key.right_view)
-	// 	ray_init();
 	x = cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.forward && !wall_collision(x, y))
