@@ -79,7 +79,7 @@ void		draw()
 
 void	view()
 {
-	// float a,b,c;
+	float ppp, wall, start, end;
 	float angle = t_map.ray.angle - FOV_ANGLE / 2;
 	angle = normalize_angle(angle);
 	for (int j = 0 ; j < t_map.conf.r[0] ; j++)
@@ -87,6 +87,10 @@ void	view()
 		ray_init(angle);
 
 		t_map.ray.distance = raycast(angle);
+		ppp = (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
+		wall = (SIZE / t_map.ray.distance) * ppp;
+		start = (t_map.conf.r[1] / 2) - (wall / 2);
+		end = (t_map.conf.r[1] / 2) + (wall / 2);
 		for (int i = 0 ; i < t_map.ray.distance; i++)
 		{
 			float x = cos(angle) * i + t_map.player.x;
