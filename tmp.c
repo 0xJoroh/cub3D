@@ -32,51 +32,59 @@ float	normalize_angle(float angle)
 
 
 
-void		draw()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void	rect(float x, float y, float width, float height)
 {
-	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
-	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
-	map();
-	view();
-	// player();
-	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		x -= width;
+		while (j < width)
+		{
+			rander(x++, y, WALL_COLOR);
+			j++;
+		}
+		y++;
+		i++;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void	view()
 {
-	// float dist_proj_plan, wall_hight, start, end;
+	float dist_proj_plan, wall_hight, start, end;
 	float angle = t_map.ray.angle - FOV_ANGLE / 2;
 	angle = normalize_angle(angle);
-	for (int j = 0 ; j < t_map.conf.r[0] ; j++)
+	for (int i = 0 ; i < t_map.conf.r[0] ; i++)
 	{
 		ray_init(angle);
 		t_map.ray.distance = raycast(angle);
+		dist_proj_plan = (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
+		wall_hight = (SIZE / t_map.ray.distance) * dist_proj_plan;
+		start = (t_map.conf.r[1] / 2) - (wall_hight / 2);
+		end = (t_map.conf.r[1] / 2) + (wall_hight / 2);
+		rect(i, start, 1, wall_hight);
 
-		// dist_proj_plan = (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
-		// wall_hight = (SIZE / t_map.ray.distance) * dist_proj_plan;
-		// start = (t_map.conf.r[1] / 2) - (wall / 2);
-		// end = (t_map.conf.r[1] / 2) + (wall / 2);
-
+		//Mini Map
 		for (int i = 0 ; i < t_map.ray.distance; i++)
 		{
 			float x = cos(angle) * i + t_map.player.x;
@@ -132,4 +140,15 @@ void		map()
 		t_map.x = 0;
 		t_map.y += SIZE;
 	}
+}
+
+
+void		draw()
+{
+	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
+	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
+	map();
+	view();
+	// player();
+	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }
