@@ -8,53 +8,94 @@ void	rander(float x, float y, int color)
 
 float	degtorad(float deg)
 {
-	return (deg * M_PI / 180);
+	return (deg * (M_PI / 180));
+}
+
+float	radtodeg(float rad)
+{
+	return (rad * (180 / M_PI));
 }
 
 int		wall_collision(float x, float y)
 {
-	return (t_map.grid[(int)y / SIZE][(int)x / SIZE] == '1');
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (t_map.grid[0][i])
+		i++;
+	while (t_map.grid[j])
+		j++;
+	if (x > 0 && y > 0)
+		if ((int)y / SIZE < j && (int)x / SIZE < i)
+			return (t_map.grid[(int)y / SIZE][(int)x / SIZE] == '1');
+	return (1);
 }
 
 float	normalize_angle(float angle)
 {
-	if (angle > 360 || angle < -360)
-		return (0);
+	angle = (float)fmod(angle, 2 * M_PI);
+	if (angle < 0)
+		angle += 2 * M_PI;
 	return (angle);
 }
 
-void	view()
+
+
+
+
+
+
+void		draw()
 {
-	t_map.ray.angle -= 30;
-	for (float j = 0 ; j < 60 ; j += (float)60 / WIN_WIDTH)
-	{
-		t_map.ray.distance = raycast();
-		for (int i = 0 ; i < t_map.ray.distance; i++)
-		{
-			float x = cos(degtorad(t_map.ray.angle)) * i + t_map.player.x;
-			float y = sin(degtorad(t_map.ray.angle)) * i + t_map.player.y;
-			rander(x, y, PLAYER);
-		}
-		t_map.ray.angle += (float)60 / WIN_WIDTH;
-	}
-	t_map.ray.angle -= 30;
+	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
+	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
+	map();
+	view();
+	player();
+	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }
 
-// void	view()
-// {
-// 	float	x;
-// 	float	y;
 
-// 	// t_map.ray.distance = 100;
-// 	t_map.ray.distance = raycast();
 
-// 	for (int i = 0; i < t_map.ray.distance; i++)
-// 	{
-// 		x = cos(degtorad(t_map.ray.angle)) * i + t_map.player.x;
-// 		y = sin(degtorad(t_map.ray.angle)) * i + t_map.player.y;
-// 		rander(x, y, PLAYER);
-// 	}
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void	view()
+{
+	// float a,b,c;
+	float angle = t_map.ray.angle - FOV_ANGLE / 2;
+	angle = normalize_angle(angle);
+	for (int j = 0 ; j < t_map.conf.r[0] ; j++)
+	{
+		ray_init(angle);
+
+		t_map.ray.distance = raycast(angle);
+		for (int i = 0 ; i < t_map.ray.distance; i++)
+		{
+			float x = cos(angle) * i + t_map.player.x;
+			float y = sin(angle) * i + t_map.player.y;
+			rander(x, y, PLAYER);
+		}
+		angle += FOV_ANGLE / t_map.conf.r[0];
+	}
+}
 
 void		player()
 {
@@ -101,15 +142,4 @@ void		map()
 		t_map.x = 0;
 		t_map.y += SIZE;
 	}
-}
-
-void		draw()
-{
-	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
-	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
-	map();
-	ray_init();
-	view();
-	player();
-	mlx_put_image_to_window(t_map.mlx_ptr, t_map.win_ptr, t_map.img.img_ptr, 0, 0);
 }

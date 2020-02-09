@@ -111,12 +111,12 @@ void			setup(char *scene)
 	set_grid();
 	set_player();
 	if (t_map.player.view == 'N')
-		t_map.ray.angle = -90;
+		t_map.ray.angle = 1.5 * M_PI;
 	if (t_map.player.view == 'E')
 		t_map.ray.angle = 0;
 	if (t_map.player.view == 'S')
-		t_map.ray.angle = 90;
+		t_map.ray.angle = M_PI * 0.5;
 	if (t_map.player.view == 'W')
-		t_map.ray.angle = 180;
+		t_map.ray.angle = M_PI;
 	draw();
 }

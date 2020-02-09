@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 03:43:35 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 16:45:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,33 @@ int		key_event()
 	float x;
 	float y;
 
-	x = cos(degtorad(t_map.ray.angle)) * PLAYER_SPEED + t_map.player.x;
-	y = sin(degtorad(t_map.ray.angle)) * PLAYER_SPEED + t_map.player.y;
+	if (t_map.key.left_view)
+		t_map.ray.angle -= degtorad(ROTATION_ANGLE);
+	if (t_map.key.right_view)
+		t_map.ray.angle += degtorad(ROTATION_ANGLE);
+	x = cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
+	y = sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.forward && !wall_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
-	x = -cos(degtorad(t_map.ray.angle)) * PLAYER_SPEED + t_map.player.x;
-	y = -sin(degtorad(t_map.ray.angle)) * PLAYER_SPEED + t_map.player.y;
+	x = -cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
+	y = -sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.backward && !wall_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
-	x = cos(degtorad(t_map.ray.angle) - 90) * PLAYER_SPEED + t_map.player.x;
-	y = sin(degtorad(t_map.ray.angle) - 90) * PLAYER_SPEED + t_map.player.y;
+	x = cos(t_map.ray.angle - (M_PI / 2)) * PLAYER_SPEED + t_map.player.x;
+	y = sin(t_map.ray.angle - (M_PI / 2)) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.left && !wall_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
-	x = cos(degtorad(t_map.ray.angle) + 90) * PLAYER_SPEED + t_map.player.x;
-	y = sin(degtorad(t_map.ray.angle) + 90) * PLAYER_SPEED + t_map.player.y;
+	x = cos(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.x;
+	y = sin(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.right && !wall_collision(x, y))
 	{
 		t_map.player.x = x;
@@ -55,7 +59,7 @@ int		key_event()
 	return (0);
 }
 
-int key_releas(int keycode)
+int		key_releas(int keycode)
 {
 	if (keycode == 13)
 		t_map.key.forward = 0;
@@ -71,7 +75,7 @@ int key_releas(int keycode)
 		t_map.key.right_view = 0;
 	if (keycode == 53)
 		t_map.key.quit = 0;
-	return 0;
+	return (0);
 }
 
 int		key_press(int keycode)
@@ -90,5 +94,5 @@ int		key_press(int keycode)
 		t_map.key.right_view = 1;
 	if (keycode == 53)
 		t_map.key.quit = 1;
-	return 0;
+	return (0);
 }

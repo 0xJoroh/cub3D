@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 04:21:06 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 16:27:38 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WIN_HEIGHT 900
 # define SIZE 55
 # define PLAYER_SPEED 5
-# define ROTATION_ANGLE 3
+# define ROTATION_ANGLE 5
 
 # include <mlx.h>
 # include <math.h>
@@ -31,13 +31,15 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+# define FOV_ANGLE 60 * (M_PI / 180)
+
 typedef	struct	s_ray
 {
 	int			is_down;
 	int			is_up;
 	int			is_right;
 	int			is_left;
-	int			distance;
+	float		distance;
 	float		angle;
 }				t_ray;
 
@@ -108,12 +110,13 @@ void			check_grid();
 int				key_event();
 int				key_releas(int keycode);
 int				key_press(int keycode);
-int				raycast();
+float			raycast(float angle);
 void			rander(float x, float y, int color);
 float			degtorad(float deg);
 int				wall_collision(float x, float y);
 float			normalize_angle(float angle);
-void			ray_init();
+void			ray_init(float angle);
+float			radtodeg(float rad);
 
 /***********************		Tmp		****************************/
 
