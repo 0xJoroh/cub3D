@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/08 22:52:51 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 04:21:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WIN_HEIGHT 900
 # define SIZE 55
 # define PLAYER_SPEED 5
-# define ROTATION_SPEED 1
+# define ROTATION_ANGLE 3
 
 # include <mlx.h>
 # include <math.h>
@@ -120,7 +120,7 @@ void			ray_init();
 void			draw();
 void			player();
 void			squar();
-void			ft_putstruct();
+void			map();
 void			view();
 
 #endif
