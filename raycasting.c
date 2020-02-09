@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 04:50:48 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:36:03 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		horizontal(float playerX, float playerY, float angle)
 	ay = floor(playerY / SIZE) * SIZE;
 	ay += t_map.ray.is_down ? SIZE : 0;
 
-	ax = playerX + (ay - playerY) / tan(angle);
+	ax = playerX + (playerY - ay) / tan(angle);
 
 	ystep = SIZE;
 	ystep *= t_map.ray.is_up ? -1 : 1;
@@ -90,11 +90,13 @@ int		verticale(float playerX, float playerY, float angle)
 
 int		raycast()
 {
-	// int		h;
-	int		v;
+	int		h;
+	// int		v;
 
-	// h = horizontal(t_map.player.x, t_map.player.y, degtorad(t_map.ray.angle));
-	v = verticale(t_map.player.x, t_map.player.y, degtorad(t_map.ray.angle));
+	h = horizontal(t_map.player.x, t_map.player.y, degtorad(t_map.ray.angle));
+	// v = verticale(t_map.player.x, t_map.player.y, degtorad(t_map.ray.angle));
+	// printf("v : %d, h : %d\n", v, h);
 	// return ((h < v) ? h : v);
-	return v;
+	return h;
+	// return v;
 }

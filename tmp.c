@@ -25,7 +25,6 @@ float	normalize_angle(float angle)
 
 void	view()
 {
-
 	t_map.ray.angle -= 30;
 	for (float j = 0 ; j < 60 ; j += (float)60 / WIN_WIDTH)
 	{
