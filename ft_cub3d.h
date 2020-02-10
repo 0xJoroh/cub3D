@@ -6,15 +6,18 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 00:56:55 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:59:14 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
 # define BUFFER_SIZE 128
-# define WALL_COLOR 0xffffff
-# define PLAYER 0x9b59b6
+# define NORTH 0xffffff
+# define EAST 0xfffff0
+# define WEST 0xffff00
+# define SOUTH 0xffff0f
+# define CEILLING 0xf00000
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 6
@@ -52,6 +55,8 @@ typedef	struct	s_key
 	int			quit;
 	int			left_view;
 	int			right_view;
+	int			up_view;
+	float		up_angle;
 }				t_key;
 
 typedef struct	s_conf
@@ -69,6 +74,7 @@ typedef struct	s_conf
 typedef struct	s_player
 {
 	char		view;
+
 	float		x;
 	float		y;
 }				t_player;
@@ -117,16 +123,10 @@ float			normalize_angle(float angle);
 void			ray_init(float angle);
 float			radtodeg(float rad);
 float			degtorad(float deg);
-void			walls(float x, float y, float width, float height);
+void			walls(float x, float y, float height, int color);
 void			flooor(float x, float y, float width);
-void			ceiling(float x, float y, float width, float height);
-
-/***********************		Tmp		****************************/
-
+void			ceiling(float y, float height);
 void			draw();
-void			player();
-void			squar();
-void			map();
 void			render_view();
 
 #endif

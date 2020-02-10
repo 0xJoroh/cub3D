@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 01:15:17 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:11:55 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static void	check_angle(void)
 		t_map.ray.angle -= degtorad(ROTATION_ANGLE);
 	if (t_map.key.right_view)
 		t_map.ray.angle += degtorad(ROTATION_ANGLE);
+	if (t_map.key.up_angle > 200)
+		t_map.key.up_angle = 200;
+	if (t_map.key.up_angle < -200)
+		t_map.key.up_angle = -200;
 }
 
 static void	check_position(void)
@@ -65,7 +69,7 @@ int			key_event(void)
 	if (t_map.key.quit)
 		quit();
 	if (t_map.key.left_view || t_map.key.right_view || t_map.key.right ||
-	t_map.key.left || t_map.key.forward || t_map.key.backward)
+	t_map.key.left || t_map.key.forward || t_map.key.backward || t_map.key.up_view)
 	{
 		mlx_destroy_image(t_map.mlx_ptr, t_map.img.img_ptr);
 		draw();
@@ -87,6 +91,8 @@ int		key_releas(int keycode)
 		t_map.key.left_view = 0;
 	if (keycode == 124)
 		t_map.key.right_view = 0;
+	if (keycode == 126 || keycode == 125)
+		t_map.key.up_view = 0;
 	if (keycode == 53)
 		t_map.key.quit = 0;
 	return (0);
@@ -106,6 +112,12 @@ int		key_press(int keycode)
 		t_map.key.left_view = 1;
 	if (keycode == 124)
 		t_map.key.right_view = 1;
+	if (keycode == 126 || keycode == 125)
+		t_map.key.up_view = 1;
+	if (keycode == 126)
+		t_map.key.up_angle += 15;
+	if (keycode == 125)
+		t_map.key.up_angle -= 15;
 	if (keycode == 53)
 		t_map.key.quit = 1;
 	return (0);
