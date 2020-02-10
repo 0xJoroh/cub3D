@@ -6,21 +6,25 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 16:45:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 01:15:17 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-int		key_event()
+static void	check_angle(void)
 {
-	float x;
-	float y;
-
 	if (t_map.key.left_view)
 		t_map.ray.angle -= degtorad(ROTATION_ANGLE);
 	if (t_map.key.right_view)
 		t_map.ray.angle += degtorad(ROTATION_ANGLE);
+}
+
+static void	check_position(void)
+{
+	float	x;
+	float	y;
+
 	x = cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.forward && !wall_collision(x, y))
@@ -42,6 +46,15 @@ int		key_event()
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
+}
+
+int			key_event(void)
+{
+	float x;
+	float y;
+
+	check_angle();
+	check_position();
 	x = cos(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.y;
 	if (t_map.key.right && !wall_collision(x, y))
@@ -51,7 +64,8 @@ int		key_event()
 	}
 	if (t_map.key.quit)
 		quit();
-	if (t_map.key.left_view || t_map.key.right_view || t_map.key.right || t_map.key.left || t_map.key.forward || t_map.key.backward)
+	if (t_map.key.left_view || t_map.key.right_view || t_map.key.right ||
+	t_map.key.left || t_map.key.forward || t_map.key.backward)
 	{
 		mlx_destroy_image(t_map.mlx_ptr, t_map.img.img_ptr);
 		draw();

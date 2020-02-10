@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_grid.c                                     :+:      :+:    :+:   */
+/*   set_mapgrid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 10:17:46 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 15:49:03 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/02/10 01:12:02 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/10 01:12:59 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-int		valid(char *str)
+static int	valid(char *str)
 {
 	if (str[0] == 'R' || (str[0] == 'N' && str[1] == 'O') ||
 	(str[0] == 'S' && str[1] == 'O') || (str[0] == 'W' && str[1] == 'E')
@@ -23,7 +23,7 @@ int		valid(char *str)
 	return (0);
 }
 
-int		line_counter(char *line)
+static int	line_counter(char *line)
 {
 	int		len;
 
@@ -36,7 +36,7 @@ int		line_counter(char *line)
 	return (len);
 }
 
-int		get_height(char *scene)
+static int	get_height(char *scene)
 {
 	int		height;
 	char	*line;
@@ -55,7 +55,7 @@ int		get_height(char *scene)
 	return (height);
 }
 
-int		get_width(char *scene)
+static int	get_width(char *scene)
 {
 	int		width;
 	char	*line;
@@ -84,7 +84,7 @@ int		get_width(char *scene)
 	return (width);
 }
 
-void	set_grid()
+void		set_grid(void)
 {
 	int		fd;
 	char	*line;
@@ -93,7 +93,7 @@ void	set_grid()
 
 	i = 0;
 	fd = open(t_map.scene, O_RDONLY);
-	t_map.grid = (char**)malloc((t_map.grid_height = get_height(t_map.scene) + 1) * sizeof(char*));
+	t_map.grid = (char**)malloc((get_height(t_map.scene) + 1) * sizeof(char*));
 	while (get_next_line(fd, &line))
 	{
 		if (*line != '1')

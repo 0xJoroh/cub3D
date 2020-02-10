@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 17:44:16 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 01:05:51 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*check_scene(char *scene)
 	int len;
 
 	len = ft_strlen(scene);
-	if (open(scene, O_RDONLY) < 0 || scene[len - 3] != 'c' || scene[len - 2] != 'u' || scene[len - 1] != 'b')
+	if (open(scene, O_RDONLY) < 0 || scene[len - 3] != 'c'
+	|| scene[len - 2] != 'u' || scene[len - 1] != 'b')
 		ft_puterror("This path is not exist.");
 	return (scene);
 }
@@ -35,7 +36,7 @@ int		check_reso(char c, int res)
 	return (res);
 }
 
-void	check_walls()
+void	check_walls(void)
 {
 	int		i;
 	int		j;
@@ -61,7 +62,7 @@ void	check_walls()
 			ft_puterror("The map must be closed/surrounded by walls.");
 }
 
-void	check_grid()
+void	check_grid(void)
 {
 	int		i;
 	int		j;
@@ -73,8 +74,9 @@ void	check_grid()
 	{
 		j = -1;
 		while (t_map.grid[i][++j])
-			if (t_map.grid[i][j] != '1' && t_map.grid[i][j] != '0' &&
-			t_map.grid[i][j] != '2' && t_map.grid[i][j] != 'S' && t_map.grid[i][j] != 'N'
+			if (t_map.grid[i][j] != '1' &&
+			t_map.grid[i][j] != '0' && t_map.grid[i][j] != '2' &&
+			t_map.grid[i][j] != 'S' && t_map.grid[i][j] != 'N'
 			&& t_map.grid[i][j] != 'W' && t_map.grid[i][j] != 'E')
 				ft_puterror("There is extra character in your map");
 			else if (t_map.grid[i][j] == 'S' || t_map.grid[i][j] == 'N'

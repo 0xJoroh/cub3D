@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                         :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 14:40:26 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/07 15:53:43 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/02/10 01:16:54 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/10 01:16:56 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-unsigned long	get_color(int r, int g, int b)
+static unsigned long	get_color(int r, int g, int b)
 {
 	if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
 		ft_puterror("the Colors must have a value between 0 and 255.");
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
-char			*get_conf(char *scene, char *lookfor, int i)
+static char				*get_conf(char *scene, char *lookfor, int i)
 {
 	char	*line;
 	int		fd;
@@ -52,7 +52,7 @@ char			*get_conf(char *scene, char *lookfor, int i)
 	exit(-1);
 }
 
-void		set_conf(char *scene)
+static void				set_conf(char *scene)
 {
 	t_map.conf.r[0] = check_reso('W', ft_atoi(get_conf(scene, "R", 1)));
 	t_map.conf.r[1] = check_reso('H', ft_atoi(get_conf(scene, "R", 2)));
@@ -71,7 +71,7 @@ void		set_conf(char *scene)
 	ft_atoi(get_conf(scene, "C", 2)));
 }
 
-int		set_player()
+static int				set_player(void)
 {
 	int i;
 	int j;
@@ -103,7 +103,7 @@ int		set_player()
 	return (0);
 }
 
-void	setup(char *scene)
+void					setup(char *scene)
 {
 	t_map.mlx_ptr = mlx_init();
 	t_map.scene = check_scene(scene);

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/08 20:13:05 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 01:09:56 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void	ft_puterror(char *msg)
 	quit();
 }
 
-int		quit()
+int		quit(void)
 {
-	// while (t_map.grid_height--)
-	// 	free(t_map.grid[t_map.grid_height]);
-	// free(t_map.grid);
 	exit(1);
 	return (0);
 }

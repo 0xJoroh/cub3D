@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 17:04:37 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 01:16:26 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-int		wall_collision(float x, float y)
+int				wall_collision(float x, float y)
 {
 	int i;
 	int j;
@@ -29,7 +29,7 @@ int		wall_collision(float x, float y)
 	return (1);
 }
 
-void	ray_init(float angle)
+void			ray_init(float angle)
 {
 	angle = radtodeg(angle);
 	if (angle > 360)
@@ -41,16 +41,16 @@ void	ray_init(float angle)
 	angle = degtorad(angle);
 }
 
-float		horizontal(float playerX, float playerY, float angle)
+static float	horizontal(float player_x, float player_y, float angle)
 {
 	float	ay;
 	float	ax;
 	float	xstep;
 	float	ystep;
 
-	ay = floor(playerY / SIZE) * SIZE;
+	ay = floor(player_y / SIZE) * SIZE;
 	ay += t_map.ray.is_down ? SIZE : 0;
-	ax = playerX + (ay - playerY) / tan(angle);
+	ax = player_x + (ay - player_y) / tan(angle);
 	ystep = SIZE;
 	ystep *= t_map.ray.is_up ? -1 : 1;
 	xstep = SIZE / tan(angle);
@@ -65,19 +65,19 @@ float		horizontal(float playerX, float playerY, float angle)
 	}
 	if (t_map.ray.is_up)
 		ay++;
-	return (sqrt(pow(ax - playerX, 2) + pow(ay - playerY, 2)));
+	return (sqrt(pow(ax - player_x, 2) + pow(ay - player_y, 2)));
 }
 
-float		verticale(float playerX, float playerY, float angle)
+static float	verticale(float player_x, float player_y, float angle)
 {
 	float	ay;
 	float	ax;
 	float	xstep;
 	float	ystep;
 
-	ax = floor(playerX / SIZE) * SIZE;
+	ax = floor(player_x / SIZE) * SIZE;
 	ax += t_map.ray.is_right ? SIZE : 0;
-	ay = playerY + (ax - playerX) * tan(angle);
+	ay = player_y + (ax - player_x) * tan(angle);
 	xstep = SIZE;
 	xstep *= t_map.ray.is_left ? -1 : 1;
 	ystep = SIZE * tan(angle);
@@ -92,10 +92,10 @@ float		verticale(float playerX, float playerY, float angle)
 	}
 	if (t_map.ray.is_left)
 		ax++;
-	return (sqrt(pow(ax - playerX, 2) + pow(ay - playerY, 2)));
+	return (sqrt(pow(ax - player_x, 2) + pow(ay - player_y, 2)));
 }
 
-float		raycast(float angle)
+float			raycast(float angle)
 {
 	float		h;
 	float		v;
