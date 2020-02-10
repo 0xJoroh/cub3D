@@ -86,7 +86,8 @@ int		set_player()
 		x = 0;
 		while (t_map.grid[i][j])
 		{
-			if (t_map.grid[i][j] == 'N' || t_map.grid[i][j] == 'S' || t_map.grid[i][j] == 'W' || t_map.grid[i][j] == 'E')
+			if (t_map.grid[i][j] == 'N' || t_map.grid[i][j] == 'S'
+			|| t_map.grid[i][j] == 'W' || t_map.grid[i][j] == 'E')
 			{
 				t_map.player.y = y + SIZE / 2;
 				t_map.player.x = x + SIZE / 2;
@@ -102,12 +103,13 @@ int		set_player()
 	return (0);
 }
 
-void			setup(char *scene)
+void	setup(char *scene)
 {
 	t_map.mlx_ptr = mlx_init();
 	t_map.scene = check_scene(scene);
 	set_conf(scene);
-	t_map.win_ptr = mlx_new_window(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1], "The Game");
+	t_map.win_ptr = mlx_new_window(t_map.mlx_ptr,
+	t_map.conf.r[0], t_map.conf.r[1], "The Game");
 	set_grid();
 	set_player();
 	if (t_map.player.view == 'N')

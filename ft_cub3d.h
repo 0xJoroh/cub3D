@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/09 19:00:35 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/10 00:56:58 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 6
-# define PLAYER_SPEED 2 * 0.2
-# define ROTATION_ANGLE 1
+# define PLAYER_SPEED 2 * 0.4
+# define ROTATION_ANGLE 1.5
 
 # include <mlx.h>
 # include <math.h>
@@ -111,12 +111,15 @@ int				key_event();
 int				key_releas(int keycode);
 int				key_press(int keycode);
 float			raycast(float angle);
-void			rander(float x, float y, int color);
-float			degtorad(float deg);
+void			render_px(float x, float y, int color);
 int				wall_collision(float x, float y);
 float			normalize_angle(float angle);
 void			ray_init(float angle);
 float			radtodeg(float rad);
+float			degtorad(float deg);
+void			walls(float x, float y, float width, float height);
+void			flooor(float x, float y, float width);
+void			ceiling(float x, float y, float width, float height);
 
 /***********************		Tmp		****************************/
 
@@ -124,6 +127,6 @@ void			draw();
 void			player();
 void			squar();
 void			map();
-void			view();
+void			render_view();
 
 #endif
