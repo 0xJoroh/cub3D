@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 16:57:53 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:28:16 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,18 @@ void		render_view(void)
 	int		i;
 	float	wall_hight;
 	float	angle;
-	int		color = NORTH;
 
 	i = -1;
 	angle = normalize_angle(t_map.ray.angle - FOV_ANGLE / 2);
-	if (t_map.ray.is_down)
-		color = WEST;
-	if (t_map.ray.is_up)
-		color = EAST;
 	while (i++ < t_map.conf.r[0])
 	{
 		ray_init(angle);
 		t_map.ray.distance = raycast(angle) * cos(angle - t_map.ray.angle);
 		wall_hight = (SIZE / t_map.ray.distance) * (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
-		ceiling(i, (t_map.conf.r[1] / 2) - (wall_hight / 2) + t_map.key.up_angle);
-		walls(i, (t_map.conf.r[1] / 2) - (wall_hight / 2) + t_map.key.up_angle, wall_hight, color);
-		flooor(i, (t_map.conf.r[1] / 2) + (wall_hight / 2) + t_map.key.up_angle, 1);
+		float start = (t_map.conf.r[1] / 2) - (wall_hight / 2) + t_map.key.up_angle;
+		ceiling(i, start, 0xcccccc);
+		walls(i, start, wall_hight, get_texture());
+		flooor(i, (t_map.conf.r[1] / 2) + (wall_hight / 2) + t_map.key.up_angle, 0x103033);
 		angle += FOV_ANGLE / t_map.conf.r[0];
 	}
 }

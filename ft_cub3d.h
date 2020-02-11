@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 16:59:14 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:28:13 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct	s_ray
 	int			is_left;
 	float		distance;
 	float		angle;
+	int			wall_hit;
 }				t_ray;
 
 typedef	struct	s_key
@@ -124,9 +125,10 @@ void			ray_init(float angle);
 float			radtodeg(float rad);
 float			degtorad(float deg);
 void			walls(float x, float y, float height, int color);
-void			flooor(float x, float y, float width);
-void			ceiling(float y, float height);
+void			flooor(float x, float y, int color);
+void			ceiling(float x, float end, int color);
 void			draw();
 void			render_view();
+int				get_texture(void);
 
 #endif

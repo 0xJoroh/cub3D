@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 01:16:26 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:05:47 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ float			raycast(float angle)
 
 	h = horizontal(t_map.player.x, t_map.player.y, angle);
 	v = verticale(t_map.player.x, t_map.player.y, angle);
+	t_map.ray.wall_hit = (v < h) ? 1 : 0;
 	return ((h < v) ? h : v);
 }

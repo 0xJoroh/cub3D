@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 16:57:42 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:29:49 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,48 @@ void	walls(float x, float y, float height, int color)
 	}
 }
 
-void	flooor(float x, float y, float width)
+void	flooor(float x, float y, int color)
 {
 	int		i;
-	int		j;
 
 	i = 0;
 	while (i < t_map.conf.r[1])
 	{
-		j = 0;
-		x -= width;
-		while (j < width)
-		{
-			render_px(x++, y, 0xe17055);
-			j++;
-		}
-		y++;
+		x --;
+		render_px(x++, y++, color);
 		i++;
 	}
 }
 
-void	ceiling(float y, float height)
+void	ceiling(float x, float end, int color)
 {
 	int		i;
-	int		x;
+	int		y;
 
 	i = -1;
-	x = 0;
-	while (i++ < height)
+	y = 0;
+	while (i++ < end)
 	{
 		x--;
-		render_px(x++, y++, CEILLING);
+		render_px(x++, y++, color);
 	}
+}
+
+int		get_texture(void)
+{
+	if (t_map.ray.wall_hit)
+	{
+		if (t_map.ray.is_right)
+			return (0xcccccc);
+		if (t_map.ray.is_left)
+			return (0x996633);
+	}
+	if (!t_map.ray.wall_hit)
+	{
+		if (t_map.ray.is_up)
+			return (0x123456);
+		if (t_map.ray.is_down)
+			return (0x321654);
+	}
+	return (0x321654);
 }
