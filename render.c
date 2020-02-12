@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/11 14:28:16 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/12 21:55:49 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void		render_view(void)
 		t_map.ray.distance = raycast(angle) * cos(angle - t_map.ray.angle);
 		wall_hight = (SIZE / t_map.ray.distance) * (t_map.conf.r[0] / 2) / tan(FOV_ANGLE / 2);
 		float start = (t_map.conf.r[1] / 2) - (wall_hight / 2) + t_map.key.up_angle;
-		ceiling(i, start, 0xcccccc);
+		ceiling(i, start, t_map.conf.c);
 		walls(i, start, wall_hight, get_texture());
-		flooor(i, (t_map.conf.r[1] / 2) + (wall_hight / 2) + t_map.key.up_angle, 0x103033);
+		flooor(i, (t_map.conf.r[1] / 2) + (wall_hight / 2) + t_map.key.up_angle, t_map.conf.f);
 		angle += FOV_ANGLE / t_map.conf.r[0];
 	}
 }
