@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/15 15:53:31 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/15 17:49:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		draw()
 	t_map.img.img_ptr = mlx_new_image(t_map.mlx_ptr, t_map.conf.r[0], t_map.conf.r[1]);
 	t_map.img.data = (int *)mlx_get_data_addr(t_map.img.img_ptr, &t_map.img.bpp, &t_map.img.size_l, &t_map.img.endian);
 	// get directions
+	
 	t_map.texture.xpm_ptr = mlx_xpm_file_to_image(t_map.mlx_ptr, t_map.conf.so, &t_map.texture.width, &t_map.texture.height);
 	t_map.texture.data = (int *)mlx_get_data_addr(t_map.texture.xpm_ptr, &t_map.texture.bpp, &t_map.texture.size_l, &t_map.texture.endian);
 	render_view();
