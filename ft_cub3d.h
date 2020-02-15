@@ -6,23 +6,12 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/12 21:42:27 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/15 15:24:25 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
-# define BUFFER_SIZE 128
-# define NORTH 0xffffff
-# define EAST 0xfffff0
-# define WEST 0xffff00
-# define SOUTH 0xffff0f
-# define CEILLING 0xf00000
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 900
-# define SIZE 6
-# define PLAYER_SPEED 2 * 0.4
-# define ROTATION_ANGLE 1.5
 
 # include <mlx.h>
 # include <math.h>
@@ -34,7 +23,30 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+# define BUFFER_SIZE 128
+# define NORTH 0xffffff
+# define EAST 0xfffff0
+# define WEST 0xffff00
+# define SOUTH 0xffff0f
+# define CEILLING 0xf00000
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
+# define SIZE 64
+# define PLAYER_SPEED 8
+# define ROTATION_ANGLE 2
 # define FOV_ANGLE 60 * (M_PI / 180)
+
+typedef	struct	s_texture
+{
+	char		*path;
+	void		*xpm_ptr;
+	int			*data;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size_l;
+	int			endian;
+}				t_texture;
 
 typedef	struct	s_ray
 {
@@ -45,6 +57,8 @@ typedef	struct	s_ray
 	float		distance;
 	float		angle;
 	int			wall_hit;
+	float		x_offset;
+	float		y_offset;
 }				t_ray;
 
 typedef	struct	s_key
@@ -75,7 +89,6 @@ typedef struct	s_conf
 typedef struct	s_player
 {
 	char		view;
-
 	float		x;
 	float		y;
 }				t_player;
@@ -103,6 +116,7 @@ struct			s_map
 	t_img		img;
 	t_key		key;
 	t_ray		ray;
+	t_texture	texture;
 }				t_map;
 
 int				get_next_line(int fd, char **line);
@@ -124,11 +138,10 @@ float			normalize_angle(float angle);
 void			ray_init(float angle);
 float			radtodeg(float rad);
 float			degtorad(float deg);
-void			walls(float x, float y, float height, int color);
+void			walls(float x, float y, float height);
 void			flooor(float x, float y, int color);
 void			ceiling(float x, float end, int color);
 void			draw();
 void			render_view();
-int				get_texture(void);
 
 #endif

@@ -1,8 +1,8 @@
 R 1600 900
-NO ./textures/1.xpm
+NO ./textures/2.xpm
 SO ./textures/2.xpm
-WE ./textures/3.xpm
-EA ./textures/4.xpm
+WE ./textures/2.xpm
+EA ./textures/2.xpm
 
 S ../textures/5.xpm
 F 45,52,54

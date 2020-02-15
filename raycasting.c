@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/11 14:05:47 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/15 15:36:17 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static float	horizontal(float player_x, float player_y, float angle)
 	}
 	if (t_map.ray.is_up)
 		ay++;
+	t_map.ray.x_offset = ay;
 	return (sqrt(pow(ax - player_x, 2) + pow(ay - player_y, 2)));
 }
 
@@ -92,6 +93,7 @@ static float	verticale(float player_x, float player_y, float angle)
 	}
 	if (t_map.ray.is_left)
 		ax++;
+	t_map.ray.x_offset = ay < t_map.ray.x_offset ? ay : t_map.ray.x_offset;
 	return (sqrt(pow(ax - player_x, 2) + pow(ay - player_y, 2)));
 }
 

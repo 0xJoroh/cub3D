@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/10 16:11:55 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/12 22:30:24 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	check_angle(void)
 		t_map.ray.angle += degtorad(ROTATION_ANGLE);
 	if (t_map.key.up_angle > 200)
 		t_map.key.up_angle = 200;
-	if (t_map.key.up_angle < -200)
-		t_map.key.up_angle = -200;
+	if (t_map.key.up_angle < -250)
+		t_map.key.up_angle = -250;
 }
 
 static void	check_position(void)
