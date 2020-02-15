@@ -6,36 +6,40 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/13 17:16:43 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/15 15:55:09 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-#include "textures/1.xpm"
 
-// void	walls(float x, float y, float height)
-// {
-// 	int		i;
-// 	int		j;
+void		walls(float x, float y, float height)
+{
+	float	i;
+	float	factor;
 
-// 	j = 0;
-// 	i = 0;
-// 	while (i < height)
-// 	{
-// 		x--;
-// 		render_px(x++, y++, t_map.texture.texture[i++][j++]);
-// 	}
-// }
+	i = 0;
+	factor = (float)t_map.texture.height / height;
+	while (i < height)
+	{
+		int color = t_map.texture.data[(int)(i * factor) % 64 * t_map.texture.width + (int)t_map.ray.x_offset % 64];
+		render_px(x, i + y, color);
+		i++;
+	}
+}
 
 void	flooor(float x, float y, int color)
 {
-	int		i;
+	float	i;
+	float	factor;
+	float	height = t_map.conf.r[1] - y;
 
 	i = 0;
-	while (i < t_map.conf.r[1])
+	color = 0;
+	factor = (float)t_map.texture.height / height;
+	while (i < height)
 	{
-		x--;
-		render_px(x++, y++, color);
+		int color = t_map.texture.data[(int)(i * factor) % 64 * t_map.texture.width + (int)t_map.ray.x_offset % 64];
+		render_px(x, i + y, color);
 		i++;
 	}
 }
