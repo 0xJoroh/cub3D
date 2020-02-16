@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:19:50 by mait-si-          #+#    #+#             */
-/*   Updated: 2019/10/22 18:09:03 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/16 11:54:31 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	counter(char const *str, char c)
+static int	words_num(char const *str, char c)
 {
 	int var;
 	int counter;
@@ -33,62 +33,49 @@ static int	counter(char const *str, char c)
 	return (counter);
 }
 
-static void	fill_words(char const *str, char **words, char c)
+static int		ft_strlenword(char *s, char c)
 {
-	int i;
-	int j;
+	int	len;
 
-	i = 0;
-	while (*str)
+	len = 0;
+	while (*s != c && *s != '\0')
 	{
-		j = 0;
-		while (*str != c && *str)
-			words[i][j++] = *str++;
-		if (j)
-			words[i++][j] = '\0';
-		if (*str == '\0')
-			break ;
-		str++;
+		len++;
+		s++;
 	}
+	return (len);
 }
 
-static void	memallo(int split_count, char **w, char const *str, char c)
+static void		*freeing(char **tab, int i)
 {
-	int letter_counter;
-	int i;
-
-	i = 0;
-	while (split_count--)
-	{
-		letter_counter = 0;
-		if (*str == c)
-		{
-			str++;
-			split_count++;
-		}
-		while (*str && *str != c)
-		{
-			letter_counter++;
-			str++;
-		}
-		if (letter_counter)
-			if (!(w[i++] = (char *)malloc(sizeof(char) * (letter_counter + 1))))
-				while (i >= 0)
-					free(w[i--]);
-	}
-	if (i >= 0)
-		w[i] = 0;
+	while (i--)
+		free(tab[i]);
+	free(tab);
+	return (NULL);
 }
 
-char		**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
-	char	**words;
+	int		counter;
+	char	**tab;
+	int		i;
 
 	if (!s)
-		return (0);
-	if (!(words = (char **)malloc(sizeof(char*) * (counter(s, c) + 1))))
-		return (0);
-	memallo(counter(s, c), words, s, c);
-	fill_words(s, words, c);
-	return (words);
+		return (NULL);
+	counter = words_num((char *)s, c);
+	if (!(tab = (char **)malloc((counter + 1) * sizeof(char*))))
+		return (NULL);
+	i = 0;
+	while (counter--)
+	{
+		while (*s == c && *s != '\0')
+			s++;
+		tab[i] = ft_substr((char *)s, 0, ft_strlenword((char *)s, c));
+		if (!tab[i])
+			return (freeing(tab, i));
+		s = s + ft_strlenword((char *)s, c);
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
