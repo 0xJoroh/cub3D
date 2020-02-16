@@ -6,22 +6,22 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/15 17:41:30 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/16 11:04:05 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-void		walls(float x, float y, float height)
+void		walls(float x, float y, float height, int nbr)
 {
 	float	i;
 	float	factor;
 
 	i = 0;
-	factor = (float)t_map.texture.height / height;
+	factor = (float)t_map.texture.height[nbr] / height;
 	while (i < height)
 	{
-		int color = t_map.texture.data[(int)(i * factor) % 64 * t_map.texture.width + (int)t_map.ray.x_offset % 64];
+		int color = t_map.texture.data[nbr][(int)(i * factor) * t_map.texture.width[nbr] + (int)t_map.ray.x_offset];
 		render_px(x, i + y, color);
 		i++;
 	}

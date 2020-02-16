@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/15 17:45:08 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/16 11:12:37 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@
 # define WIN_HEIGHT 900
 # define SIZE 64
 # define PLAYER_SPEED 8
-# define ROTATION_ANGLE 2 * 0.5
+# define ROTATION_ANGLE 1.5
 # define FOV_ANGLE 60 * (M_PI / 180)
 
 typedef	struct	s_texture
 {
 	char		*path;
-	void		*xpm_ptr;
-	int			*data;
-	int			width;
-	int			height;
+	void		*xpm_ptr[4];
+	int			*data[4];
+	int			width[4];
+	int			height[4];
 	int			bpp;
 	int			size_l;
 	int			endian;
@@ -140,7 +140,7 @@ float			normalize_angle(float angle);
 void			ray_init(float angle);
 float			radtodeg(float rad);
 float			degtorad(float deg);
-void			walls(float x, float y, float height);
+void			walls(float x, float y, float height, int nbr);
 void			flooor(float x, float y, int color);
 void			ceiling(float x, float end, int color);
 void			draw();
