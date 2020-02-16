@@ -6,11 +6,17 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/16 11:04:05 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/16 11:36:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
+
+int			shadow(int color)
+{
+
+	return (color);
+}
 
 void		walls(float x, float y, float height, int nbr)
 {
@@ -22,6 +28,7 @@ void		walls(float x, float y, float height, int nbr)
 	while (i < height)
 	{
 		int color = t_map.texture.data[nbr][(int)(i * factor) * t_map.texture.width[nbr] + (int)t_map.ray.x_offset];
+		shadow(color);
 		render_px(x, i + y, color);
 		i++;
 	}
