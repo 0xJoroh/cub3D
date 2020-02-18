@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/16 12:01:50 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:49:02 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 64
-# define PLAYER_SPEED 8
-# define ROTATION_ANGLE 1.5
+# define PLAYER_SPEED 15
+# define ROTATION_ANGLE 1.5 * 2.5
 # define FOV_ANGLE 60 * (M_PI / 180)
 
 typedef	struct	s_texture
 {
 	char		*path;
-	void		*xpm_ptr[4];
-	int			*data[4];
-	int			width[4];
-	int			height[4];
+	void		*xpm_ptr[6];
+	int			*data[6];
+	int			width[6];
+	int			height[6];
 	int			bpp;
 	int			size_l;
 	int			endian;

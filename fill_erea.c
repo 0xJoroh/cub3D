@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/16 14:14:13 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:47:01 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 
 int			shadow(int color)
 {
+	int r;
+	int g;
+	int b;
 
+	r = color / pow(256, 2);
+	g = (color / 256) % 256;
+	b = color % 256;
+	if ((t_map.ray.distance / 180) > 1)
+	{
+		r /= (t_map.ray.distance / 180);
+		g /= (t_map.ray.distance / 180);
+		b /= (t_map.ray.distance / 180);
+	}
+	color = pow(2, 16) * r + pow(2, 8) * g + b;
 	return (color);
 }
 
@@ -28,8 +41,7 @@ void		walls(float x, float y, float height, int nbr)
 	while (i < height)
 	{
 		int color = t_map.texture.data[nbr][(int)(i * factor) * t_map.texture.width[nbr] + (int)t_map.ray.x_offset];
-		shadow(color);
-		render_px(x, i + y, color);
+		render_px(x, i + y, shadow(color));
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/16 11:11:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:14:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-static int			get_texture_num()
+static int	get_texture_num()
 {
 	if (t_map.ray.wall_hit && t_map.ray.is_left)
 		return (1);
