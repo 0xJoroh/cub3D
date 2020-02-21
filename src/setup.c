@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:16:54 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/18 17:22:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:39:00 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,54 +19,6 @@ static unsigned long	get_color(int r, int g, int b)
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
-static char				*get_conf(char *scene, char *lookfor, int i)
-{
-	char	*line;
-	int		fd;
-
-	if ((fd = open(scene, O_RDONLY)) < 0)
-		ft_puterror("This scene is not exist.");
-	while (get_next_line(fd, &line))
-		if (!ft_strcmp(line, "") || *line == '\n')
-			continue ;
-		else if (!ft_strcmp(lookfor, ft_split(line, ' ')[0]))
-			if (*lookfor == 'C' || *lookfor == 'F')
-				if (ft_tablen(ft_split(line, ' ')) != 2 ||
-				ft_tablen(ft_split(++line, ',')) != 3)
-					ft_puterror("Fix F or C data");
-				else
-					return (ft_split(line, ',')[i]);
-			else if (*line == 'R' && ft_tablen(ft_split(line, ' ')) != 3)
-				ft_puterror("Fix the resolution data");
-			else if (*line != 'R' && ft_tablen(ft_split(line, ' ')) != 2)
-				ft_puterror("you have to fix your texture path");
-			else
-				return (ft_split(line, ' ')[i]);
-		else
-			continue ;
-	ft_puterror("you have to fix your scene.");
-	exit(-1);
-}
-
-static void				set_conf(char *scene)
-{
-	t_map.conf.r[0] = check_reso('W', ft_atoi(get_conf(scene, "R", 1)));
-	t_map.conf.r[1] = check_reso('H', ft_atoi(get_conf(scene, "R", 2)));
-	t_map.conf.no = get_conf(scene, "NO", 1);
-	t_map.conf.so = get_conf(scene, "SO", 1);
-	t_map.conf.we = get_conf(scene, "WE", 1);
-	t_map.conf.ea = get_conf(scene, "EA", 1);
-	t_map.conf.s = get_conf(scene, "S", 1);
-	t_map.conf.f = get_color(
-	ft_atoi(get_conf(scene, "F", 0)),
-	ft_atoi(get_conf(scene, "F", 1)),
-	ft_atoi(get_conf(scene, "F", 2)));
-	t_map.conf.c = get_color(
-	ft_atoi(get_conf(scene, "C", 0)),
-	ft_atoi(get_conf(scene, "C", 1)),
-	ft_atoi(get_conf(scene, "C", 2)));
-}
-
 static int				set_player(void)
 {
 	int i;
@@ -76,11 +28,11 @@ static int				set_player(void)
 
 	y = 0;
 	i = 0;
-	while (t_map.grid[i])
+	while (t_map.conf.grid[i])
 	{
 		j = 0;
 		x = 0;
-		while (t_map.grid[i][j])
+		while (t_map.conf.grid[i][j])
 		{
 			if (get_player(i, j, x, y))
 				return (1);
@@ -93,14 +45,57 @@ static int				set_player(void)
 	return (0);
 }
 
+static void				get_conf(char **words)
+{
+	if (!ft_strcmp("R", words[0]))
+	{
+		t_map.conf.r[0] = check_reso('W', ft_atoi(words[1]));
+		t_map.conf.r[1] = check_reso('W', ft_atoi(words[2]));
+	}
+	else if (!ft_strcmp("NO", words[0]))
+		t_map.conf.no = words[1];
+	else if (!ft_strcmp("SO", words[0]))
+		t_map.conf.so = words[1];
+	else if (!ft_strcmp("WE", words[0]))
+		t_map.conf.we = words[1];
+	else if (!ft_strcmp("EA", words[0]))
+		t_map.conf.ea = words[1];
+	else if (!ft_strcmp("S", words[0]))
+		t_map.conf.s = words[1];
+	else if (!ft_strcmp("F", words[0]))
+		t_map.conf.f = get_color(ft_atoi(ft_split(t_map.line + 1, ',')[0]),
+			ft_atoi(ft_split(t_map.line + 1, ',')[1]),
+			ft_atoi(ft_split(t_map.line + 1, ',')[2]));
+	else if (!ft_strcmp("C", words[0]))
+		t_map.conf.c = get_color(ft_atoi(ft_split(t_map.line + 1, ',')[0]),
+			ft_atoi(ft_split(t_map.line + 1, ',')[1]),
+			ft_atoi(ft_split(t_map.line + 1, ',')[2]));
+	else if ('1' == words[0][0])
+		set_grid();
+}
+
+static void				set_conf(void)
+{
+	char	**words;
+
+	while (get_next_line(t_map.fd, &t_map.line))
+	{
+		words = ft_split(t_map.line, ' ');
+		if (words)
+			get_conf(words);
+		free(words);
+		free(t_map.line);
+	}
+	free(t_map.line);
+}
+
 void					setup(char *scene)
 {
 	t_map.mlx_ptr = mlx_init();
 	t_map.scene = check_scene(scene);
-	set_conf(scene);
+	set_conf();
 	t_map.win_ptr = mlx_new_window(t_map.mlx_ptr, t_map.conf.r[0],
 	t_map.conf.r[1], "The Game");
-	set_grid();
 	set_player();
 	textures_init();
 	draw();

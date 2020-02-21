@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/18 17:23:15 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/21 11:55:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct		s_conf
 	char			*we;
 	char			*ea;
 	char			*s;
+	char			**grid;
 	unsigned long	f;
 	unsigned long	c;
 }					t_conf;
@@ -107,6 +108,14 @@ typedef struct		s_player
 	float			x;
 	float			y;
 }					t_player;
+
+typedef struct		s_sprite
+{
+	float			x;
+	float			distance;
+	float			y;
+	struct s_sprite *next;
+}					t_sprite;
 
 typedef struct		s_img
 {
@@ -124,8 +133,9 @@ struct				s_map
 	char			*scene;
 	void			*mlx_ptr;
 	void			*win_ptr;
-	char			**grid;
 	int				grid_height;
+	int				fd;
+	char			*line;
 	t_conf			conf;
 	t_player		player;
 	t_img			img;
@@ -162,5 +172,6 @@ void				draw();
 void				render_view();
 void				textures_init(void);
 int					get_player(int i, int j, int x, int y);
+int					sprite_collision(float x, float y);
 
 #endif

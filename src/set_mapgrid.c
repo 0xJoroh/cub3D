@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:12:02 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/18 17:22:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:25:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,92 +23,63 @@ static int	valid(char *str)
 	return (0);
 }
 
-static int	line_counter(char *line)
-{
-	int		len;
-
-	len = 0;
-	while (*line)
-		if (*line++ == ' ')
-			continue ;
-		else
-			len++;
-	return (len);
-}
-
-static int	get_height(char *scene)
+static int	grid_height(void)
 {
 	int		height;
 	char	*line;
 	int		fd;
 
 	height = 1;
-	fd = open(scene, O_RDONLY);
+	fd = open(t_map.scene, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		if (!valid(line))
 			ft_puterror("there is extra config on your scene.");
-		if (*line != '1')
-			continue ;
-		height++;
+		if (*line == '1')
+			height++;
+		free(line);
 	}
+	free(line);
 	return (height);
 }
 
-static int	get_width(char *scene)
+int			grid_width(char *str)
 {
-	int		width;
-	char	*line;
-	int		fd;
-	int		i;
+	int len;
 
-	fd = open(scene, O_RDONLY);
-	while (get_next_line(fd, &line) && *line != '1')
-	{
-		free(line);
-		continue;
-	}
-	width = line_counter(line);
-	free(line);
-	while (get_next_line(fd, &line))
-	{
-		i = 0;
-		while (*line)
-			if (*line++ == ' ')
-				continue ;
-			else
-				i++;
-		if (i != width)
-			ft_puterror("Fix your Map");
-	}
-	return (width);
+	len = 0;
+	while (*str)
+		if (*str++ != ' ')
+			len++;
+	return (len);
 }
 
 void		set_grid(void)
 {
-	int		fd;
-	char	*line;
 	int		i;
 	int		j;
+	int		len;
+	int		k;
 
 	i = 0;
-	fd = open(t_map.scene, O_RDONLY);
-	t_map.grid = (char**)malloc((get_height(t_map.scene) + 1) * sizeof(char*));
-	while (get_next_line(fd, &line))
+	len = grid_width(t_map.line);
+	free(t_map.line);
+	t_map.conf.grid = (char**)malloc((grid_height() + 1) * sizeof(char*));
+	while (get_next_line(t_map.fd, &t_map.line))
 	{
-		if (*line != '1')
-			continue ;
-		t_map.grid[i] = (char*)malloc(get_width(t_map.scene) + 1);
 		j = 0;
-		while (*line)
+		k = 0;
+		if (grid_width(t_map.line) != len)
+			ft_puterror("fix your map size");
+		t_map.conf.grid[i] = (char*)malloc(len + 1);
+		while (t_map.line[k])
 		{
-			while (*line == ' ')
-				line++;
-			t_map.grid[i][j++] = *line++;
+			while (t_map.line[k] == ' ')
+				k++;
+			t_map.conf.grid[i][j++] = t_map.line[k++];
 		}
-		t_map.grid[i++][j] = '\0';
+		t_map.conf.grid[i++][j] = '\0';
+		free(t_map.line);
 	}
-	t_map.grid[i] = NULL;
-	check_walls();
-	check_grid();
+	t_map.conf.grid[i] = NULL;
 }

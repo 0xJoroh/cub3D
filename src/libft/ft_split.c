@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:19:50 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/18 17:12:19 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:37:39 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char			**ft_split(char const *s, char c)
 	char	**tab;
 	int		i;
 
-	if (!s)
+	if (!s || !ft_strcmp(s, ""))
 		return (NULL);
 	counter = words_num((char *)s, c);
 	if (!(tab = (char **)malloc((counter + 1) * sizeof(char*))))
