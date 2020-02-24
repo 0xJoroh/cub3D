@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:01:30 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/21 11:55:24 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:07:38 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_cub3d.h"
 
-int				wall_collision(float x, float y)
+int		wall_collision(float x, float y)
 {
 	int i;
 	int j;
@@ -26,6 +26,23 @@ int				wall_collision(float x, float y)
 	if (x > 0 && y > 0)
 		if ((int)y / SIZE < j && (int)x / SIZE < i)
 			return (t_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == '1');
+	return (1);
+}
+
+int		sprite_collision(float x, float y)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (t_map.conf.grid[0][i])
+		i++;
+	while (t_map.conf.grid[j])
+		j++;
+	if (x > 0 && y > 0)
+		if ((int)y / SIZE < j && (int)x / SIZE < i)
+			return (t_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == '2');
 	return (1);
 }
 

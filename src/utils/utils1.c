@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:50:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/18 17:20:00 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/24 14:07:51 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,17 @@ float	normalize_angle(float angle)
 	if (angle < 0)
 		angle += 2 * M_PI;
 	return (angle);
+}
+
+void	freeing(char **words)
+{
+	int i;
+
+	i = 0;
+	if (words)
+	{
+		while (words[i])
+			free(words[i++]);
+		free(words);
+	}
 }

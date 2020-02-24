@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/20 18:08:56 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:15:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@ static void	check_position(void)
 
 	x = cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
-	if (t_map.key.forward && !wall_collision(x, y))
+	if (t_map.key.forward && !wall_collision(x, y) && !sprite_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
 	x = -cos(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
 	y = -sin(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
-	if (t_map.key.backward && !wall_collision(x, y))
+	if (t_map.key.backward && !wall_collision(x, y) && !sprite_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
 	x = cos(t_map.ray.angle - (M_PI / 2)) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle - (M_PI / 2)) * PLAYER_SPEED + t_map.player.y;
-	if (t_map.key.left && !wall_collision(x, y))
+	if (t_map.key.left && !wall_collision(x, y) && !sprite_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;
 	}
 }
 
-int			key_event(void)
+int			loop_hook(void)
 {
 	float x;
 	float y;
@@ -61,7 +61,7 @@ int			key_event(void)
 	check_position();
 	x = cos(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.x;
 	y = sin(t_map.ray.angle + (M_PI / 2)) * PLAYER_SPEED + t_map.player.y;
-	if (t_map.key.right && !wall_collision(x, y))
+	if (t_map.key.right && !wall_collision(x, y) && !sprite_collision(x, y))
 	{
 		t_map.player.x = x;
 		t_map.player.y = y;

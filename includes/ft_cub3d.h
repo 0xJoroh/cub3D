@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/21 11:55:06 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:15:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 64
-# define PLAYER_SPEED 15
+# define PLAYER_SPEED 20
 # define ROTATION_ANGLE 1.5 * 2.5
 # define FOV_ANGLE 60 * (M_PI / 180)
 
@@ -112,8 +112,8 @@ typedef struct		s_player
 typedef struct		s_sprite
 {
 	float			x;
-	float			distance;
 	float			y;
+	float			distance;
 	struct s_sprite *next;
 }					t_sprite;
 
@@ -143,6 +143,7 @@ struct				s_map
 	t_ray			ray;
 	t_texture		texture;
 	t_bmp			bmp;
+	t_sprite		sprite;
 }					t_map;
 
 int					get_next_line(int fd, char **line);
@@ -154,7 +155,7 @@ void				check_walls();
 char				*check_scene(char *scene);
 int					check_reso(char c, int res);
 void				check_grid();
-int					key_event();
+int					loop_hook();
 int					key_releas(int keycode);
 int					key_press(int keycode);
 float				raycast(float angle);
@@ -173,5 +174,7 @@ void				render_view();
 void				textures_init(void);
 int					get_player(int i, int j, int x, int y);
 int					sprite_collision(float x, float y);
+void				freeing(char **words);
+void				set_conf(void);
 
 #endif
