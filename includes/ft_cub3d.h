@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:16:23 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:44:14 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,9 @@ void				setup(char *scene);
 void				ft_puterror(char *msg);
 int					quit();
 void				set_grid(int len);
-void				check_walls();
 char				*check_scene(char *scene);
 int					check_reso(char c, int res);
-void				check_grid();
+void				check_conf();
 int					loop_hook();
 int					key_releas(int keycode);
 int					key_press(int keycode);
