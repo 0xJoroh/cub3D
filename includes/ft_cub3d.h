@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/24 16:15:11 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:16:23 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,10 @@ struct				s_map
 	char			*scene;
 	void			*mlx_ptr;
 	void			*win_ptr;
-	int				grid_height;
 	int				fd;
 	char			*line;
+	int				grid_width;
+	int				grid_height;
 	t_conf			conf;
 	t_player		player;
 	t_img			img;
@@ -150,7 +151,7 @@ int					get_next_line(int fd, char **line);
 void				setup(char *scene);
 void				ft_puterror(char *msg);
 int					quit();
-void				set_grid();
+void				set_grid(int len);
 void				check_walls();
 char				*check_scene(char *scene);
 int					check_reso(char c, int res);
@@ -170,6 +171,7 @@ void				flooor(float x, float y, int color);
 void				ceiling(float x, float end, int color);
 void				bmp(const char *argv);
 void				draw();
+int					grid_width(char *str);
 void				render_view();
 void				textures_init(void);
 int					get_player(int i, int j, int x, int y);

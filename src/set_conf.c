@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/24 15:46:12 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:27:37 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void					set_conf(void)
 		{
 			words = ft_split(t_map.line, ' ');
 			if (words[0][0] == '1')
-				set_grid();
+				set_grid(t_map.grid_width = grid_width(t_map.line));
 			else
 				get_conf(words);
 			freeing(words);
@@ -80,4 +80,6 @@ void					set_conf(void)
 		free(t_map.line);
 	}
 	free(t_map.line);
+	check_walls();
+	check_grid();
 }

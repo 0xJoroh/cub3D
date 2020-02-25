@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/21 16:24:56 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:28:39 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,23 @@ void	check_walls(void)
 {
 	int		i;
 	int		j;
-	int		end;
 
 	i = 0;
-	end = 0;
-	while (t_map.conf.grid[0][end])
-		end++;
-	while (t_map.conf.grid[i])
+	while (t_map.conf.grid[0][i])
+		if (t_map.conf.grid[0][i++] != '1')
+			ft_puterror("The map must be closed/surrounded by walls.1");
+	i = 0;
+	while (++i < t_map.grid_height - 1)
 	{
 		j = 0;
-		while (t_map.conf.grid[i][j] && !i)
-			if (t_map.conf.grid[i][j++] != '1')
-				ft_puterror("The map must be closed/surrounded by walls.");
-		if (t_map.conf.grid[i][0] != '1' || t_map.conf.grid[i][end - 1] != '1')
-			ft_puterror("The map must be closed/surrounded by walls.");
-		i++;
+		if (t_map.conf.grid[i][0] != '1' ||
+		t_map.conf.grid[i][t_map.grid_width - 1] != '1')
+			ft_puterror("The map must be closed/surrounded by walls.2");
 	}
 	j = 0;
-	while (t_map.conf.grid[i - 1][j])
-		if (t_map.conf.grid[i - 1][j++] != '1')
-			ft_puterror("The map must be closed/surrounded by walls.");
+	while (t_map.conf.grid[i][j])
+		if (t_map.conf.grid[i][j++] != '1')
+			ft_puterror("The map must be closed/surrounded by walls.3");
 }
 
 void	check_grid(void)

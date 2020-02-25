@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:12:02 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/24 15:52:40 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:27:23 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static int	grid_height(void)
 		free(line);
 	}
 	free(line);
+	t_map.grid_height = height - 1;
 	return (height);
 }
 
-static int	grid_width(char *str)
+int			grid_width(char *str)
 {
 	int len;
 
@@ -71,15 +72,24 @@ static void	fill_grid(int i, int len)
 	t_map.conf.grid[i][j] = '\0';
 }
 
-void		set_grid(void)
+void		set_grid(int len)
 {
 	int		i;
-	int		len;
+	int		k;
 
 	i = 0;
-	len = grid_width(t_map.line);
-	free(t_map.line);
+	k = 0;
 	t_map.conf.grid = (char**)malloc((grid_height() + 1) * sizeof(char*));
+	t_map.conf.grid[0] = (char*)malloc(len + 1);
+	while (t_map.line[k])
+	{
+		while (t_map.line[k] == ' ')
+			k++;
+		t_map.conf.grid[0][i++] = t_map.line[k++];
+	}
+	t_map.conf.grid[0][i] = '\0';
+	free(t_map.line);
+	i = 1;
 	while (get_next_line(t_map.fd, &t_map.line))
 	{
 		if (grid_width(t_map.line) != len)
