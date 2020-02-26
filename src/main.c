@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 15:41:57 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:49:10 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int		main(int argc, char *argv[])
 		ft_puterror("you have to pass at least two argument");
 	g_sprites = ft_calloc(1, sizeof(t_sprite*));
 	setup(argv[1]);
-	// ft_lstsize(*g_sprites);
-	// exit(1);
+	ft_lstsize(*g_sprites);
+	exit(1);
 	if (argc == 3)
 		bmp(argv[2]);
 	mlx_hook(t_map.win_ptr, 2, 0, key_press, (void*)0);

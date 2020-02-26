@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:44:09 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:49:52 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,4 @@ void					set_conf(void)
 		free(t_map.line);
 	}
 	free(t_map.line);
-	check_conf();
 }
