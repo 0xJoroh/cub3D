@@ -6,23 +6,11 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:09:55 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:48:48 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_cub3d.h"
-
-void			ray_init(float angle)
-{
-	angle = radtodeg(angle);
-	if (angle > 360)
-		angle = 0;
-	t_map.ray.is_down = angle >= 0 && angle <= 180;
-	t_map.ray.is_right = angle <= 90 || angle >= 270;
-	t_map.ray.is_up = !t_map.ray.is_down;
-	t_map.ray.is_left = !t_map.ray.is_right;
-	angle = degtorad(angle);
-}
 
 static float	horizontal(float player_x, float player_y, float angle)
 {
@@ -32,22 +20,22 @@ static float	horizontal(float player_x, float player_y, float angle)
 
 	ay = floor(player_y / SIZE) * SIZE;
 	ay += t_map.ray.is_down ? SIZE : 0;
-	t_map.ray.x = player_x + (ay - player_y) / tan(angle);
+	t_map.ray.x = player_x + (ay - player_y) / tanf(angle);
 	ystep = SIZE;
 	ystep *= t_map.ray.is_up ? -1 : 1;
-	xstep = SIZE / tan(angle);
+	xstep = SIZE / tanf(angle);
 	xstep *= t_map.ray.is_left && xstep > 0 ? -1 : 1;
 	xstep *= t_map.ray.is_right && xstep < 0 ? -1 : 1;
 	if (t_map.ray.is_up)
 		ay--;
-	while (!wall_collision(t_map.ray.x, ay))
+	while (!collision(t_map.ray.x, ay, '1'))
 	{
 		t_map.ray.x += xstep;
 		ay += ystep;
 	}
 	if (t_map.ray.is_up)
 		ay++;
-	return (sqrt(pow(t_map.ray.x - player_x, 2) + pow(ay - player_y, 2)));
+	return (compute_distance(t_map.ray.x, player_x, ay, player_y));
 }
 
 static float	verticale(float player_x, float player_y, float angle)
@@ -58,22 +46,22 @@ static float	verticale(float player_x, float player_y, float angle)
 
 	ax = floor(player_x / SIZE) * SIZE;
 	ax += t_map.ray.is_right ? SIZE : 0;
-	t_map.ray.y = player_y + (ax - player_x) * tan(angle);
+	t_map.ray.y = player_y + (ax - player_x) * tanf(angle);
 	xstep = SIZE;
 	xstep *= t_map.ray.is_left ? -1 : 1;
-	ystep = SIZE * tan(angle);
+	ystep = SIZE * tanf(angle);
 	ystep *= t_map.ray.is_up && ystep > 0 ? -1 : 1;
 	ystep *= t_map.ray.is_down && ystep < 0 ? -1 : 1;
 	if (t_map.ray.is_left)
 		ax--;
-	while (!wall_collision(ax, t_map.ray.y))
+	while (!collision(ax, t_map.ray.y, '1'))
 	{
 		ax += xstep;
 		t_map.ray.y += ystep;
 	}
 	if (t_map.ray.is_left)
 		ax++;
-	return (sqrt(pow(ax - player_x, 2) + pow(t_map.ray.y - player_y, 2)));
+	return (compute_distance(ax, player_x, t_map.ray.y, player_y));
 }
 
 float			raycast(float angle)

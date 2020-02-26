@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 16:30:12 by mait-si-         ###   ########.fr       */
+/*   Created: 2019/10/20 19:44:57 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/26 12:15:38 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_cub3d.h"
+#include "libft.h"
 
-void	ft_puterror(char *msg)
+t_sprite	*ft_lstlast(t_sprite *lst)
 {
-	write(2, "\nError\n", 8);
-	ft_putstr(msg);
-	quit();
-}
-
-int		quit(void)
-{
-	mlx_destroy_window(t_map.mlx_ptr, t_map.win_ptr);
-	exit(1);
-	return (0);
+	if (lst)
+		while (lst->next)
+			lst = lst->next;
+	return (lst);
 }

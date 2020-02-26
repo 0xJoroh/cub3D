@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 16:30:12 by mait-si-         ###   ########.fr       */
+/*   Created: 2019/10/20 15:42:49 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/26 12:13:52 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_cub3d.h"
+#include "libft.h"
 
-void	ft_puterror(char *msg)
+void	ft_lstadd_front(t_sprite **alst, t_sprite *new)
 {
-	write(2, "\nError\n", 8);
-	ft_putstr(msg);
-	quit();
-}
-
-int		quit(void)
-{
-	mlx_destroy_window(t_map.mlx_ptr, t_map.win_ptr);
-	exit(1);
-	return (0);
+	new->next = *alst;
+	*alst = new;
 }

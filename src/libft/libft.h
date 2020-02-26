@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 12:57:52 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/21 16:35:43 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:18:00 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct		s_sprite
+{
+	float			x;
+	float			y;
+	float			distance;
+	struct s_sprite *next;
+}					t_sprite;
 
 int				ft_tablen(char **tab);
 int				ft_atoi(const char *str);
@@ -68,5 +76,11 @@ char			*ft_strrev(char *str);
 void			ft_putchar(unsigned char c);
 void			ft_putendl(char *str);
 void			ft_putnbr(int nb);
+
+t_sprite		*ft_lstnew(float x, float y, float distance);
+void			ft_lstadd_front(t_sprite **alst, t_sprite *new);
+int				ft_lstsize(t_sprite *lst);
+t_sprite		*ft_lstlast(t_sprite *lst);
+void			ft_lstadd_back(t_sprite **alst, t_sprite *new);
 
 #endif

@@ -6,25 +6,17 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:01:30 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:16:06 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:44:34 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_cub3d.h"
 
-int		wall_collision(float x, float y)
+int		collision(float x, float y, char c)
 {
 	if (x > 0 && y > 0)
 		if ((int)y / SIZE < t_map.grid_height && (int)x / SIZE < t_map.grid_width)
-			return (t_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == '1');
-	return (1);
-}
-
-int		sprite_collision(float x, float y)
-{
-	if (x > 0 && y > 0)
-		if ((int)y / SIZE < t_map.grid_height && (int)x / SIZE < t_map.grid_width)
-			return (t_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == '2');
+			return (t_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == c);
 	return (1);
 }
 

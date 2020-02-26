@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:12:42 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:33:57 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			shadow(int color)
 	return (color);
 }
 
-void		walls(float x, float y, float height, int nbr)
+void		draw_walls(float x, float y, float height, int nbr)
 {
 	float	i;
 	float	factor;
@@ -48,29 +48,20 @@ void		walls(float x, float y, float height, int nbr)
 	}
 }
 
-void		flooor(float x, float y, int color)
+void		draw_floor(float x, float y, int color)
 {
 	float	i;
 
-	i = 0;
-	while (i < t_map.conf.r[1])
-	{
-		x--;
-		render_px(x++, y++, color);
-		i++;
-	}
+	i = t_map.conf.r[1];
+	while (i--)
+		render_px(x, y++, color);
 }
 
-void		ceiling(float x, float end, int color)
+void		draw_ceiling(float x, float end, int color)
 {
 	int		i;
-	int		y;
 
-	i = -1;
-	y = 0;
-	while (i++ < end)
-	{
-		x--;
-		render_px(x++, y++, color);
-	}
+	i = 0;
+	while (i < end)
+		render_px(x, i++, color);
 }

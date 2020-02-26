@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 14:44:14 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:44:31 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,6 @@ typedef struct		s_player
 	float			y;
 }					t_player;
 
-typedef struct		s_sprite
-{
-	float			x;
-	float			y;
-	float			distance;
-	struct s_sprite *next;
-}					t_sprite;
-
 typedef struct		s_img
 {
 	void			*img_ptr;
@@ -137,6 +129,7 @@ struct				s_map
 	char			*line;
 	int				grid_width;
 	int				grid_height;
+	int				sprites;
 	t_conf			conf;
 	t_player		player;
 	t_img			img;
@@ -144,8 +137,9 @@ struct				s_map
 	t_ray			ray;
 	t_texture		texture;
 	t_bmp			bmp;
-	t_sprite		sprite;
 }					t_map;
+
+t_sprite			**g_sprites;
 
 int					get_next_line(int fd, char **line);
 void				setup(char *scene);
@@ -160,22 +154,22 @@ int					key_releas(int keycode);
 int					key_press(int keycode);
 float				raycast(float angle);
 void				render_px(float x, float y, int color);
-int					wall_collision(float x, float y);
+int					collision(float x, float y, char c);
 float				normalize_angle(float angle);
-void				ray_init(float angle);
 float				radtodeg(float rad);
 float				degtorad(float deg);
-void				walls(float x, float y, float height, int nbr);
-void				flooor(float x, float y, int color);
-void				ceiling(float x, float end, int color);
+void				draw_walls(float x, float y, float height, int nbr);
+void				draw_floor(float x, float y, int color);
+void				draw_ceiling(float x, float end, int color);
 void				bmp(const char *argv);
 void				draw();
 int					grid_width(char *str);
-void				render_view();
 void				textures_init(void);
 int					get_player(int i, int j, int x, int y);
-int					sprite_collision(float x, float y);
 void				freeing(char **words);
 void				set_conf(void);
+float				compute_distance(float x1, float y1, float x2, float y2);
+
+
 
 #endif

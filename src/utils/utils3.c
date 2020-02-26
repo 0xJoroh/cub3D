@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 16:30:12 by mait-si-         ###   ########.fr       */
+/*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/26 12:30:06 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_cub3d.h"
+#include "../../includes/ft_cub3d.h"
 
-void	ft_puterror(char *msg)
+float				compute_distance(float x1, float y1, float x2, float y2)
 {
-	write(2, "\nError\n", 8);
-	ft_putstr(msg);
-	quit();
-}
-
-int		quit(void)
-{
-	mlx_destroy_window(t_map.mlx_ptr, t_map.win_ptr);
-	exit(1);
-	return (0);
+	return (sqrt(pow(x1 - y1, 2) + pow(x2 - y2, 2)));
 }

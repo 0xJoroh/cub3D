@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:16:54 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/24 15:37:23 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/02/26 13:35:20 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void					setup(char *scene)
 	t_map.mlx_ptr = mlx_init();
 	t_map.scene = check_scene(scene);
 	set_conf();
-	t_map.win_ptr = mlx_new_window(t_map.mlx_ptr, t_map.conf.r[0],
-	t_map.conf.r[1], "The Game");
 	set_player();
 	textures_init();
+	t_map.win_ptr = mlx_new_window(t_map.mlx_ptr, t_map.conf.r[0],
+	t_map.conf.r[1], "The Game");
 	draw();
 }

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 16:30:12 by mait-si-         ###   ########.fr       */
+/*   Created: 2019/10/20 19:05:33 by mait-si-          #+#    #+#             */
+/*   Updated: 2020/02/26 13:34:29 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_cub3d.h"
+#include "libft.h"
+#include <stdio.h>
 
-void	ft_puterror(char *msg)
+int	ft_lstsize(t_sprite *lst)
 {
-	write(2, "\nError\n", 8);
-	ft_putstr(msg);
-	quit();
-}
+	int len;
 
-int		quit(void)
-{
-	mlx_destroy_window(t_map.mlx_ptr, t_map.win_ptr);
-	exit(1);
-	return (0);
+	len = 0;
+	while (lst)
+	{
+		len++;
+		// printf("s%d(%f, %f)\tDistance => %f\n", len, lst->x, lst->y, lst->distance);
+		lst = lst->next;
+	}
+	return (len);
 }
