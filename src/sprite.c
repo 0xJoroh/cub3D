@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 16:13:16 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:32:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void			add_sprite(t_sprite **alst, t_sprite *new)
 		last_sprite(*alst)->next = new;
 }
 
-void			sort_sprite(t_sprite **head)
+void			sort_sprite(void)
 {
 	t_sprite	*tmp1;
 	t_sprite	*tmp2;
 	float		dist;
 
-	tmp1 = *head;
+	tmp1 = *g_sprites;
 	while (tmp1)
 	{
 		tmp2 = tmp1->next;
@@ -66,96 +66,62 @@ void			sort_sprite(t_sprite **head)
 	}
 }
 
-
-
-
-
-
-
-
-// void	ft_draw_sprit()
-// {
-// 	int j;
-// 	int *add;
-// 	int a;
-
-// 	ptr->y = 0;
-// 	j = 0;
-// 	add = (int*)mlx_get_data_addr(ptr->img_xpm_sprit, &a, &a, &a);
-// 	while (ptr->y++ < ptr->spt_size - 1)
-// 	{
-// 		if (ptr->x_sp + ptr->y < 0 || ptr->x_sp + ptr->y > ptr->size_map_x)
-// 			continue;
-// 		if (g_head->ds_sprit >= g_sprit[ptr->x_sp + ((int)ptr->y)] && (g_head->ds_sprit - g_sprit[ptr->x_sp + ((int)ptr->y)]) > 40)
-// 			continue;
-// 		j = 0;
-// 		while (j++ < ptr->spt_size - 1)
-// 		{
-// 			if (ptr->y_sp + j < 0 || ptr->y_sp + j > ptr->size_map_y)
-// 				continue;
-// 			ptr->color = add[(ptr->s_x * (j * ptr->s_y / ptr->spt_size)) + (((int)ptr->y) * ptr->s_x / ptr->spt_size)];
-// 			if (ptr->color != add[0])
-// 				img_put((ptr->x_sp + ((int)ptr->y)), ptr->y_sp + j, ptr);
-// 		}
-// 	}
-// }
-
-
-
-
-
-
-static void	render_sprite(int spt_size, int x_ofst, int y_ofst)
+void	render_sprite(int spt_size, int x_offset, int y_offset, float sprite_dist)
 {
 	int color;
 	int i;
 	int j;
 
+	float angle = normalize_angle(g_map.ray.angle);
 	i = -1;
 	while (++i < spt_size)
 	{
-		if (x_ofst + i < 0 || x_ofst + i > t_map.conf.r[0])
+
+		ray_init(angle);
+		if (x_offset + i < 0 || x_offset + i > g_map.conf.r[0])
 			continue ;
-		// if (game->ray[x_ofst + i].dist <= sprite->distance)
-		// 	continue ;
+		if (sprite_dist > g_zbuffer[i + x_offset])
+			continue ;
 		j = -1;
 		while (++j < spt_size)
 		{
-			if (y_ofst + j < 0 || y_ofst + j >= t_map.conf.r[1])
+			if (y_offset + j < 0 || y_offset + j >= g_map.conf.r[1])
 				continue ;
-			color = t_map.texture.data[4][i * t_map.texture.width[4] / spt_size) + (j * t_map.texture.width[4] / spt_size];
-			if (color != 0)
-				t_map.texture.data[4][(y_ofst + j) * t_map.conf.r[0] + (t_map.conf.r[0] + x_ofst + i)] = color;
+			color = g_map.texture.data[4][((j * g_map.texture.height[4] / spt_size) * g_map.texture.width[4]) + (i * g_map.texture.width[4] / spt_size)];
+			if (color != 0x0FF00F)
+				g_map.img.data[((int)(y_offset + j) * g_map.conf.r[0]) + (int)(x_offset + i)] = color;
 		}
 	}
 }
 
-static void	sprite_position(t_sprite *sprite)
+void	sprite_position(t_sprite *sprite)
 {
 	int		spt_size;
-	int		x_ofst;
-	int		y_ofst;
+	int		x_offset;
+	int		y_offset;
 	float	sprite_dir;
 
-	sprite_dir = atan2(sprite->y - t_map.player.y, sprite->x - t_map.player.x);
-	while (sprite_dir - t_map.ray.angle > M_PI)
+	float angle = normalize_angle(g_map.ray.angle);
+	sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
+	sprite_dir = atan2((sprite->y - g_map.player.y), (sprite->x - g_map.player.x));
+	while (sprite_dir - angle > M_PI)
 		sprite_dir -= 2 * M_PI;
-	while (sprite_dir - t_map.ray.angle < -M_PI)
+	while (sprite_dir - angle < -M_PI)
 		sprite_dir += 2 * M_PI;
-	if (t_map.conf.r[1] > t_map.conf.r[0])
-		spt_size = t_map.conf.r[1] / sprite->distance;
+	if (g_map.conf.r[1] > g_map.conf.r[0])
+		spt_size = (g_map.conf.r[1] / sprite->distance) * 64;
 	else
-		spt_size = t_map.conf.r[0] / sprite->distance;
-	x_ofst = (sprite_dir - t_map.ray.angle) *
-		t_map.conf.r[0] / FOV_ANGLE + (t_map.conf.r[0] / 2 - spt_size / 2);
-	y_ofst = (t_map.conf.r[0] / 2) - spt_size / 2;
-	render_sprite(spt_size, x_ofst, y_ofst);
+		spt_size = (g_map.conf.r[0] / sprite->distance) * 64;
+	x_offset = (sprite_dir - angle) * g_map.conf.r[0] / (FOV_ANGLE) + (g_map.conf.r[0] / 2 - spt_size / 2);
+	y_offset = g_map.conf.r[1] / 2 - spt_size / 2;
+	render_sprite(spt_size, x_offset, y_offset, sprite->distance);
 }
 
 void		generete_sprite()
 {
 	t_sprite *sprite;
 
+	sort_sprite();
 	sprite = *g_sprites;
 	while (sprite)
 	{
@@ -163,27 +129,3 @@ void		generete_sprite()
 		sprite = sprite->next;
 	}
 }
-
-
-
-
-// void	ft_cal_ds(t_win *ptr)
-// {
-// 	float a;
-
-// 	ptr->sp_dr = atan2(g_head->y_sprit - ptr->y_origine,
-// 	g_head->x_sprit - ptr->x_origine);
-// 	while (ptr->sp_dr - ptr->angle * (M_PI / 180) > M_PI)
-// 		ptr->sp_dr -= 2 * M_PI;
-// 	while (ptr->sp_dr - ptr->angle * (M_PI / 180) < -M_PI)
-// 		ptr->sp_dr += 2 * M_PI;
-// 	if (ptr->size_map_x > ptr->size_map_y)
-// 		ptr->spt_size = (ptr->size_map_x / g_head->ds_sprit) * ptr->size_square;
-// 	else
-// 		ptr->spt_size = (ptr->size_map_y / g_head->ds_sprit) * ptr->size_square;
-// 	ptr->y_sp = (ptr->size_map_y / 2) - (ptr->spt_size / 2);
-// 	a = ptr->sp_dr - ptr->angle;
-// 	ptr->x_sp = (ptr->sp_dr - ptr->angle * (M_PI / 180)) / g_fov_angle *
-// 	ptr->size_map_x + (ptr->size_map_x / 2 - ptr->spt_size / 2);
-// 	ft_draw_sprit();
-// }

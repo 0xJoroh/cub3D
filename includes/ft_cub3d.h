@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 16:13:41 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:13:34 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define BUFFER_SIZE 128
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define SIZE 20
+# define SIZE 64
 # define PLAYER_SPEED 10
 # define ROTATION_ANGLE 1.5 * 2
 # define FOV_ANGLE 60 * (M_PI / 180)
@@ -137,9 +137,11 @@ struct				s_map
 	t_ray			ray;
 	t_texture		texture;
 	t_bmp			bmp;
-}					t_map;
+}					g_map;
+
 
 t_sprite			**g_sprites;
+double				*g_zbuffer;
 
 int					get_next_line(int fd, char **line);
 void				setup(char *scene);
@@ -153,7 +155,6 @@ int					loop_hook();
 int					key_releas(int keycode);
 int					key_press(int keycode);
 float				raycast(float angle);
-// void				render_px(float x, float y, int color);
 int					collision(float x, float y, char c);
 float				normalize_angle(float angle);
 float				radtodeg(float rad);
@@ -169,9 +170,10 @@ int					get_player(char c, int x, int y);
 void				freeing(char **words);
 void				set_conf(void);
 float				distance(float x1, float y1, float x2, float y2);
-void				sort_sprite(t_sprite **head);
+void				sort_sprite();
 void				add_sprite(t_sprite **alst, t_sprite *new);
 t_sprite			*new_sprite(float x, float y, float distance);
 void				generete_sprite();
+void				ray_init(float angle);
 
 #endif

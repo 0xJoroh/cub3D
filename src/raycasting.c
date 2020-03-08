@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 10:18:20 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:13:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ static float	horizontal(float player_x, float player_y, float angle)
 	float	ystep;
 
 	ay = floor(player_y / SIZE) * SIZE;
-	ay += t_map.ray.is_down ? SIZE : 0;
-	t_map.ray.x = player_x + (ay - player_y) / tanf(angle);
+	ay += g_map.ray.is_down ? SIZE : 0;
+	g_map.ray.x = player_x + (ay - player_y) / tanf(angle);
 	ystep = SIZE;
-	ystep *= t_map.ray.is_up ? -1 : 1;
+	ystep *= g_map.ray.is_up ? -1 : 1;
 	xstep = SIZE / tanf(angle);
-	xstep *= t_map.ray.is_left && xstep > 0 ? -1 : 1;
-	xstep *= t_map.ray.is_right && xstep < 0 ? -1 : 1;
-	if (t_map.ray.is_up)
+	xstep *= g_map.ray.is_left && xstep > 0 ? -1 : 1;
+	xstep *= g_map.ray.is_right && xstep < 0 ? -1 : 1;
+	if (g_map.ray.is_up)
 		ay--;
-	while (!collision(t_map.ray.x, ay, '1'))
+	while (!collision(g_map.ray.x, ay, '1'))
 	{
-		t_map.ray.x += xstep;
+		g_map.ray.x += xstep;
 		ay += ystep;
 	}
-	if (t_map.ray.is_up)
+	if (g_map.ray.is_up)
 		ay++;
-	return (distance(t_map.ray.x, player_x, ay, player_y));
+	return (distance(g_map.ray.x, player_y, player_x, ay));
 }
 
 static float	verticale(float player_x, float player_y, float angle)
@@ -45,23 +45,23 @@ static float	verticale(float player_x, float player_y, float angle)
 	float	ystep;
 
 	ax = floor(player_x / SIZE) * SIZE;
-	ax += t_map.ray.is_right ? SIZE : 0;
-	t_map.ray.y = player_y + (ax - player_x) * tanf(angle);
+	ax += g_map.ray.is_right ? SIZE : 0;
+	g_map.ray.y = player_y + (ax - player_x) * tanf(angle);
 	xstep = SIZE;
-	xstep *= t_map.ray.is_left ? -1 : 1;
+	xstep *= g_map.ray.is_left ? -1 : 1;
 	ystep = SIZE * tanf(angle);
-	ystep *= t_map.ray.is_up && ystep > 0 ? -1 : 1;
-	ystep *= t_map.ray.is_down && ystep < 0 ? -1 : 1;
-	if (t_map.ray.is_left)
+	ystep *= g_map.ray.is_up && ystep > 0 ? -1 : 1;
+	ystep *= g_map.ray.is_down && ystep < 0 ? -1 : 1;
+	if (g_map.ray.is_left)
 		ax--;
-	while (!collision(ax, t_map.ray.y, '1'))
+	while (!collision(ax, g_map.ray.y, '1'))
 	{
 		ax += xstep;
-		t_map.ray.y += ystep;
+		g_map.ray.y += ystep;
 	}
-	if (t_map.ray.is_left)
+	if (g_map.ray.is_left)
 		ax++;
-	return (distance(ax, player_x, t_map.ray.y, player_y));
+	return (distance(ax, g_map.ray.y, player_x, player_y));
 }
 
 float			raycast(float angle)
@@ -69,10 +69,10 @@ float			raycast(float angle)
 	float		h;
 	float		v;
 
-	h = horizontal(t_map.player.x, t_map.player.y, angle);
-	v = verticale(t_map.player.x, t_map.player.y, angle);
-	t_map.ray.wall_hit = (v < h) ? 1 : 0;
-	t_map.ray.x_offset = t_map.ray.wall_hit ?
-	fmod(t_map.ray.y, SIZE) : fmod(t_map.ray.x, SIZE);
+	h = horizontal(g_map.player.x, g_map.player.y, angle);
+	v = verticale(g_map.player.x, g_map.player.y, angle);
+	g_map.ray.wall_hit = (v < h) ? 1 : 0;
+	g_map.ray.x_offset = g_map.ray.wall_hit ?
+	fmod(g_map.ray.y, SIZE) : fmod(g_map.ray.x, SIZE);
 	return ((h < v) ? h : v);
 }

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 12:07:15 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/25 16:30:12 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:13:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_puterror(char *msg)
 
 int		quit(void)
 {
-	mlx_destroy_window(t_map.mlx_ptr, t_map.win_ptr);
+	mlx_destroy_window(g_map.mlx_ptr, g_map.win_ptr);
 	exit(1);
 	return (0);
 }
