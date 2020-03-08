@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 15:44:31 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 16:13:41 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,20 @@
 # include "../src/libft/libft.h"
 
 # define BUFFER_SIZE 128
-# define NORTH 0xffffff
-# define EAST 0xfffff0
-# define WEST 0xffff00
-# define SOUTH 0xffff0f
-# define CEILLING 0xf00000
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define SIZE 64
-# define PLAYER_SPEED 20
-# define ROTATION_ANGLE 1.5 * 2.5
+# define SIZE 20
+# define PLAYER_SPEED 10
+# define ROTATION_ANGLE 1.5 * 2
 # define FOV_ANGLE 60 * (M_PI / 180)
+
+typedef struct		s_sprite
+{
+	float			x;
+	float			y;
+	float			distance;
+	struct s_sprite *next;
+}					t_sprite;
 
 typedef struct		s_bmp
 {
@@ -52,7 +55,6 @@ typedef struct		s_bmp
 
 typedef	struct		s_texture
 {
-	char			*path;
 	void			*xpm_ptr[6];
 	int				*data[6];
 	int				width[6];
@@ -120,8 +122,6 @@ typedef struct		s_img
 
 struct				s_map
 {
-	float			x;
-	float			y;
 	char			*scene;
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -153,7 +153,7 @@ int					loop_hook();
 int					key_releas(int keycode);
 int					key_press(int keycode);
 float				raycast(float angle);
-void				render_px(float x, float y, int color);
+// void				render_px(float x, float y, int color);
 int					collision(float x, float y, char c);
 float				normalize_angle(float angle);
 float				radtodeg(float rad);
@@ -165,11 +165,13 @@ void				bmp(const char *argv);
 void				draw();
 int					grid_width(char *str);
 void				textures_init(void);
-int					get_player(int i, int j, int x, int y);
+int					get_player(char c, int x, int y);
 void				freeing(char **words);
 void				set_conf(void);
-float				compute_distance(float x1, float y1, float x2, float y2);
-
-
+float				distance(float x1, float y1, float x2, float y2);
+void				sort_sprite(t_sprite **head);
+void				add_sprite(t_sprite **alst, t_sprite *new);
+t_sprite			*new_sprite(float x, float y, float distance);
+void				generete_sprite();
 
 #endif

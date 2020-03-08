@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 15:45:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 10:24:22 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	check_position(void)
 
 	x = cosf(t_map.ray.angle) * PLAYER_SPEED + t_map.player.x;
 	y = sinf(t_map.ray.angle) * PLAYER_SPEED + t_map.player.y;
+
 	if (t_map.key.forward && !collision(x, y, '1') && !collision(x, y, '2'))
 	{
 		t_map.player.x = x;

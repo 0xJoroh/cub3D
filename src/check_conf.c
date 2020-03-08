@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 13:39:54 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:07:25 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	check_character(char c, float x, float y)
 		return (1);
 	if (c == '2')
 	{
-		x += SIZE / 2;
-		y += SIZE / 2;
-		ft_lstadd_back(g_sprites, ft_lstnew(x, y,
-		compute_distance(x, y, t_map.player.x, t_map.player.y)));
+		x *= (SIZE / 2);
+		y *= (SIZE / 2);
+		add_sprite(g_sprites, new_sprite(x, y,
+		distance(x, y, t_map.player.x, t_map.player.y)));
 	}
 	return (0);
 }
@@ -71,7 +71,7 @@ void		check_conf(void)
 		t_map.conf.grid[i][t_map.grid_width - 1] != '1')
 			ft_puterror("The map must be closed/surrounded by walls.2");
 		j = -1;
-		while (++j < t_map.grid_width - 2)
+		while (++j < t_map.grid_width - 1)
 			players += check_character(t_map.conf.grid[i][j], (float)i, (float)j);
 	}
 	j = 0;

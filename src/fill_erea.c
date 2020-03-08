@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 12:33:57 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 14:46:24 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void		draw_walls(float x, float y, float height, int nbr)
 	factor = (float)t_map.texture.height[nbr] / height;
 	while (i < height)
 	{
-		color = t_map.texture.data[nbr][(int)(i * factor) * \
-		t_map.texture.width[nbr] + (int)t_map.ray.x_offset];
-		render_px(x, i + y, shadow(color));
+		color = t_map.texture.data[nbr][(int)(i * factor) * t_map.texture.width[nbr] + (int)t_map.ray.x_offset];
+		y++;
+		if (x < t_map.conf.r[0] && y < t_map.conf.r[1] && x > 0 && y > 0)
+			t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = color;
 		i++;
 	}
 }
@@ -54,7 +55,11 @@ void		draw_floor(float x, float y, int color)
 
 	i = t_map.conf.r[1];
 	while (i--)
-		render_px(x, y++, color);
+	{
+		y++;
+		if (x < t_map.conf.r[0] && y < t_map.conf.r[1] && x > 0 && y > 0)
+			t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = color;
+	}
 }
 
 void		draw_ceiling(float x, float end, int color)
@@ -63,5 +68,9 @@ void		draw_ceiling(float x, float end, int color)
 
 	i = 0;
 	while (i < end)
-		render_px(x, i++, color);
+	{
+		i++;
+		if (x < t_map.conf.r[0] && i < t_map.conf.r[1] && x > 0 && i > 0)
+			t_map.img.data[(int)i * t_map.conf.r[0] + (int)x] = color;
+	}
 }

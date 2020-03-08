@@ -6,17 +6,17 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:50:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/24 14:07:51 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 10:49:16 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_cub3d.h"
 
-void	render_px(float x, float y, int color)
-{
-	if (x < t_map.conf.r[0] && y < t_map.conf.r[1] && x > 0 && y > 0)
-		t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = color;
-}
+// void	render_px(float x, float y, int color)
+// {
+// 	if (x < t_map.conf.r[0] && y < t_map.conf.r[1] && x > 0 && y > 0)
+// 		t_map.img.data[(int)y * t_map.conf.r[0] + (int)x] = color;
+// }
 
 float	degtorad(float deg)
 {

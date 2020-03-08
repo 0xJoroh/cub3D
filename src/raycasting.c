@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 15:48:48 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 10:18:20 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static float	horizontal(float player_x, float player_y, float angle)
 	}
 	if (t_map.ray.is_up)
 		ay++;
-	return (compute_distance(t_map.ray.x, player_x, ay, player_y));
+	return (distance(t_map.ray.x, player_x, ay, player_y));
 }
 
 static float	verticale(float player_x, float player_y, float angle)
@@ -61,7 +61,7 @@ static float	verticale(float player_x, float player_y, float angle)
 	}
 	if (t_map.ray.is_left)
 		ax++;
-	return (compute_distance(ax, player_x, t_map.ray.y, player_y));
+	return (distance(ax, player_x, t_map.ray.y, player_y));
 }
 
 float			raycast(float angle)

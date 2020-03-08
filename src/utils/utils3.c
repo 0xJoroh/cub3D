@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 12:30:06 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:07:25 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_cub3d.h"
 
-float				compute_distance(float x1, float y1, float x2, float y2)
+float	distance(float x1, float y1, float x2, float y2)
 {
-	return (sqrt(pow(x1 - y1, 2) + pow(x2 - y2, 2)));
+	return ((float)sqrt(pow(x1 - y1, 2) + pow(x2 - y2, 2)));
 }

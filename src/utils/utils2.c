@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:01:30 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/02/26 15:44:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/08 14:49:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ void	textures_init2(void)
 {
 	if (!(t_map.texture.xpm_ptr[0] = mlx_xpm_file_to_image(t_map.mlx_ptr,
 	t_map.conf.ea, &t_map.texture.width[0], &t_map.texture.height[0])))
-		ft_puterror("texture path is not exist");
+		ft_puterror("EA texture path is not exist");
 	if (!(t_map.texture.data[0] =
 	(int *)mlx_get_data_addr(t_map.texture.xpm_ptr[0], &t_map.texture.bpp,
 	&t_map.texture.size_l, &t_map.texture.endian)))
-		ft_puterror("texture path is not exist");
+		ft_puterror("EA texture path is not exist");
 	if (!(t_map.texture.xpm_ptr[1] = mlx_xpm_file_to_image(t_map.mlx_ptr,
 	t_map.conf.we, &t_map.texture.width[1], &t_map.texture.height[1])))
-		ft_puterror("texture path is not exist");
+		ft_puterror("WE texture path is not exist");
 	if (!(t_map.texture.data[1] =
 	(int *)mlx_get_data_addr(t_map.texture.xpm_ptr[1], &t_map.texture.bpp,
 	&t_map.texture.size_l, &t_map.texture.endian)))
-		ft_puterror("texture path is not exist");
+		ft_puterror("WE texture path is not exist");
 }
 
 void	textures_init(void)
@@ -43,41 +43,40 @@ void	textures_init(void)
 	textures_init2();
 	if (!(t_map.texture.xpm_ptr[2] = mlx_xpm_file_to_image(t_map.mlx_ptr,
 	t_map.conf.so, &t_map.texture.width[2], &t_map.texture.height[2])))
-		ft_puterror("texture path is not exist");
+		ft_puterror("SO texture path is not exist");
 	if (!(t_map.texture.data[2] =
 	(int *)mlx_get_data_addr(t_map.texture.xpm_ptr[2], &t_map.texture.bpp,
 	&t_map.texture.size_l, &t_map.texture.endian)))
-		ft_puterror("texture path is not exist");
+		ft_puterror("SO texture path is not exist");
 	if (!(t_map.texture.xpm_ptr[3] = mlx_xpm_file_to_image(t_map.mlx_ptr,
 	t_map.conf.no, &t_map.texture.width[3], &t_map.texture.height[3])))
-		ft_puterror("texture path is not exist");
+		ft_puterror("NO texture path is not exist");
 	if (!(t_map.texture.data[3] =
 	(int *)mlx_get_data_addr(t_map.texture.xpm_ptr[3], &t_map.texture.bpp,
 	&t_map.texture.size_l, &t_map.texture.endian)))
-		ft_puterror("texture path is not exist");
+		ft_puterror("NO texture path is not exist");
 	if (!(t_map.texture.xpm_ptr[4] = mlx_xpm_file_to_image(t_map.mlx_ptr,
 	t_map.conf.s, &t_map.texture.width[4], &t_map.texture.height[4])))
-		ft_puterror("texture path is not exist");
+		ft_puterror("Sprite texture path is not exist");
 	if (!(t_map.texture.data[4] =
 	(int *)mlx_get_data_addr(t_map.texture.xpm_ptr[4], &t_map.texture.bpp,
 	&t_map.texture.size_l, &t_map.texture.endian)))
-		ft_puterror("texture path is not exist");
+		ft_puterror("Sprite texture path is not exist");
 }
 
-int		get_player(int i, int j, int x, int y)
+int		get_player(char c, int x, int y)
 {
-	if (t_map.conf.grid[i][j] == 'N' || t_map.conf.grid[i][j] == 'S'
-	|| t_map.conf.grid[i][j] == 'W' || t_map.conf.grid[i][j] == 'E')
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
 		t_map.player.y = y + SIZE / 2;
 		t_map.player.x = x + SIZE / 2;
-		if (t_map.conf.grid[i][j] == 'N')
+		if (c == 'N')
 			t_map.ray.angle = 1.5 * M_PI;
-		if (t_map.conf.grid[i][j] == 'E')
-			t_map.ray.angle = 0;
-		if (t_map.conf.grid[i][j] == 'S')
+		if (c == 'E')
+			t_map.ray.angle = 0.01;
+		if (c == 'S')
 			t_map.ray.angle = M_PI * 0.5;
-		if (t_map.conf.grid[i][j] == 'W')
+		if (c == 'W')
 			t_map.ray.angle = M_PI;
 		return (1);
 	}
