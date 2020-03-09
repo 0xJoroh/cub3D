@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/09 15:28:19 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:35:45 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	sprite_position(t_sprite *sprite)
 	float	sprite_dir;
 
 	float angle = normalize_angle(g_map.ray.angle);
-	sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
+	// sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
 	sprite_dir = atan2((sprite->y - g_map.player.y), (sprite->x - g_map.player.x));
 	while (sprite_dir - angle > M_PI)
 		sprite_dir -= 2 * M_PI;
@@ -117,17 +117,24 @@ void	sprite_position(t_sprite *sprite)
 	render_sprite(spt_size, x_offset, y_offset, sprite->distance);
 }
 
-void		sprite_dist()
+void		sprite_init()
 {
-	// calculate distance;
+	t_sprite *sprite;
+
+	sprite = *g_sprites;
+	while (sprite)
+	{
+		sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
+		sprite = sprite->next;
+	}
+	sort_sprite();
 }
 
 void		generete_sprite()
 {
 	t_sprite *sprite;
 
-	sprite_dist();
-	sort_sprite();
+	sprite_init();
 	sprite = *g_sprites;
 	while (sprite)
 	{
