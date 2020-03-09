@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:32:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:28:19 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			sort_sprite(void)
 		tmp2 = tmp1->next;
 		while (tmp2)
 		{
-			if (tmp2->distance < tmp1->distance)
+			if (tmp2->distance > tmp1->distance)
 			{
 				dist = tmp1->distance;
 				tmp1->distance = tmp2->distance;
@@ -117,10 +117,16 @@ void	sprite_position(t_sprite *sprite)
 	render_sprite(spt_size, x_offset, y_offset, sprite->distance);
 }
 
+void		sprite_dist()
+{
+	// calculate distance;
+}
+
 void		generete_sprite()
 {
 	t_sprite *sprite;
 
+	sprite_dist();
 	sort_sprite();
 	sprite = *g_sprites;
 	while (sprite)

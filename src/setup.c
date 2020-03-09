@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:16:54 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:15:23 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:15:56 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void					setup(char *scene)
 	check_conf();
 	textures_init();
 	g_map.win_ptr = mlx_new_window(g_map.mlx_ptr, g_map.conf.r[0], g_map.conf.r[1], "The Game");
+	// Handle Errors
 	if (!(g_zbuffer = malloc(sizeof(double) * g_map.conf.r[0])))
 		return ;
 	// Handle Errors
