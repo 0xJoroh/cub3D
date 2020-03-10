@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/09 15:35:45 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:59:55 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,32 @@ void			add_sprite(t_sprite **alst, t_sprite *new)
 		last_sprite(*alst)->next = new;
 }
 
-void			sort_sprite(void)
+void	sort_sprite()
 {
-	t_sprite	*tmp1;
-	t_sprite	*tmp2;
-	float		dist;
+	t_sprite	*sprite;
+	t_sprite	*before;
+	t_sprite	*next;
 
-	tmp1 = *g_sprites;
-	while (tmp1)
+	if (*g_sprites)
 	{
-		tmp2 = tmp1->next;
-		while (tmp2)
+		sprite = *g_sprites;
+		before = 0;
+		while (sprite->next)
 		{
-			if (tmp2->distance > tmp1->distance)
+			next = sprite->next;
+			if (sprite->distance < next->distance)
 			{
-				dist = tmp1->distance;
-				tmp1->distance = tmp2->distance;
-				tmp2->distance = dist;
+				sprite->next = next->next;
+				next->next = sprite;
+				if (before)
+					before->next = next;
+				else
+					*g_sprites = next;
+				sprite = *g_sprites;
 			}
-			tmp2 = tmp2->next;
+			before = sprite;
+			sprite = sprite->next;
 		}
-		tmp1 = tmp1->next;
 	}
 }
 
@@ -80,7 +85,7 @@ void	render_sprite(int spt_size, int x_offset, int y_offset, float sprite_dist)
 		ray_init(angle);
 		if (x_offset + i < 0 || x_offset + i > g_map.conf.r[0])
 			continue ;
-		if (sprite_dist > g_zbuffer[i + x_offset])
+		if (sprite_dist > g_zbuffer[i + x_offset] && (sprite_dist - g_zbuffer[i + x_offset]) > 40)
 			continue ;
 		j = -1;
 		while (++j < spt_size)
@@ -88,7 +93,7 @@ void	render_sprite(int spt_size, int x_offset, int y_offset, float sprite_dist)
 			if (y_offset + j < 0 || y_offset + j >= g_map.conf.r[1])
 				continue ;
 			color = g_map.texture.data[4][((j * g_map.texture.height[4] / spt_size) * g_map.texture.width[4]) + (i * g_map.texture.width[4] / spt_size)];
-			if (color != 0x0FF00F)
+			if (color != 0)
 				g_map.img.data[((int)(y_offset + j) * g_map.conf.r[0]) + (int)(x_offset + i)] = color;
 		}
 	}
@@ -102,7 +107,7 @@ void	sprite_position(t_sprite *sprite)
 	float	sprite_dir;
 
 	float angle = normalize_angle(g_map.ray.angle);
-	// sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
+	sprite->distance = distance(sprite->x, sprite->y, g_map.player.x, g_map.player.y);
 	sprite_dir = atan2((sprite->y - g_map.player.y), (sprite->x - g_map.player.x));
 	while (sprite_dir - angle > M_PI)
 		sprite_dir -= 2 * M_PI;
@@ -114,7 +119,7 @@ void	sprite_position(t_sprite *sprite)
 		spt_size = (g_map.conf.r[0] / sprite->distance) * 64;
 	x_offset = (sprite_dir - angle) * g_map.conf.r[0] / (FOV_ANGLE) + (g_map.conf.r[0] / 2 - spt_size / 2);
 	y_offset = g_map.conf.r[1] / 2 - spt_size / 2;
-	render_sprite(spt_size, x_offset, y_offset, sprite->distance);
+	render_sprite(spt_size, x_offset, y_offset + g_map.key.up_angle, sprite->distance);
 }
 
 void		sprite_init()

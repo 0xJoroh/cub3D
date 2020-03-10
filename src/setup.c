@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:16:54 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/09 15:15:56 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:27:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ void					setup(char *scene)
 	set_player();
 	check_conf();
 	textures_init();
-	g_map.win_ptr = mlx_new_window(g_map.mlx_ptr, g_map.conf.r[0], g_map.conf.r[1], "The Game");
-	// Handle Errors
+	if (!(g_map.win_ptr = mlx_new_window(g_map.mlx_ptr, g_map.conf.r[0], g_map.conf.r[1], "The Game")))
+		ft_puterror("there is error on minilibx Library.");
 	if (!(g_zbuffer = malloc(sizeof(double) * g_map.conf.r[0])))
-		return ;
-	// Handle Errors
+		ft_puterror("Z-Biffer can not allocated.");
 	draw();
 }

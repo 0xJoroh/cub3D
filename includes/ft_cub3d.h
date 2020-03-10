@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:13:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:59:46 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 typedef struct		s_sprite
 {
+	int				id;
 	float			x;
 	float			y;
 	float			distance;
@@ -138,7 +139,6 @@ struct				s_map
 	t_texture		texture;
 	t_bmp			bmp;
 }					g_map;
-
 
 t_sprite			**g_sprites;
 double				*g_zbuffer;
