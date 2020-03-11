@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:35:19 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:21:33 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_angle(void)
 		g_map.ray.angle -= degtorad(ROTATION_ANGLE);
 	else if (g_map.key.right_view)
 		g_map.ray.angle += degtorad(ROTATION_ANGLE);
-	if (g_map.key.up_angle > 200)
+	if (g_map.key.up_angle > 200 || g_map.key.crouch)
 		g_map.key.up_angle = 200;
 	else if (g_map.key.up_angle < -250)
 		g_map.key.up_angle = -250;
@@ -92,6 +92,8 @@ int			key_releas(int keycode)
 		g_map.key.left_view = 0;
 	if (keycode == 124)
 		g_map.key.right_view = 0;
+	if (keycode == 256)
+		g_map.key.crouch = 0;
 	if (keycode == 126 || keycode == 125)
 		g_map.key.up_view = 0;
 	if (keycode == 53)
@@ -121,5 +123,7 @@ int			key_press(int keycode)
 		g_map.key.up_angle -= 15;
 	if (keycode == 53)
 		g_map.key.quit = 1;
+	if (keycode == 256)
+		g_map.key.crouch = 1;
 	return (0);
 }

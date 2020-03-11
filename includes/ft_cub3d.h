@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:08:58 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:20:46 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef	struct		s_key
 	int				right;
 	int				forward;
 	int				backward;
+	int				crouch;
 	int				quit;
 	int				left_view;
 	int				right_view;
