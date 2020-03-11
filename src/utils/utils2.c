@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:01:30 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 14:04:38 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:12:35 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		collision(float x, float y, char c)
 {
 	if (x > 0 && y > 0)
-		if ((int)y / SIZE < g_map.grid_height && (int)x / SIZE < g_map.grid_width)
+		if ((int)y / SIZE < g_map.grid_height &&
+		(int)x / SIZE < g_map.grid_width)
 			return (g_map.conf.grid[(int)y / SIZE][(int)x / SIZE] == c);
 	return (1);
 }

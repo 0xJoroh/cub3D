@@ -6,13 +6,13 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 01:12:02 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 20:57:27 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:08:40 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_cub3d.h"
 
-void		set_grid()
+void		set_grid(void)
 {
 	char *map;
 	char *tmp;

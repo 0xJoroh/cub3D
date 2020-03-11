@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 14:50:42 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:08:58 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,6 @@ t_sprite			*new_sprite(float x, float y, float distance);
 void				generete_sprite();
 void				ray_init(float angle);
 int					shadow(int color);
+int					surounded_walls(int x, int y);
 
 #endif

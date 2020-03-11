@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:49:29 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 14:33:21 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:13:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void		draw_walls(float x, float y, float height, int nbr)
 	factor = (float)g_map.texture.height[nbr] / height;
 	while (i < height)
 	{
-		color = g_map.texture.data[nbr][(int)(i * factor) * g_map.texture.width[nbr] + (int)g_map.ray.x_offset];
+		color = g_map.texture.data[nbr][(int)(i * factor) *
+		g_map.texture.width[nbr] + (int)g_map.ray.x_offset];
 		y++;
 		if (x < g_map.conf.r[0] && y < g_map.conf.r[1] && x > 0 && y > 0)
 			g_map.img.data[(int)y * g_map.conf.r[0] + (int)x] = shadow(color);

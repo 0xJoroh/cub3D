@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 20:56:22 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:09:04 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,57 +49,49 @@ static int	check_character(char c, float x, float y)
 		y *= SIZE;
 		x += SIZE / 2;
 		y += SIZE / 2;
-		add_sprite(g_sprites, new_sprite(x, y, distance(x, y, g_map.player.x, g_map.player.y)));
+		add_sprite(g_sprites, new_sprite(x, y,
+		distance(x, y, g_map.player.x, g_map.player.y)));
 	}
 	return (0);
 }
 
-int			surounded_walls(int x, int y)
+int			check_grid(void)
 {
-	char left = g_map.conf.grid[x][y - 1];
-	char right = g_map.conf.grid[x][y + 1];
+	int i;
+	int j;
+	int players;
 
-	char up = g_map.conf.grid[x - 1][y];
-	char down = g_map.conf.grid[x + 1][y];
-
-	if (left == ' ' || right == ' ' || up == ' ' || down == ' ')
-		ft_puterror("map must be surounded by walls.");
-	return (0);
-}
-
-void		check_conf(void)
-{
-	int		i;
-	int		j;
-	int		players;
-
+	i = 0;
 	players = 0;
-	i = 0;
-	while (g_map.conf.grid[0][i])
-	{
-		if (g_map.conf.grid[0][i] != '1' && g_map.conf.grid[0][i] != ' ')
-			ft_puterror("map must be surounded by walls.");
-		i++;
-	}
-	i = 0;
-	while (g_map.conf.grid[g_map.grid_height - 1][i])
-	{
-		if (g_map.conf.grid[g_map.grid_height - 1][i] != '1' && g_map.conf.grid[g_map.grid_height - 1][i] != ' ')
-			ft_puterror("map must be surounded by walls.");
-		i++;
-	}
-	i = 0;
 	while (++i < g_map.grid_height - 1)
 	{
 		j = -1;
 		while (g_map.conf.grid[i][++j])
 		{
-			players += check_character(g_map.conf.grid[i][j], (float)j, (float)i);
+			players +=
+			check_character(g_map.conf.grid[i][j], (float)j, (float)i);
 			if (g_map.conf.grid[i][j] == '0')
-				if (surounded_walls(i, j) || j == 0 || j == (int)ft_strlen(g_map.conf.grid[i]) - 1)
+				if (surounded_walls(i, j) || j == 0 ||
+				j == (int)ft_strlen(g_map.conf.grid[i]) - 1)
 					ft_puterror("map must be surounded by walls.");
 		}
 	}
-	if (players != 1)
+	return (players);
+}
+
+void		check_conf(void)
+{
+	int		i;
+
+	i = -1;
+	while (g_map.conf.grid[0][++i])
+		if (g_map.conf.grid[0][i] != '1' && g_map.conf.grid[0][i] != ' ')
+			ft_puterror("map must be surounded by walls.");
+	i = -1;
+	while (g_map.conf.grid[g_map.grid_height - 1][++i])
+		if (g_map.conf.grid[g_map.grid_height - 1][i] != '1' &&
+		g_map.conf.grid[g_map.grid_height - 1][i] != ' ')
+			ft_puterror("map must be surounded by walls.");
+	if (check_grid() != 1)
 		ft_puterror("you have to have just 1 player");
 }
