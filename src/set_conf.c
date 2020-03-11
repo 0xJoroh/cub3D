@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:13:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:13:40 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,20 @@ static void				get_conf2(char **words)
 {
 	if (!ft_strcmp("R", words[0]))
 	{
+		if (words[3])
+			ft_puterror("fix your resolutiom");
 		g_map.conf.r[0] = check_reso('W', ft_atoi(words[1]));
 		g_map.conf.r[1] = check_reso('H', ft_atoi(words[2]));
 	}
-	else if (!ft_strcmp("NO", words[0]))
+	else if (!ft_strcmp("NO", words[0]) && !words[2])
 		g_map.conf.no = ft_strdup(words[1]);
-	else if (!ft_strcmp("SO", words[0]))
+	else if (!ft_strcmp("SO", words[0]) && !words[2])
 		g_map.conf.so = ft_strdup(words[1]);
-	else if (!ft_strcmp("WE", words[0]))
+	else if (!ft_strcmp("WE", words[0]) && !words[2])
 		g_map.conf.we = ft_strdup(words[1]);
-	else if (!ft_strcmp("EA", words[0]))
+	else if (!ft_strcmp("EA", words[0]) && !words[2])
 		g_map.conf.ea = ft_strdup(words[1]);
-	else if (!ft_strcmp("S", words[0]))
+	else if (!ft_strcmp("S", words[0]) && !words[2])
 		g_map.conf.s = ft_strdup(words[1]);
 	else
 		ft_puterror("There is extra config into your .cub file");
@@ -71,8 +73,15 @@ void					set_conf(void)
 		if (ft_strcmp(g_map.line, ""))
 		{
 			words = ft_split(g_map.line, ' ');
-			if (words[0][0] == '1')
-				set_grid(g_map.grid_width = grid_width(g_map.line));
+			if (g_map.conf.r[0] && g_map.conf.r[1] && g_map.conf.no &&
+			g_map.conf.so && g_map.conf.we && g_map.conf.ea &&
+			g_map.conf.s && g_map.conf.c && g_map.conf.f)
+			{
+				set_grid();
+				g_map.grid_height++;
+				freeing(words);
+				break ;
+			}
 			else
 				get_conf(words);
 			freeing(words);

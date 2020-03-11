@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/10 14:59:46 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:50:42 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define SIZE 64
-# define PLAYER_SPEED 10
-# define ROTATION_ANGLE 1.5 * 2
+# define PLAYER_SPEED 15
+# define ROTATION_ANGLE 4
 # define FOV_ANGLE 60 * (M_PI / 180)
 
 typedef struct		s_sprite
@@ -147,7 +147,7 @@ int					get_next_line(int fd, char **line);
 void				setup(char *scene);
 void				ft_puterror(char *msg);
 int					quit();
-void				set_grid(int len);
+void				set_grid();
 char				*check_scene(char *scene);
 int					check_reso(char c, int res);
 void				check_conf();
@@ -175,5 +175,6 @@ void				add_sprite(t_sprite **alst, t_sprite *new);
 t_sprite			*new_sprite(float x, float y, float distance);
 void				generete_sprite();
 void				ray_init(float angle);
+int					shadow(int color);
 
 #endif

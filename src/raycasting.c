@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:33:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:13:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:11:03 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static float	horizontal(float player_x, float player_y, float angle)
 	xstep *= g_map.ray.is_right && xstep < 0 ? -1 : 1;
 	if (g_map.ray.is_up)
 		ay--;
-	while (!collision(g_map.ray.x, ay, '1'))
+	while (!collision(g_map.ray.x, ay, '1') && !collision(g_map.ray.x, ay, '3'))
 	{
 		g_map.ray.x += xstep;
 		ay += ystep;
@@ -54,7 +54,7 @@ static float	verticale(float player_x, float player_y, float angle)
 	ystep *= g_map.ray.is_down && ystep < 0 ? -1 : 1;
 	if (g_map.ray.is_left)
 		ax--;
-	while (!collision(ax, g_map.ray.y, '1'))
+	while (!collision(ax, g_map.ray.y, '1') && !collision(ax, g_map.ray.y, '3'))
 	{
 		ax += xstep;
 		g_map.ray.y += ystep;
