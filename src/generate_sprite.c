@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 21:21:08 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:34:34 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:31:18 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static void	draw_sprite(int spt_size, int x, int y, int i)
 	{
 		if (y + j < 0 || y + j >= g_map.conf.r[1])
 			continue ;
-		color = g_map.texture.data[4]
-		[((j * g_map.texture.height[4] / spt_size) *
-		g_map.texture.width[4]) + (i * g_map.texture.width[4] / spt_size)];
+		color = g_map.texture.data[g_sprite_texture]
+		[((j * g_map.texture.height[g_sprite_texture] / spt_size) *
+		g_map.texture.width[g_sprite_texture]) +
+		(i * g_map.texture.width[g_sprite_texture] / spt_size)];
 		if (color != 0)
 			g_map.img.data[((int)(y + j) *
 			g_map.conf.r[0]) + (int)(x + i)] = shadow(color);
@@ -98,6 +99,14 @@ void		generete_sprite(void)
 	sprite = *g_sprites;
 	while (sprite)
 	{
+		if (sprite->id == 0)
+			g_sprite_texture = 4;
+		else if (sprite->id == 1)
+			g_sprite_texture = 5;
+		else if (sprite->id == 2)
+			g_sprite_texture = 6;
+		else if (sprite->id == 3)
+			g_sprite_texture = 7;
 		sprite_position(sprite);
 		sprite = sprite->next;
 	}

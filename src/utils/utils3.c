@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:09:02 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:07:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,54 @@ int		surounded_walls(int x, int y)
 	g_map.conf.grid[x - 1][y] == ' ' || g_map.conf.grid[x + 1][y] == ' ')
 		ft_puterror("map must be surounded by walls.");
 	return (0);
+}
+
+void	render_lifebar_cadr(float x, float y, int width, int height)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < height)
+	{
+		j = -1;
+		while (++j < width)
+			g_map.img.data[(int)(i + y) * g_map.conf.r[0] + (int)(j + x)] =
+			0x123456;
+	}
+}
+
+void	render_lifebar(float x, float y, int width, int height)
+{
+	int i;
+	int j;
+
+	i = -1;
+	render_lifebar_cadr(19, 19, 202, 32);
+	while (++i < height)
+	{
+		j = -1;
+		while (++j < width)
+			g_map.img.data[(int)(i + y) * g_map.conf.r[0] + (int)(j + x)] =
+			0xe74c3c;
+	}
+}
+
+void	check_collision(void)
+{
+	if (collision(g_map.player.x, g_map.player.y, '5'))
+	{
+		g_map.life_bar -= 30;
+		g_map.conf.grid[(int)(g_map.player.y / SIZE)]
+		[(int)(g_map.player.x / SIZE)] = '0';
+	}
+	if (collision(g_map.player.x, g_map.player.y, '4'))
+	{
+		if (g_map.life_bar <= 170)
+			g_map.life_bar += 30;
+	}
+	// if (collision(g_map.player.x, g_map.player.y, '6'))
+	// {
+
+	// }
 }

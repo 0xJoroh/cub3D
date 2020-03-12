@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 22:20:46 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:40:57 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef struct		s_bmp
 
 typedef	struct		s_texture
 {
-	void			*xpm_ptr[6];
-	int				*data[6];
-	int				width[6];
-	int				height[6];
+	void			*xpm_ptr[10];
+	int				*data[10];
+	int				width[10];
+	int				height[10];
 	int				bpp;
 	int				size_l;
 	int				endian;
@@ -132,6 +132,7 @@ struct				s_map
 	int				grid_width;
 	int				grid_height;
 	int				sprites;
+	int				life_bar;
 	t_conf			conf;
 	t_player		player;
 	t_img			img;
@@ -142,6 +143,7 @@ struct				s_map
 }					g_map;
 
 t_sprite			**g_sprites;
+int					g_sprite_texture;
 double				*g_zbuffer;
 
 int					get_next_line(int fd, char **line);
@@ -173,10 +175,13 @@ void				set_conf(void);
 float				distance(float x1, float y1, float x2, float y2);
 void				sort_sprite();
 void				add_sprite(t_sprite **alst, t_sprite *new);
-t_sprite			*new_sprite(float x, float y, float distance);
+t_sprite			*new_sprite(float x, float y, float distance, char c);
 void				generete_sprite();
 void				ray_init(float angle);
 int					shadow(int color);
 int					surounded_walls(int x, int y);
+void				render_lifebar_cadr(float x, float y, int width, int height);
+void				render_lifebar(float x, float y, int width, int height);
+void				check_collision(void);
 
 #endif

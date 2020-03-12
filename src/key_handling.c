@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:34:39 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 22:21:33 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:39:09 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	check_angle(void)
 		g_map.ray.angle -= degtorad(ROTATION_ANGLE);
 	else if (g_map.key.right_view)
 		g_map.ray.angle += degtorad(ROTATION_ANGLE);
-	if (g_map.key.up_angle > 200 || g_map.key.crouch)
+	if (g_map.key.up_angle > 200)
 		g_map.key.up_angle = 200;
-	else if (g_map.key.up_angle < -250)
-		g_map.key.up_angle = -250;
+	else if (g_map.key.up_angle < -300)
+		g_map.key.up_angle = -300;
 }
 
 static void	check_position(void)
@@ -59,9 +59,11 @@ int			loop_hook(void)
 
 	if (g_map.key.quit)
 		quit();
+	if (g_map.key.crouch)
+		g_map.key.up_angle = -300;
 	if (g_map.key.left_view || g_map.key.right_view || g_map.key.right ||
 	g_map.key.left || g_map.key.forward ||
-	g_map.key.backward || g_map.key.up_view)
+	g_map.key.backward || g_map.key.up_view || g_map.key.crouch)
 	{
 		check_angle();
 		check_position();
@@ -72,6 +74,7 @@ int			loop_hook(void)
 			g_map.player.x = x;
 			g_map.player.y = y;
 		}
+		check_collision();
 		mlx_destroy_image(g_map.mlx_ptr, g_map.img.img_ptr);
 		draw();
 	}
@@ -93,7 +96,10 @@ int			key_releas(int keycode)
 	if (keycode == 124)
 		g_map.key.right_view = 0;
 	if (keycode == 256)
+	{
+		g_map.key.up_angle = 0;
 		g_map.key.crouch = 0;
+	}
 	if (keycode == 126 || keycode == 125)
 		g_map.key.up_view = 0;
 	if (keycode == 53)

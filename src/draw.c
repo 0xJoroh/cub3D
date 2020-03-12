@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 22:14:01 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:02:11 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,10 @@ static void	render_view(void)
 	// }
 // }
 
-// void		render_lifebar()
-// {
-
-// }
-
 void		draw(void)
 {
+	if (g_map.life_bar <= 0)
+		exit(1);
 	g_map.img.img_ptr =
 	mlx_new_image(g_map.mlx_ptr, g_map.conf.r[0], g_map.conf.r[1]);
 	g_map.img.data = (int *)mlx_get_data_addr(g_map.img.img_ptr, &g_map.img.bpp,
@@ -107,7 +104,7 @@ void		draw(void)
 	render_view();
 	generete_sprite();
 	// render_hud();
-	// render_lifebar();
+	render_lifebar(20, 20, g_map.life_bar, 30);
 	mlx_put_image_to_window(g_map.mlx_ptr, g_map.win_ptr,
 	g_map.img.img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:09:04 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:10:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,19 @@ int			check_reso(char c, int res)
 static int	check_character(char c, float x, float y)
 {
 	if (c != '1' && c != '0' && c != '2' && c != 'S' && c != 'N' &&
-	c != 'W' && c != 'E' && c != '3' && c != ' ')
+	c != 'W' && c != 'E' && c != '3' && c != ' ' && c != '4' &&
+	c != '5' && c != '6')
 		ft_puterror("There is extra character in your map");
 	if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
 		return (1);
-	if (c == '2')
+	if (c == '2' || c == '4' || c == '5' || c == '6')
 	{
 		x *= SIZE;
 		y *= SIZE;
 		x += SIZE / 2;
 		y += SIZE / 2;
 		add_sprite(g_sprites, new_sprite(x, y,
-		distance(x, y, g_map.player.x, g_map.player.y)));
+		distance(x, y, g_map.player.x, g_map.player.y), c));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 14:13:40 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 11:54:43 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void					set_conf(void)
 {
 	char	**words;
 
+	g_map.life_bar = 200;
 	while (get_next_line(g_map.fd, &g_map.line))
 	{
 		if (ft_strcmp(g_map.line, ""))

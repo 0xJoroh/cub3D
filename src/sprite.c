@@ -6,18 +6,26 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/11 21:30:51 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:29:39 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_cub3d.h"
 
-t_sprite		*new_sprite(float x, float y, float distance)
+t_sprite		*new_sprite(float x, float y, float distance, char c)
 {
 	t_sprite			*list;
 
 	if (!(list = (t_sprite*)malloc(sizeof(*list) + 1)))
 		return (0);
+	if (c == '2')
+		list->id = 0;
+	else if (c == '4')
+		list->id = 1;
+	else if (c == '5')
+		list->id = 2;
+	else if (c == '6')
+		list->id = 3;
 	list->x = x;
 	list->y = y;
 	list->distance = distance;
