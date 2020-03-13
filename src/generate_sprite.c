@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 21:21:08 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/13 23:06:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/14 00:02:55 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	draw_sprite(int spt_size, int x, int y, int i)
 		(i * g_map.texture.width[g_sprite_texture] / spt_size)];
 		if (color != 0)
 			g_map.img.data[((int)(y + j) *
-			g_map.conf.r[0]) + (int)(x + i)] = shadow(color);
+			g_map.conf.r[0]) + (int)(x + i)] = color;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/13 23:07:08 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:53:26 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		surounded_walls(int x, int y)
 	return (0);
 }
 
-void	render_lifebar_cadr(float x, float y, int width, int height)
+static void	render_lifebar_cadr(float x, float y, int width, int height)
 {
 	int i;
 	int j;
@@ -40,7 +40,7 @@ void	render_lifebar_cadr(float x, float y, int width, int height)
 	}
 }
 
-void	render_lifebar(float x, float y, int width, int height)
+void		render_lifebar(float x, float y, int width, int height)
 {
 	int i;
 	int j;
@@ -59,12 +59,8 @@ void	render_lifebar(float x, float y, int width, int height)
 void	check_collision(void)
 {
 	if (collision(g_map.player.x, g_map.player.y, '5'))
-	{
 		g_map.life_bar -= 30;
-		g_map.conf.grid[(int)(g_map.player.y / SIZE)]
-		[(int)(g_map.player.x / SIZE)] = '0';
-	}
-	if (collision(g_map.player.x, g_map.player.y, '4'))
+	else if (collision(g_map.player.x, g_map.player.y, '4'))
 	{
 		if (g_map.life_bar <= 170)
 			g_map.life_bar += 30;

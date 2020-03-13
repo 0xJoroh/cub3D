@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/13 23:06:26 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:58:44 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ static void	render_view(void)
 void		draw(void)
 {
 	if (g_map.life_bar <= 0)
+	{
+		ft_putstr("You died Cause of Corona\n");
 		exit(1);
+	}
 	g_map.img.img_ptr =
 	mlx_new_image(g_map.mlx_ptr, g_map.conf.r[0], g_map.conf.r[1]);
 	g_map.img.data = (int *)mlx_get_data_addr(g_map.img.img_ptr, &g_map.img.bpp,

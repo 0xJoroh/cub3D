@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:17 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 12:29:39 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:52:47 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_sprite		*new_sprite(float x, float y, float distance, char c)
 		list->id = 1;
 	else if (c == '5')
 		list->id = 2;
-	else if (c == '6')
-		list->id = 3;
 	list->x = x;
 	list->y = y;
 	list->distance = distance;
