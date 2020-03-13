@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 14:07:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:07:08 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,4 @@ void	check_collision(void)
 		if (g_map.life_bar <= 170)
 			g_map.life_bar += 30;
 	}
-	// if (collision(g_map.player.x, g_map.player.y, '6'))
-	// {
-
-	// }
 }

@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 21:21:08 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 13:31:18 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:06:07 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ void		generete_sprite(void)
 			g_sprite_texture = 5;
 		else if (sprite->id == 2)
 			g_sprite_texture = 6;
-		else if (sprite->id == 3)
-			g_sprite_texture = 7;
 		sprite_position(sprite);
 		sprite = sprite->next;
 	}

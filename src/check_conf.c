@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 08:16:11 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 12:10:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:07:29 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int	check_character(char c, float x, float y)
 {
 	if (c != '1' && c != '0' && c != '2' && c != 'S' && c != 'N' &&
 	c != 'W' && c != 'E' && c != '3' && c != ' ' && c != '4' &&
-	c != '5' && c != '6')
+	c != '5')
 		ft_puterror("There is extra character in your map");
 	if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
 		return (1);
-	if (c == '2' || c == '4' || c == '5' || c == '6')
+	if (c == '2' || c == '4' || c == '5')
 	{
 		x *= SIZE;
 		y *= SIZE;

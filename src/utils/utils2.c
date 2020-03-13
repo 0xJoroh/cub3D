@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:01:30 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 13:30:50 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:06:55 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ void	textures_init3(void)
 		ft_puterror("Health texture path is not exist");
 	if (!(g_map.texture.data[6] =
 	(int *)mlx_get_data_addr(g_map.texture.xpm_ptr[6], &g_map.texture.bpp,
-	&g_map.texture.size_l, &g_map.texture.endian)))
-		ft_puterror("Health texture path is not exist");
-	if (!(g_map.texture.xpm_ptr[7] =
-	mlx_xpm_file_to_image(g_map.mlx_ptr, "./textures/black-hole.xpm",
-	&g_map.texture.width[7], &g_map.texture.height[7])))
-		ft_puterror("Health texture path is not exist");
-	if (!(g_map.texture.data[7] =
-	(int *)mlx_get_data_addr(g_map.texture.xpm_ptr[7], &g_map.texture.bpp,
 	&g_map.texture.size_l, &g_map.texture.endian)))
 		ft_puterror("Health texture path is not exist");
 }

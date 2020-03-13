@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:55:09 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 14:02:11 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:06:26 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,38 +61,6 @@ static void	render_view(void)
 	}
 }
 
-// void		render_hud(void)
-// {
-// 	int x;
-// 	int height;
-// 	int width;
-// 	int y;
-
-// 	height = 3;
-// 	x = g_map.conf.r[0] / 2 - 25;
-// 	y = g_map.conf.r[1] / 2 - 25;
-// 	while (height--)
-// 	{
-// 		width = 25;
-// 		while (width--)
-// 			g_map.img.data[(int)y * g_map.conf.r[0] + (int)x++] = 0xffffff;
-// 		x = g_map.conf.r[0] / 2 - 25;
-// 		y++;
-// 	}
-
-	// x = g_map.conf.r[0] / 2 - 25;
-	// y = g_map.conf.r[1] / 2 - 25;
-	// width = 25;
-	// while (width--)
-	// {
-	// 	height = 5;
-	// 	while (height--)
-	// 		g_map.img.data[(int)y++ * g_map.conf.r[0] + (int)x] = 0xffffff;
-	// 	y = g_map.conf.r[1] / 2 - 25;
-	// 	x++;
-	// }
-// }
-
 void		draw(void)
 {
 	if (g_map.life_bar <= 0)
@@ -103,7 +71,6 @@ void		draw(void)
 	&g_map.img.size_l, &g_map.img.endian);
 	render_view();
 	generete_sprite();
-	// render_hud();
 	render_lifebar(20, 20, g_map.life_bar, 30);
 	mlx_put_image_to_window(g_map.mlx_ptr, g_map.win_ptr,
 	g_map.img.img_ptr, 0, 0);
