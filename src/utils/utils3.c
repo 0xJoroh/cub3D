@@ -6,18 +6,18 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 12:24:35 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/13 23:53:26 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/14 02:02:22 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_cub3d.h"
 
-float	distance(float x1, float y1, float x2, float y2)
+float		distance(float x1, float y1, float x2, float y2)
 {
 	return ((float)sqrt(pow(x1 - x2, 2) + pow(y2 - y1, 2)));
 }
 
-int		surounded_walls(int x, int y)
+int			surounded_walls(int x, int y)
 {
 	if (g_map.conf.grid[x][y - 1] == ' ' || g_map.conf.grid[x][y + 1] == ' ' ||
 	g_map.conf.grid[x - 1][y] == ' ' || g_map.conf.grid[x + 1][y] == ' ')
@@ -56,13 +56,13 @@ void		render_lifebar(float x, float y, int width, int height)
 	}
 }
 
-void	check_collision(void)
+void		check_collision(void)
 {
 	if (collision(g_map.player.x, g_map.player.y, '5'))
-		g_map.life_bar -= 30;
+		g_map.life_bar -= 10;
 	else if (collision(g_map.player.x, g_map.player.y, '4'))
 	{
-		if (g_map.life_bar <= 170)
-			g_map.life_bar += 30;
+		if (g_map.life_bar < 200)
+			g_map.life_bar += 10;
 	}
 }

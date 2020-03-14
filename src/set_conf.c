@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/12 11:54:43 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/14 02:01:32 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,38 @@ static unsigned long	get_color(int r, int g, int b)
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
+static int				is_alldigit(char *str)
+{
+	int c;
+	int i;
+
+	c = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ' ')
+			continue ;
+		if (str[i] == '-')
+		{
+			c++;
+			if (c > 1)
+				ft_puterror("there is too many -");
+		}
+		if (('0' <= str[i] && str[i] <= '9') || str[i] == '-')
+			continue;
+		ft_puterror("Put a correct Number without extra characters");
+	}
+	return (ft_atoi(str));
+}
+
 static void				get_conf2(char **words)
 {
 	if (!ft_strcmp("R", words[0]))
 	{
 		if (words[3])
 			ft_puterror("fix your resolutiom");
-		g_map.conf.r[0] = check_reso('W', ft_atoi(words[1]));
-		g_map.conf.r[1] = check_reso('H', ft_atoi(words[2]));
+		g_map.conf.r[0] = check_reso('W', is_alldigit(words[1]));
+		g_map.conf.r[1] = check_reso('H', is_alldigit(words[2]));
 	}
 	else if (!ft_strcmp("NO", words[0]) && !words[2])
 		g_map.conf.no = ft_strdup(words[1]);
@@ -49,15 +73,15 @@ static void				get_conf(char **words)
 	if (!ft_strcmp("F", words[0]))
 	{
 		str = ft_split(g_map.line + 1, ',');
-		g_map.conf.f = get_color(ft_atoi(str[0]),
-		ft_atoi(str[1]), ft_atoi(str[2]));
+		g_map.conf.f = get_color(is_alldigit(str[0]),
+		is_alldigit(str[1]), is_alldigit(str[2]));
 		freeing(str);
 	}
 	else if (!ft_strcmp("C", words[0]))
 	{
 		str = ft_split(g_map.line + 1, ',');
-		g_map.conf.c = get_color(ft_atoi(str[0]),
-		ft_atoi(str[1]), ft_atoi(str[2]));
+		g_map.conf.c = get_color(is_alldigit(str[0]),
+		is_alldigit(str[1]), is_alldigit(str[2]));
 		freeing(str);
 	}
 	else

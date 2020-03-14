@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/14 00:04:04 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/03/14 01:51:04 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "../src/libft/libft.h"
 
 # define BUFFER_SIZE 128
-# define WIN_WIDTH 2560
-# define WIN_HEIGHT 1440
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 # define SIZE 64
 # define PLAYER_SPEED 15
 # define ROTATION_ANGLE 4
