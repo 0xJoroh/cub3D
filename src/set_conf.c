@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:47 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/14 02:01:32 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/10/14 20:46:39 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static unsigned long	get_color(int r, int g, int b)
 {
 	if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
-		ft_puterror("the Colors must have a value between 0 and 255.");
+		ft_puterror("the colors must have a value between 0 and 255.");
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
@@ -31,12 +31,9 @@ static int				is_alldigit(char *str)
 		if (str[i] == ' ')
 			continue ;
 		if (str[i] == '-')
-		{
-			c++;
-			if (c > 1)
+			if (++c > 1)
 				ft_puterror("there is too many -");
-		}
-		if (('0' <= str[i] && str[i] <= '9') || str[i] == '-')
+		if (ft_isdigit(str[i]) || str[i] == '-')
 			continue;
 		ft_puterror("Put a correct Number without extra characters");
 	}
