@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 16:47:57 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/08 23:13:07 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/10/14 14:36:04 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	bmp(const char *argv)
 	int				x2;
 
 	xy[1] = g_map.conf.r[1];
-	if (ft_strcmp("––save", argv))
+	if (ft_strcmp("--save", argv))
 		ft_puterror("your second argument is incorrect");
 	init_bmp();
 	if (!(buf = (unsigned char	*)malloc(g_map.bmp.imagesize)))

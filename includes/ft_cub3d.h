@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:49:37 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/03/23 02:51:49 by macbookpro       ###   ########.fr       */
+/*   Updated: 2020/10/14 14:26:08 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,10 @@ struct				s_map
 	t_texture		texture;
 	t_bmp			bmp;
 }					g_map;
+
+t_sprite			**g_sprites;
+int					g_sprite_texture;
+double				*g_zbuffer;
 
 int					get_next_line(int fd, char **line);
 void				setup(char *scene);
