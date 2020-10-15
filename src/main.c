@@ -6,7 +6,7 @@
 /*   By: mait-si- <mait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 21:24:33 by mait-si-          #+#    #+#             */
-/*   Updated: 2020/10/14 20:49:53 by mait-si-         ###   ########.fr       */
+/*   Updated: 2020/10/15 11:33:33 by mait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(int argc, char *argv[])
 {
 	if (argc != 2 && argc != 3)
-		ft_puterror("you have to pass at least two argument");
+		ft_puterror("you have to pass at least 2 arguments");
 	g_sprites = ft_calloc(1, sizeof(t_sprite*));
 	setup(argv[1]);
 	if (argc == 3 && !ft_strcmp("--save", argv[2]))
